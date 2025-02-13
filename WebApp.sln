@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication.Web", "WebApplication.Web\WebApplication.Web.csproj", "{812AB5BF-BC0C-4786-9708-20FD5A84C24C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymWebsite.Web", "GymWebsite.Web\GymWebsite.Web.csproj", "{6CF96E46-5580-4E8B-98B4-A6696829AE91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{812AB5BF-BC0C-4786-9708-20FD5A84C24C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{812AB5BF-BC0C-4786-9708-20FD5A84C24C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{812AB5BF-BC0C-4786-9708-20FD5A84C24C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{812AB5BF-BC0C-4786-9708-20FD5A84C24C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF96E46-5580-4E8B-98B4-A6696829AE91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF96E46-5580-4E8B-98B4-A6696829AE91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF96E46-5580-4E8B-98B4-A6696829AE91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF96E46-5580-4E8B-98B4-A6696829AE91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
