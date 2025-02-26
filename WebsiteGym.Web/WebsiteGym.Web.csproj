@@ -143,6 +143,27 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\img\360_F_120756997_1PELclEVhEn9N1HRUdq9ItQFY43yOwtF.jpg" />
+    <Content Include="Content\img\360_F_338166432_0o8qtAQIE5VMynSeJql9rekVtDaUiPKZ.jpg" />
+    <Content Include="Content\img\antrenor-personal-fitness-400x250.jpg" />
+    <Content Include="Content\img\Best-Personal-Trainers-in-Edgewater-MD-1536x865.png" />
+    <Content Include="Content\img\Best-Personal-Trainers-in-Edgewater-MD.png" />
+    <Content Include="Content\img\bodybuilder-posing-on-black-background-sitting-on-bench-after-training-muscular-man-in-gym-black-and-white-photo.jpg" />
+    <Content Include="Content\img\CoachVsTrainer_Feature.png" />
+    <Content Include="Content\img\DALL·E 2025-02-23 16.41.10 - A modern and bold gym logo featuring a strong, stylized dumbbell or barbell icon integrated with a dynamic, muscular figure. The design uses a black a.png" />
+    <Content Include="Content\img\DALL·E 2025-02-23 17.06.23 - A modern and bold gym logo featuring a strong, stylized dumbbell or barbell icon integrated with a dynamic, muscular figure. The design uses a black a.png" />
+    <Content Include="Content\img\download %281%29.jpg" />
+    <Content Include="Content\img\download.jpg" />
+    <Content Include="Content\img\f710044bf79a4b1f5d8b085e5e5d9711_M.jpg" />
+    <Content Include="Content\img\group-workouts-1-1-1024x536.jpg" />
+    <Content Include="Content\img\HD-wallpaper-sports-bodybuilding-black-white-bodybuilder-gym-man-muscle.jpg" />
+    <Content Include="Content\img\image_2025-02-23_171836700.png" />
+    <Content Include="Content\img\mh-trainer-2-1533576998.png" />
+    <Content Include="Content\img\middle_aged_man_working_out_at_gym_with_trainer-852401638.jpg" />
+    <Content Include="Content\img\nasm-personal-trainer-and-nutrition-coach_THUMBNAIL.jpg" />
+    <Content Include="Content\img\pexels-anush-1229356.jpg" />
+    <Content Include="Content\img\shtanga-trenazhernyy-zal-gym.jpg" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -163,6 +184,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <None Include="Views\Home\about.cshtml" />
+    <None Include="Views\Home\contact.cshtml" />
+    <None Include="Views\Home\index.cshtml" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -174,9 +199,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

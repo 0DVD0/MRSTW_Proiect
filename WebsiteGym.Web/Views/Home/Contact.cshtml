@@ -1,19 +1,99 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title>Gym Management - Contact Us</title>
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet"
+           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+     <!-- Custom CSS -->
+     <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid d-flex align-items-center">
+               <!-- Logo -->
+               <a class="navbar-brand" href="index.html">
+                    <img src="img/DALL·E 2025-02-23 16.41.10 - A modern and bold gym logo featuring a strong, stylized dumbbell or barbell icon integrated with a dynamic, muscular figure. The design uses a black a.png" alt="Gym Logo" class="brand-logo">
+                    <span class="brand-text">MADGYM</span>
+               </a>
 
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+               <!-- Sidebar Toggle Button (Only for Mobile) -->
+               <button class="btn btn-outline-light ms-auto d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                    ☰
+               </button>
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
-</main>
+               <!-- Standard Navbar Links (Hidden on Mobile) -->
+               <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                         <li><a href="index.html" class="nav-link">Home</a></li>
+                         <li><a href="about.html" class="nav-link">About</a></li>
+                         <li><a href="services.html" class="nav-link">Services</a></li>
+                         <li><a href="subscriptions.html" class="nav-link">Membership</a></li>
+                         <li><a href="contact.html" class="nav-link">Contact</a></li>
+                         <li><a class="btn btn-primary w-100" href="login.html">Login</a></li>
+                    </ul>
+               </div>
+          </div>
+     </nav>
+
+     <!-- Offcanvas Sidebar (For Mobile Navigation) -->
+     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+          <div class="offcanvas-header">
+               <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
+               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+               <ul class="list-unstyled">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="subscriptions.html" class="nav-link">Membership</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a class="btn btn-primary w-100" href="login.html">Login</a></li>
+               </ul>
+          </div>
+     </div>
+     <!-- Main Content -->
+     <main class="container py-5">
+          <section id="contact">
+               <h2 class="mb-4">Get in Touch</h2>
+               <p>If you have any questions, please feel free to reach out to us:</p>
+               <ul>
+                    <li>Email: info@gymmanagement.com</li>
+                    <li>Phone: (123) 456-7890</li>
+                    <li>Address: 123 Fitness St, Workout City, Fitland</li>
+               </ul>
+               <!-- Contact Form -->
+               <form action="send-message.php" method="post" class="mt-4">
+                    <div class="mb-3">
+                         <label for="name" class="form-label">Your Name:</label>
+                         <input type="text" id="name" name="name" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                         <label for="email" class="form-label">Your Email:</label>
+                         <input type="email" id="email" name="email" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                         <label for="message" class="form-label">Message:</label>
+                         <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+               </form>
+          </section>
+     </main>
+
+     <!-- Footer -->
+     <footer class="bg-dark text-white text-center py-3">
+          <p class="mb-0">&copy; 2025 Gym Management. All rights reserved.</p>
+     </footer>
+
+     <!-- Bootstrap JS Bundle -->
+     <!-- Bootstrap JS Bundle -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="script.js"></script>
+
+</body>
+</html>
+
