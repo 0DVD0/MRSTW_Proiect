@@ -150,7 +150,7 @@
     <Content Include="Content\img\Best-Personal-Trainers-in-Edgewater-MD.png" />
     <Content Include="Content\img\bodybuilder-posing-on-black-background-sitting-on-bench-after-training-muscular-man-in-gym-black-and-white-photo.jpg" />
     <Content Include="Content\img\CoachVsTrainer_Feature.png" />
-    <Content Include="Content\img\DALL·E 2025-02-23 16.41.10 - A modern and bold gym logo featuring a strong, stylized dumbbell or barbell icon integrated with a dynamic, muscular figure. The design uses a black a.png" />
+    <Content Include="Content\img\Logo.png" />
     <Content Include="Content\img\DALL·E 2025-02-23 17.06.23 - A modern and bold gym logo featuring a strong, stylized dumbbell or barbell icon integrated with a dynamic, muscular figure. The design uses a black a.png" />
     <Content Include="Content\img\download %281%29.jpg" />
     <Content Include="Content\img\download.jpg" />
@@ -184,9 +184,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <None Include="Views\Home\about.cshtml" />
-    <None Include="Views\Home\contact.cshtml" />
-    <None Include="Views\Home\index.cshtml" />
+    <None Include="Views\Home\About.cshtml" />
+    <None Include="Views\Home\Contact.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\script.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

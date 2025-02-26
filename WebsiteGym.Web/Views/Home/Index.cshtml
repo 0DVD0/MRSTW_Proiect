@@ -16,7 +16,7 @@
           <div class="container-fluid">
                <!-- Logo -->
                <a class="navbar-brand" href="@Url.Action("index", "Home")">
-                    <img src="@Url.Content("~/Content/img/DALL·E 2025-02-23 16.41.10 - A modern and bold gym logo featuring a strong, stylized dumbbell or barbell icon integrated with a dynamic, muscular figure. The design uses a black a.png")" alt="Gym Logo" class="brand-logo">
+                    <img src="@Url.Content("~/Content/img/Logo.png")" alt="Gym Logo" class="brand-logo">
                     <span class="brand-text">MADGYM</span>
                </a>
 
@@ -29,6 +29,7 @@
                <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                          <li class="nav-item"><a class="nav-link" href="@Url.Action("index", "Home")">Home</a></li>
+                         <li class="nav-item"><a class="nav-link" href="@Url.Action("about", "Home")">About</a></li>
                          <li class="nav-item"><a class="nav-link" href="@Url.Action("services", "Home")">Services</a></li>
                          <li class="nav-item"><a class="nav-link" href="@Url.Action("memberships", "Home")">Membership</a></li>
                          <li class="nav-item"><a class="nav-link" href="@Url.Action("contact", "Home")">Contact</a></li>
@@ -47,6 +48,7 @@
           <div class="offcanvas-body">
                <ul class="list-unstyled">
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("index", "Home")">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("about", "Home")">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("services", "Home")">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("memberships", "Home")">Membership</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("contact", "Home")">Contact</a></li>
@@ -86,7 +88,7 @@
                <div class="row">
                     <div class="col-md-4">
                          <div class="card service-card">
-                              <img src="Content/img/Best-Personal-Trainers-in-Edgewater-MD.png" class="card-img-top" alt="Personal Training">
+                              <img src="@Url.Content("~/Content/img/Best-Personal-Trainers-in-Edgewater-MD.png")" class="card-img-top" alt="Personal Training">
                               <div class="card-body">
                                    <h3>Personal Training</h3>
                                    <p>One-on-one coaching with expert trainers.</p>
@@ -95,7 +97,7 @@
                     </div>
                     <div class="col-md-4">
                          <div class="card service-card">
-                              <img src="Content/img/group-workouts-1-1-1024x536.jpg" class="card-img-top" alt="Group Classes">
+                              <img src="@Url.Content("~/Content/img/group-workouts-1-1-1024x536.jpg")" class="card-img-top" alt="Group Classes">
                               <div class="card-body">
                                    <h3>Group Classes</h3>
                                    <p>Exciting HIIT, yoga, and strength classes.</p>
@@ -104,7 +106,7 @@
                     </div>
                     <div class="col-md-4">
                          <div class="card service-card">
-                              <img src="Content/img/f710044bf79a4b1f5d8b085e5e5d9711_M.jpg" class="card-img-top" alt="Nutrition Coaching">
+                              <img src="@Url.Content("~/Content/img/f710044bf79a4b1f5d8b085e5e5d9711_M.jpg")" class="card-img-top" alt="Nutrition Coaching">
                               <div class="card-body">
                                    <h3>Nutrition Coaching</h3>
                                    <p>Personalized meal plans for better results.</p>

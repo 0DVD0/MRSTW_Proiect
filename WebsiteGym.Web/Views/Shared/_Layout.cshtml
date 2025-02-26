@@ -7,24 +7,9 @@
      <link rel="stylesheet" href="~/Content/style.css">
 </head>
 <body>
-     <header>
-          <nav>
-               <ul>
-                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-                    <li><a href="@Url.Action("About", "Home")">About</a></li>
-                    <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
-               </ul>
-          </nav>
-     </header>
-
      <main>
           @RenderBody()
      </main>
-
-     <footer>
-          <p>&copy; @DateTime.Now.Year - My Website</p>
-     </footer>
-
      <script src="~/Scripts/script.js"></script>
      @RenderSection("Scripts", required: false)
 </body>
