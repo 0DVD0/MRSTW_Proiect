@@ -1,8 +1,3 @@
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "About Us";
-}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,31 +8,30 @@
      <link rel="stylesheet"
            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
      <!-- Custom CSS -->
-     <link rel="stylesheet" href="@Url.Content(" ~ /Content/style.css")">
+     <link rel="stylesheet" href="@Url.Content(" ~ /Content/home_style.css")">
 </head>
 <body>
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid d-flex align-items-center">
                <!-- Logo -->
                <a class="navbar-brand" href="index.cshtml">
-                    <img src="img/DALL·E 2025-02-23 16.41.10 - A modern and bold gym logo featuring a strong, stylized dumbbell or barbell icon integrated with a dynamic, muscular figure. The design uses a black a.png" alt="Gym Logo" class="brand-logo">
+                    <img src="@Url.Content("~/Content/img/Logo.png")" alt="Gym Logo" class="brand-logo">
                     <span class="brand-text">MADGYM</span>
                </a>
 
                <!-- Sidebar Toggle Button (Only for Mobile) -->
                <button class="btn btn-outline-light ms-auto d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
-                    ☰
+                    &#9776;
                </button>
 
                <!-- Standard Navbar Links (Hidden on Mobile) -->
                <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                         <li><a href="index.cshtml" class="nav-link">Home</a></li>
-                         <li><a href="about.cshtml" class="nav-link">About</a></li>
-                         <li><a href="services.cshtml" class="nav-link">Services</a></li>
-                         <li><a href="subscriptions.cshtml" class="nav-link">Membership</a></li>
-                         <li><a href="contact.cshtml" class="nav-link">Contact</a></li>
-                         <li><a class="btn btn-primary w-100" href="login.html">Login</a></li>
+                         <li class="nav-item"><a class="nav-link" href="@Url.Action("index", "Home")">Home</a></li>
+                         <li class="nav-item"><a class="nav-link" href="@Url.Action("services", "Home")">Services</a></li>
+                         <li class="nav-item"><a class="nav-link" href="@Url.Action("memberships", "Home")">Membership</a></li>
+                         <li class="nav-item"><a class="nav-link" href="@Url.Action("contact", "Home")">Contact</a></li>
+                         <li class="nav-item"><a class="btn btn-primary" href="@Url.Action("login", "Home")">Login</a></li>
                     </ul>
                </div>
           </div>
@@ -51,13 +45,11 @@
           </div>
           <div class="offcanvas-body">
                <ul class="list-unstyled">
-                    <li><a href="index.cshtml" class="nav-link">Home</a></li>
-                    <li><a href="about.cshtml" class="nav-link">About</a></li>
-                    <li><a href="services.cshtml" class="nav-link">Services</a></li>
-                    <li><a href="subscriptions.cshtml" class="nav-link">Subscriptions</a></li>
-                    <li><a href="blog.cshtml" class="nav-link">Blog</a></li>
-                    <li><a href="contact.cshtml" class="nav-link">Contact</a></li>
-                    <li><a class="btn btn-primary w-100" href="login.cshtml">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("index", "Home")">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("services", "Home")">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("memberships", "Home")">Membership</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("contact", "Home")">Contact</a></li>
+                    <li class="nav-item"><a class="btn btn-primary" href="@Url.Action("login", "Home")">Login</a></li>
                </ul>
           </div>
      </div>
@@ -87,7 +79,7 @@
      <!-- Bootstrap JS Bundle -->
      <!-- Bootstrap JS Bundle -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-     <script src="@Url.Content(" ~ /Scripts/script.js")"></script>
+     <script src="@Url.Content(" ~ /Scripts/home_script.js")"></script>
 
 </body>
 </html>

@@ -163,7 +163,7 @@
     <Content Include="Content\img\nasm-personal-trainer-and-nutrition-coach_THUMBNAIL.jpg" />
     <Content Include="Content\img\pexels-anush-1229356.jpg" />
     <Content Include="Content\img\shtanga-trenazhernyy-zal-gym.jpg" />
-    <Content Include="Content\style.css" />
+    <Content Include="Content\home_style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -187,7 +187,7 @@
     <None Include="Views\Home\About.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\home_script.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
