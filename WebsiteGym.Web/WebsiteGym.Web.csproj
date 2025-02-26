@@ -117,6 +117,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -147,6 +148,7 @@
     <Content Include="Content\img\Best-Personal-Trainers-in-Edgewater-MD.png" />
     <Content Include="Content\img\bodybuilder-posing-on-black-background-sitting-on-bench-after-training-muscular-man-in-gym-black-and-white-photo.jpg" />
     <Content Include="Content\img\CoachVsTrainer_Feature.png" />
+    <Content Include="Content\img\gym.jpg" />
     <Content Include="Content\img\Logo.png" />
     <Content Include="Content\img\DALL·E 2025-02-23 17.06.23 - A modern and bold gym logo featuring a strong, stylized dumbbell or barbell icon integrated with a dynamic, muscular figure. The design uses a black a.png" />
     <Content Include="Content\img\download %281%29.jpg" />
@@ -161,6 +163,7 @@
     <Content Include="Content\img\pexels-anush-1229356.jpg" />
     <Content Include="Content\img\shtanga-trenazhernyy-zal-gym.jpg" />
     <Content Include="Content\home_style.css" />
+    <Content Include="Content\logstyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -180,11 +183,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\logscript.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <None Include="Views\Home\About.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\home_script.js" />
+    <None Include="Views\Home\Login.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -200,6 +205,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
