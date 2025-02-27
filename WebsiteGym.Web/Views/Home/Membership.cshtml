@@ -10,59 +10,8 @@
 </head>
 <body>
 
-    <!--Navigation Bar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <!-- Logo -->
-            <a class="navbar-brand" href="@Url.Action("index", "Home")">
-                <img src="@Url.Content("~/Content/img/Logo.png")" alt="Gym Logo" class="brand-logo">
-                <span class="brand-text">MADGYM</span>
-            </a>
-
-            <!-- Sidebar Toggle Button (Only for Mobile) -->
-            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
-                &#9776;
-
-            </button>
-
-            <!-- Standard Navbar Links (Hidden on Mobile) -->
-            <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About", "Home")">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Services", "Home")">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Membership", "Home")">Membership</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a></li>
-                    <li class="nav-item"><a class="btn btn-primary" href="@Url.Action("Login", "Home")">Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Offcanvas Sidebar (For Mobile Navigation) -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="list-unstyled">
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("About", "Home")">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("Services", "Home")">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("Membership", "Home")">Membership</a></li>
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a></li>
-                <li class="nav-item"><a class="btn btn-primary" href="@Url.Action("Login", "Home")">Login</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Header Section -->
-    <header class="bg-white text-white text-center py-5">
-        <h1>Choose the Perfect Membership for You</h1>
-        <p>Discover the benefits of each plan and start today!</p>
-    </header>
-
     <!-- Cards Section -->
-    <section id="plans" class="container my-1">
+    <section id="plans" class="container my-1" style="padding-top: 100px;">
         <div class="row">
             <div class="col-md-4 mt-3">
                 <div class="card text-center d-flex flex-column h-100">
@@ -150,32 +99,8 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section id="testimonials" class="py-5 bg-light text-center">
-        <div class="container">
-            <h2>What Our Members Say</h2>
-            <blockquote class="blockquote">
-                <p>"This gym transformed my life! The trainers are amazing and the atmosphere is inspiring."</p>
-                <footer class="blockquote-footer">John D.</footer>
-            </blockquote>
-        </div>
-    </section>
 
-    <!-- About Us Section -->
-    <section id="about" class="py-5 bg-light text-center">
-        <div class="container">
-            <h2>About MadGym</h2>
-            <p>We provide world-class fitness facilities with expert trainers to help you reach your fitness goals.</p>
-            <a href="about.html" class="btn btn-primary">Learn More</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2025 MadGym. All Rights Reserved</p>
-    </footer>
-
-    <script src="~/Scripts/MembershipPage.js"></script>
+    <script src="~/Scripts/home_script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -4,13 +4,61 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>@ViewData["Title"] - My Website</title>
-     <link rel="stylesheet" href="~/Content/style.css">
+     <link rel="stylesheet" href="~/Content/home_style.css">
 </head>
 <body>
+     <!--Navigation Bar-->
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+               <!-- Logo -->
+               <a class="navbar-brand" href="@Url.Action("index", "Home")">
+                    <img src="@Url.Content("~/Content/img/Logo.png")" alt="Gym Logo" class="brand-logo">
+                    <span class="brand-text">MADGYM</span>
+               </a>
+
+               <!-- Sidebar Toggle Button (Only for Mobile) -->
+               <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                    &#9776;
+
+               </button>
+
+               <!-- Standard Navbar Links (Hidden on Mobile) -->
+               <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                         <li class="nav-item"><a class="nav-link" href="@Url.Action("About", "Home")">About</a></li>
+                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Services", "Home")">Services</a></li>
+                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Membership", "Home")">Membership</a></li>
+                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a></li>
+                         <li class="nav-item"><a class="btn btn-primary" href="@Url.Action("Login", "Home")">Login</a></li>
+                    </ul>
+               </div>
+          </div>
+     </nav>
+
+     <!-- Offcanvas Sidebar (For Mobile Navigation) -->
+     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+          <div class="offcanvas-header">
+               <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
+               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+               <ul class="list-unstyled">
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About", "Home")">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Services", "Home")">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Membership", "Home")">Membership</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a></li>
+                    <li class="nav-item"><a class="btn btn-primary" href="@Url.Action("Login", "Home")">Login</a></li>
+               </ul>
+          </div>
+     </div>
      <main>
           @RenderBody()
      </main>
-     <script src="~/Scripts/script.js"></script>
+     <!-- Footer -->
+     <footer class="bg-dark text-white text-center py-3">
+          <p>&copy; 2025 MadGym. All Rights Reserved.</p>
+     </footer>
+     <script src="~/Scripts/home_script.js"></script>
      @RenderSection("Scripts", required: false)
 </body>
 </html>
