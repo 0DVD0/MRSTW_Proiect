@@ -6,28 +6,32 @@ using System.Web.Mvc;
 
 namespace WebsiteGym.Web.Controllers
 {
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();
-        }
+     public class HomeController : Controller
+     {
+          public ActionResult Index()
+          {
+               return View();
+          }
 
-        public ActionResult About()
-        {
+          public ActionResult About()
+          {
 
-            return View();
-        }
+               return View();
+          }
 
-        public ActionResult Contact()
-        {
+          public ActionResult Contact()
+          {
 
-            return View();
-        }
+               return View();
+          }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-    }
+          public ActionResult Login()
+          {
+               return View();
+          }
+          public ActionResult Membership()
+          {
+               return View();
+          }
+     }
 }
