@@ -7,8 +7,6 @@ html, body {
     padding: 0;
 }
 
-
-
 /* Make Navbar Taller */
 /* Fix Navbar Alignment */
 /* Make Navbar Fixed & Animated */
@@ -198,10 +196,10 @@ html, body {
 
 /* Hero Section Carousel Styling */
 #heroCarousel {
-     position: absolute;
+     position: relative;
      top: 0;
      left: 0;
-     width: 100vw;
+     width: 100%;
      height: 100vh;
      z-index: 1;
 }
@@ -219,14 +217,13 @@ html, body {
      top: 0;
      left: 0;
      width: 100%;
-     height: 100%;
+     height: 100vh;
      display: flex;
      flex-direction: column;
      justify-content: center;
      align-items: center;
      text-align: center;
      background: rgba(0, 0, 0, 0.6); /* Keeps the dark overlay */
-     padding: 20px;
      z-index: 10; /* Ensures it's above the carousel */
 }
 
@@ -249,9 +246,9 @@ html, body {
 
 /* Ensure Hero Section Stays Fullscreen */
 #hero {
-     position: absolute !important;
+     position: relative;
      width: 100%;
-     height: 100vh;
+     height: 100%;
      overflow: hidden;
 }
 

@@ -4,7 +4,7 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>@ViewData["Title"] - My Website</title>
-     <link rel="stylesheet" href="~/Content/home_style.css">
+     <link rel="stylesheet" href="@Url.Content("~/Content/home_style.css")">
 </head>
 <body>
      <!--Navigation Bar-->
@@ -19,7 +19,6 @@
                <!-- Sidebar Toggle Button (Only for Mobile) -->
                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
                     &#9776;
-
                </button>
 
                <!-- Standard Navbar Links (Hidden on Mobile) -->
