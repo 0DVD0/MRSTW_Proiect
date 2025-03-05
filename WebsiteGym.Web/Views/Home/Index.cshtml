@@ -10,28 +10,28 @@
 </head>
 <body>
      <!-- Hero Section -->
-      <section id="hero" >
-             <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
-                       <div class="carousel-item active">
-                            <img src="@Url.Content("~/Content/img/shtanga-trenazhernyy-zal-gym.jpg")" class="d-block w-100" alt="Slide 1">
-                       </div>
-                       <div class="carousel-item">
-                            <img src="@Url.Content("~/Content/img/pexels-anush-1229356.jpg")" class="d-block w-100" alt="Slide 2">
-                       </div>
-                       <div class="carousel-item">
-                            <img src="@Url.Content("~/Content/img/360_F_338166432_0o8qtAQIE5VMynSeJql9rekVtDaUiPKZ.jpg")" class="d-block w-100" alt="Slide 3">
-                       </div>
-                  </div>
-             </div>
+     <section id="hero">
+          <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+               <div class="carousel-inner">
+                    <div class="carousel-item active">
+                         <img src="@Url.Content("~/Content/img/shtanga-trenazhernyy-zal-gym.jpg")" class="d-block w-100" alt="Slide 1">
+                    </div>
+                    <div class="carousel-item">
+                         <img src="@Url.Content("~/Content/img/pexels-anush-1229356.jpg")" class="d-block w-100" alt="Slide 2">
+                    </div>
+                    <div class="carousel-item">
+                         <img src="@Url.Content("~/Content/img/360_F_338166432_0o8qtAQIE5VMynSeJql9rekVtDaUiPKZ.jpg")" class="d-block w-100" alt="Slide 3">
+                    </div>
+               </div>
+          </div>
 
-      <div class="hero-overlay">
-           <h1>Push Your Limits</h1>
-           <p>Experience the best training programs tailored to your needs.</p>
-           <a href="#services" class="btn btn-primary btn-lg">Join Now &#8595;</a>
-      </div>
-      </section>
-         
+          <div class="hero-overlay">
+               <h1>Push Your Limits</h1>
+               <p>Experience the best training programs tailored to your needs.</p>
+               <a href="#services" class="btn btn-primary btn-lg">Join Now &#8595;</a>
+          </div>
+     </section>
+
      <!-- Services Section -->
      <section id="services" class="py-5 text-center">
           <div class="container">
@@ -68,39 +68,37 @@
           </div>
      </section>
      <div class="text-center button-container">
-          <button class="btn btn-primary btn-lg" href="@Url.Action("services", "Home")">See Services</button>
+          <a href="@Url.Action("Services", "Home")" class="btn btn-primary btn-lg">See Services</a>
      </div>
 
      <!-- Membership Plans -->
-     <section id="membership" class="py-5 text-center">
-          <div class="container">
-               <h2 class="mb-4">Membership Plans</h2>
-               <div class="row">
-                    <div class="col-md-4">
-                         <div class="card">
-                              <div class="card-body">
-                                   <h3>Basic</h3>
-                                   <p>$20/month</p>
-                                   <a href="@Url.Action("membership", "Home")" class="btn btn-primary">Learn More</a>
-                              </div>
+     <section id="membership" class="container my-5">
+          <h2 class="text-center">Membership Plans</h2>
+          <div class="row membership-cards">
+               <div class="col-md-4 d-flex">
+                    <div class="card text-center w-100">
+                         <div class="card-body">
+                              <h3>Basic</h3>
+                              <p>$20/month</p>
+                                   <a href="@Url.Action("Membership","Home")" class="btn btn-primary">Learn More</a>
                          </div>
                     </div>
-                    <div class="col-md-4">
-                         <div class="card">
-                              <div class="card-body">
-                                   <h3>Premium</h3>
-                                   <p>$50/month (Includes personal training + nutrition)</p>
-                                   <a href="@Url.Action("membership", "Home")" class="btn btn-primary">Learn More</a>
-                              </div>
+               </div>
+               <div class="col-md-4 d-flex">
+                    <div class="card text-center w-100">
+                         <div class="card-body">
+                              <h3>Premium</h3>
+                              <p>$50/month (Includes personal training + nutrition)</p>
+                              <a href="@Url.Action("Membership","Home")" class="btn btn-primary">Learn More</a>
                          </div>
                     </div>
-                    <div class="col-md-4">
-                         <div class="card">
-                              <div class="card-body">
-                                   <h3>Ultimate</h3>
-                                   <p>$100/month (Includes all VIP privilages)</p>
-                                   <a href="@Url.Action("membership", "Home")" class="btn btn-primary">Learn More</a>
-                              </div>
+               </div>
+               <div class="col-md-4 d-flex">
+                    <div class="card text-center w-100">
+                         <div class="card-body">
+                              <h3>Ultimate</h3>
+                              <p>$100/month (Includes all VIP privileges)</p>
+                              <a href="@Url.Action("Membership","Home")" class="btn btn-primary">Learn More</a>
                          </div>
                     </div>
                </div>

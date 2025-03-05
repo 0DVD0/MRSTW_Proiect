@@ -149,6 +149,7 @@
     <Content Include="Content\home_style.css" />
     <Content Include="Content\logstyle.css" />
     <Content Include="Content\MembershipPage.css" />
+    <Content Include="Content\service_style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\logscript.js" />
@@ -170,6 +171,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Membership.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Home\Services.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
