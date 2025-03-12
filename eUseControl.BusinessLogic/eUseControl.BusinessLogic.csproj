@@ -42,6 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AdminApi.cs" />
+    <Compile Include="Core\UserApi.cs" />
+    <Compile Include="Interface\BussinesLogic.cs" />
+    <Compile Include="Interface\ISession.cs" />
+    <Compile Include="Interface\SessionBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,7 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BLStruct\" />
-    <Folder Include="Interface\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
