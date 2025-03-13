@@ -45,9 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUseControl.Helper\eUseControl.Helper.csproj">
+    <ProjectReference Include="..\eUseControl.Helper\eUseControl.DataAccess.csproj">
       <Project>{40315df3-3c91-4322-9a70-7c644d7fa9d1}</Project>
-      <Name>eUseControl.Helper</Name>
+      <Name>eUseControl.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
