@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AdminApi.cs" />
+    <Compile Include="Core\OrderApi.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Interface\BussinesLogic.cs" />
+    <Compile Include="Interface\IOrder.cs" />
     <Compile Include="Interface\ISession.cs" />
     <Compile Include="Interface\SessionBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
