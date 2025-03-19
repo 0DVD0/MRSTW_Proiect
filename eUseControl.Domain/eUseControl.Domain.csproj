@@ -41,15 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\BaseEntities\BaseEntity.cs" />
+    <Compile Include="Entities\Membership.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\eUseControl.Helper\eUseControl.DataAccess.csproj">
-      <Project>{40315df3-3c91-4322-9a70-7c644d7fa9d1}</Project>
-      <Name>eUseControl.DataAccess</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />

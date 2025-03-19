@@ -45,7 +45,8 @@
     <Compile Include="Core\OrderApi.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Interface\BussinesLogic.cs" />
-    <Compile Include="Interface\IOrder.cs" />
+    <Compile Include="Interface\IMembershipApi.cs" />
+    <Compile Include="Interface\IOrderApi.cs" />
     <Compile Include="Interface\ISession.cs" />
     <Compile Include="Interface\SessionBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,10 +55,6 @@
     <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
       <Project>{ad325b44-1176-40c4-98d0-0c1fba596d2c}</Project>
       <Name>eUseControl.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\eUseControl.Helper\eUseControl.DataAccess.csproj">
-      <Project>{40315df3-3c91-4322-9a70-7c644d7fa9d1}</Project>
-      <Name>eUseControl.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

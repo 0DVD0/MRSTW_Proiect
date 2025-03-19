@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eUseControl.BusinessLogic.Interface
 {
-    interface IOrder
+    interface IOrderApi
     {
     }
 }
