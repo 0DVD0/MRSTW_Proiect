@@ -11,7 +11,6 @@
     <div class="container checkoutContainer">
         <div class="row justify-content-center">
 
-            <!-- Checkout Membership Card -->
             <div class="col-md-6">
                 <div class="card checkoutMembershipCard shadow-lg">
                     <div class="card-header checkoutMembershipCardHeader bg-primary text-white">
@@ -42,6 +41,19 @@
                                 <option value="100">Ultimate</option>
                                 <option value="120">Friends</option>
                             </select>
+
+                            <div class="form-group mt-3">
+                                <label for="duration" class="form-label">Membership Duration:</label>
+                                <select id="duration" name="duration" class="form-control" onchange="updatePrice()">
+                                    <option value="" disabled selected>Select a membership duration</option>
+                                    <option value="1">1 Month</option>
+                                    <option value="3">3 Months</option>
+                                    <option value="6">6 Months</option>
+                                </select>
+                            </div>
+
+                            <h5 class="text-dark mt-4">Total Price: $<span id="totalPrice">0</span></h5> 
+
                             <h5 class="text-dark mt-4">Payment Method</h5>
                             <div class="row">
                                 <div class="col-md-8">
@@ -66,7 +78,9 @@
                                 <label for="terms" class="form-check-label">I agree to the terms and conditions</label>
                             </div>
 
-                            <button type="submit" class="btn checkoutButton w-100 mt-3 place-order-btn">Place Order</button>
+                            <div class="mb-3 text-center">
+                                <button type="submit" class="btn btn-primary place-order-btn">Place Order</button>
+                            </div>
                         </form>
                     </div>
                 </div>
