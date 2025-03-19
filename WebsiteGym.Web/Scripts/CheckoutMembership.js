@@ -25,3 +25,4 @@ function applyDiscount() {
         alert("Invalid discount code!");
     }
 }
+

@@ -8,6 +8,10 @@ namespace WebsiteGym.Web.Controllers
 {
     public class CheckoutController : Controller
     {
-     
+        public ActionResult CheckoutMembership()
+        {
+            return View("CheckoutMembership");
+        }
+
     }
 }
