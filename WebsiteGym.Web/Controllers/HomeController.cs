@@ -38,10 +38,10 @@ namespace WebsiteGym.Web.Controllers
           {
                return View();
           }
-         public ActionResult CheckoutMembership()
-    {
-        return View(); 
-    }
-    
+          public ActionResult CheckoutMembership()
+          {
+               return View("CheckoutMembership");  
+          }
+
     }
 }

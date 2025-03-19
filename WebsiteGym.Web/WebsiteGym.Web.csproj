@@ -151,6 +151,7 @@
     <Content Include="Content\img\pexels-anush-1229356.jpg" />
     <Content Include="Content\img\shtanga-trenazhernyy-zal-gym.jpg" />
     <Content Include="Content\home_style.css" />
+    <Content Include="Content\layout.css" />
     <Content Include="Content\logstyle.css" />
     <Content Include="Content\MembershipPage.css" />
     <Content Include="Content\service_style.css" />

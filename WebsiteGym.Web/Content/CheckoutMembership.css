@@ -1,16 +1,17 @@
 ﻿.checkoutBody {
-    background-color: #f8f9fa; 
+    background-color: #f8f9fa;
     color: #343a40;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    min-height: 100vh; 
-    margin: 0; 
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 300px;
 }
 
 .checkoutContainer {
     max-width: 1200px;
-    margin-top: 30px; 
+    margin-top: 0px;
 }
 
 .checkoutMembershipCardHeader {
@@ -31,7 +32,6 @@
     border-top-right-radius: 8px;
 }
 
-
 .checkoutMembershipCardHeader, .orderSummaryCardHeader {
     background-color: #007bff;
     color: #ffffff;
@@ -46,13 +46,13 @@
 }
 
 .checkoutButton {
-    background-color: #007bff; 
-    border-color: #007bff; 
-    color: #ffffff; 
+    background-color: #007bff;
+    border-color: #007bff ;
+    color: #ffffff ;
 }
 
     .checkoutButton:hover {
-        background-color: #0056b3; 
+        background-color: #0056b3 ;
         border-color: #0056b3;
     }
 
