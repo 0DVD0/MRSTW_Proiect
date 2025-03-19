@@ -1,14 +1,19 @@
-﻿using System;
+﻿using eUseControl.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using eUseControl.Domain.Entities;
+using System;
+using eUseControl.BusinessLogic.Core;
 
 namespace eUseControl.BusinessLogic.Interface
 {
-    interface IMembershipApi
+    public interface IMembershipApi
     {
-        void CreateMembership(Membership membership);
+        void CreateMembership(User user, MembershipType type, decimal price, DateTime startDate, bool autoRenewal);
+        void RenewMembership(int membershipId);
+        void CancelMembership(int membershipId);
+        MembershipStatus CheckMembershipStatus(int userId);
+        Membership GetMembershipDetails(int userId);
+        void ApplyDiscount(int membershipId, decimal discountAmount);
+        void UpgradeMembership(int membershipId, MembershipType newType, decimal newPrice);
+        List<Membership> GetExpiringMemberships();
     }
 }
