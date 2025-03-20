@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
 
@@ -9,126 +10,112 @@ namespace eUseControl.BusinessLogic.Core
 {
     public class AdminApi : IMembershipApi, IOrderApi
     {
-        private List<Membership> memberships = new List<Membership>();
+        private List<Membership> membershipsList = new List<Membership>();
         private List<Order> orders = new List<Order>();
 
-        public void CreateMembership(eUseControl.Domain.Entities.User.User user, MembershipType type, decimal price, DateTime startDate, bool autoRenewal)
+        public void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate)
         {
-            if (user == null || string.IsNullOrEmpty(type.ToString()))
+           if(endDate < startDate)
             {
-                throw new MembershipException("Invalid membership details");
+                return;
             }
 
-            var membership = new Membership
+           if(price < 0)
             {
-                UserId = user.Id,
-                Type = type,
+                return;
+            }
+
+           if(string.IsNullOrWhiteSpace(name))
+            {
+                return;
+            }
+
+
+            Membership membership = new Membership()
+            {
                 Price = price,
+                Name = name,
                 StartDate = startDate,
-                EndDate = autoRenewal ? startDate.AddYears(1) : startDate.AddMonths(1),
-                Status = MembershipStatus.Active,
-                TrainerSessions = null,
-                Discounts = false
+                EndDate = endDate
             };
 
-            memberships.Add(membership);
+            membership.Price = 1000000;
+
+            membershipsList.Add(membership);
         }
 
-        public void RenewMembership(int membershipId)
+        public void RemoveMembership(int membershipId)
         {
-            var membership = memberships.FirstOrDefault(m => m.Id == membershipId);
-            if (membership == null)
+            if(membershipId < 0)
             {
-                throw new MembershipException("Membership not found");
-            }
+                // todo refaxtor this
+                return;
+            } 
 
-            if (membership.Status == MembershipStatus.Expired)
+
+            foreach (Membership membership in membershipsList)
             {
-                membership.EndDate = DateTime.Now.AddMonths(1);
-                membership.Status = MembershipStatus.Active;
+                if(membership.Id == membershipId)
+                {
+                    membershipsList.Remove(membership);
+                }
             }
-        }
-
-        public void CancelMembership(int membershipId)
-        {
-            var membership = memberships.FirstOrDefault(m => m.Id == membershipId);
-            if (membership == null)
-            {
-                throw new MembershipException("Membership not found");
-            }
-
-            membership.Status = MembershipStatus.Canceled;
-        }
-
-        public MembershipStatus CheckMembershipStatus(int userId)
-        {
-            var membership = memberships.FirstOrDefault(m => m.UserId == userId);
-            if (membership == null)
-            {
-                throw new MembershipException("Membership not found");
-            }
-
-            return membership.Status;
-        }
-
-        public Membership GetMembershipDetails(int userId)
-        {
-            var membership = memberships.FirstOrDefault(m => m.UserId == userId);
-            if (membership == null)
-            {
-                throw new MembershipException("Membership not found");
-            }
-
-            return membership;
         }
 
         public void ApplyDiscount(int membershipId, decimal discountAmount)
         {
-            var membership = memberships.FirstOrDefault(m => m.Id == membershipId);
-            if (membership == null)
-            {
-                throw new MembershipException("Membership not found");
-            }
-
-            membership.Price -= discountAmount;
+        
         }
 
-        public void UpgradeMembership(int membershipId, MembershipType newType, decimal newPrice)
+        public void UpdateMembership(int membershipId, string name, decimal price, DateTime startDate, DateTime endDate)
         {
-            var membership = memberships.FirstOrDefault(m => m.Id == membershipId);
-            if (membership == null)
+            // validate 
+            if (membershipId < 0)
             {
-                throw new MembershipException("Membership not found");
+                return;
             }
 
-            membership.Type = newType;
-            membership.Price = newPrice;
-        }
-
-        public List<Membership> GetExpiringMemberships()
-        {
-            return memberships
-                .Where(m => m.EndDate <= DateTime.Now.AddDays(30) && m.Status == MembershipStatus.Active)
-                .ToList();
-        }
-
-        public void CreateOrder(Order order)
-        {
-            if (order == null || order.MembershipId <= 0)
+            foreach (Membership membership in membershipsList)
             {
-                throw new OrderException("Invalid order");
+                if (membership.Id == membershipId)
+                {
+                    membership.Name = name;
+                    membership.Price = price;
+                    membership.StartDate = startDate;
+                    membership.EndDate = endDate;
+
+                    return;
+                }
             }
-            orders.Add(order);
+        }
+
+        public Membership GetMembershipById(int membershipId)
+        {
+            if(membershipId < 0)
+            {
+                return null;
+            }
+
+            foreach(Membership membership in membershipsList)
+            {
+                if (membership.Id == membershipId)
+                {
+                    return membership;
+                }
+            }
+            return null;
+        }
+
+
+        public void CreateOrder(Order order) 
+        {
+            //TODO
+
         }
 
         public List<Order> GetAllOrders()
         {
             return orders;
         }
-    }
-
-    public class MembershipException : Exception
-    {
-        public MembershipException(string message) : base(message) { }
     }
 }
