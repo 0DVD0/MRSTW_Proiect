@@ -15,6 +15,11 @@ namespace eUseControl.BusinessLogic.Core
             throw new NotImplementedException();
         }
 
+        public void CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId)
+        {
+            Console.WriteLine("");
+        }
+
         public List<Order> GetAllOrders()
         {
             return orders;
