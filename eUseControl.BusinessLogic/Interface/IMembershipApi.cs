@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System;
 using eUseControl.BusinessLogic.Core;
+using eUseControl.Domain.Entities.User;
 
 namespace eUseControl.BusinessLogic.Interface
 {
     public interface IMembershipApi
     {
         void CreateMembership(User user, MembershipType type, decimal price, DateTime startDate, bool autoRenewal);
+
         void RenewMembership(int membershipId);
         void CancelMembership(int membershipId);
         MembershipStatus CheckMembershipStatus(int userId);

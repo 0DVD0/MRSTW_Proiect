@@ -4,6 +4,7 @@ using System.Linq;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
 
+
 namespace eUseControl.BusinessLogic.Core
 {
     public class AdminApi : IMembershipApi, IOrderApi
@@ -11,7 +12,7 @@ namespace eUseControl.BusinessLogic.Core
         private List<Membership> memberships = new List<Membership>();
         private List<Order> orders = new List<Order>();
 
-        public void CreateMembership(User user, MembershipType type, decimal price, DateTime startDate, bool autoRenewal)
+        public void CreateMembership(eUseControl.Domain.Entities.User.User user, MembershipType type, decimal price, DateTime startDate, bool autoRenewal)
         {
             if (user == null || string.IsNullOrEmpty(type.ToString()))
             {
