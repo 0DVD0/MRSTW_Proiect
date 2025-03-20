@@ -44,7 +44,7 @@
     <Compile Include="Entities\BaseEntities\BaseEntity.cs" />
     <Compile Include="Entities\Membership.cs" />
     <Compile Include="Entities\Order.cs" />
-    <Compile Include="Entities\User\Coach.cs" />
+    <Compile Include="Entities\Coach.cs" />
     <Compile Include="Entities\User\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
