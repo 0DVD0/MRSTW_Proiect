@@ -11,20 +11,13 @@ namespace eUseControl.BusinessLogic.Core
 
         public void CreateOrder(Order order)
         {
-            if (order == null || order.MembershipId <= 0)
-            {
-                throw new OrderException("Invalid order");
-            }
-            orders.Add(order);
+            // TODO: implement some logic
+            throw new NotImplementedException();
         }
 
         public List<Order> GetAllOrders()
         {
             return orders;
         }
-    }
-    public class OrderException : Exception
-    {
-        public OrderException(string message) : base(message) { }
     }
 }
