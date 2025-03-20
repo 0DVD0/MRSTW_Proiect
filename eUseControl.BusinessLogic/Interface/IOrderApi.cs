@@ -11,6 +11,6 @@ namespace eUseControl.BusinessLogic.Interface
     public interface IOrderApi
     {
         void CreateOrder(Order order);
-        List<Order> GetAllOrders();
+        IEnumerable<Order> GetAllOrders();
     }
 }

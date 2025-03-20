@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\OrderApi.cs" />
+    <Compile Include="Core\UserActions.cs" />
     <Compile Include="Core\UserServices.cs" />
     <Compile Include="Interface\BussinesLogic.cs" />
     <Compile Include="Interface\IMembershipApi.cs" />

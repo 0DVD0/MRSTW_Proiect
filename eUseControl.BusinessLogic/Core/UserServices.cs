@@ -28,6 +28,7 @@ namespace eUseControl.BusinessLogic.Core
 
           public string AuthUser(string name, string password)
           {
+               // User authorization logic
                return null;
           }
      }
