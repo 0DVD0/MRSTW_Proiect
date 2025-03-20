@@ -13,7 +13,7 @@ namespace eUseControl.BusinessLogic.Core
     public class AdminApi : IMembershipApi, IOrderApi
     {
         private List<Membership> membershipsList = new List<Membership>();
-        private List<Order> orders = new List<Order>();
+        private List<Order> ordersList = new List<Order>();
 
         public void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate)
         {
@@ -41,8 +41,6 @@ namespace eUseControl.BusinessLogic.Core
                 EndDate = endDate
             };
 
-            membership.Price = 1000000;
-
             membershipsList.Add(membership);
         }
 
@@ -50,7 +48,7 @@ namespace eUseControl.BusinessLogic.Core
         {
             if (membershipId < 0)
             {
-                // todo refaxtor this
+                // todo refactor this
                 return;
             }
 
@@ -109,15 +107,23 @@ namespace eUseControl.BusinessLogic.Core
         }
 
 
-        public void CreateOrder(Order order)
+        public void CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId)
         {
-            //TODO
 
+            Order order = new Order()
+            {
+                MembershipId = membershipId,    
+                OrderDate = orderDate,
+                TotalPrice = totalPrice,
+                UserId = userId
+            };
+            
+            ordersList.Add(order);
         }
 
         public List<Order> GetAllOrders()
         {
-            return orders;
+            return ordersList;
         }
     }
 }
