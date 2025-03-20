@@ -9,15 +9,10 @@ namespace eUseControl.BusinessLogic.Core
     {
         private List<Order> orders = new List<Order>();
 
-        public void CreateOrder(Order order)
-        {
-            // TODO: implement some logic
-            throw new NotImplementedException();
-        }
-
         public void CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId)
         {
-            Console.WriteLine("");
+     
+            throw new NotImplementedException();
         }
 
         public List<Order> GetAllOrders()
