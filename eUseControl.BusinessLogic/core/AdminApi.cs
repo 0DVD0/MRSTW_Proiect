@@ -14,6 +14,7 @@ namespace eUseControl.BusinessLogic.Core
     {
         private List<Membership> membershipsList = new List<Membership>();
         private List<Order> ordersList = new List<Order>();
+        private List<Coach> coachList = new List<Coach>();
 
         public void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate)
         {
@@ -124,6 +125,91 @@ namespace eUseControl.BusinessLogic.Core
         public List<Order> GetAllOrders()
         {
             return ordersList;
+        }
+
+        public void CreateCoach(string name, string surname, DateTime birthdate)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(surname))
+            {
+                return;
+            }
+
+            if (birthdate > DateTime.Now.AddYears(-18))
+            {
+                return;
+            }
+
+            Coach coach = new Coach()
+            {
+                Name = name,
+                Surname = surname,
+                Birthdate = birthdate
+            };
+
+            coachList.Add(coach);
+        }
+
+        public void RemoveCoach(int coachId)
+        {
+            if (coachId < 0)
+            {
+                return;
+            }
+
+            foreach (Coach coach in coachList)
+            {
+                if (coach.Id == coachId)
+                {
+                    coachList.Remove(coach);
+                }
+            }
+        }
+
+        public Coach GetCoachById(int coachId)
+        {
+            if (coachId < 0)
+            {
+                return null;
+            }
+
+            foreach (Coach coach in coachList)
+            {
+                if (coach.Id == coachId)
+                {
+                    return coach;
+                }
+            }
+            return null;
+        }
+
+        public void UpdateCoach(int coachId, string name, string surname, DateTime birthdate)
+        {
+            if (coachId < 0)
+            {
+                return;
+            }
+
+            foreach (Coach coach in coachList)
+            {
+                if (coach.Id == coachId)
+                {
+                    coach.Name = name;
+                    coach.Surname = surname;
+                    coach.Birthdate = birthdate;
+
+                    return;
+                }
+            }
+        }
+
+        public List<Coach> GetAll()
+        {
+            return coachList;
         }
     }
 }
