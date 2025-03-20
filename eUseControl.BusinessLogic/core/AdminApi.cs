@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
 
@@ -15,17 +17,17 @@ namespace eUseControl.BusinessLogic.Core
 
         public void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate)
         {
-           if(endDate < startDate)
+            if (endDate < startDate)
             {
                 return;
             }
 
-           if(price < 0)
+            if (price < 0)
             {
                 return;
             }
 
-           if(string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 return;
             }
@@ -46,16 +48,16 @@ namespace eUseControl.BusinessLogic.Core
 
         public void RemoveMembership(int membershipId)
         {
-            if(membershipId < 0)
+            if (membershipId < 0)
             {
                 // todo refaxtor this
                 return;
-            } 
+            }
 
 
             foreach (Membership membership in membershipsList)
             {
-                if(membership.Id == membershipId)
+                if (membership.Id == membershipId)
                 {
                     membershipsList.Remove(membership);
                 }
@@ -64,7 +66,7 @@ namespace eUseControl.BusinessLogic.Core
 
         public void ApplyDiscount(int membershipId, decimal discountAmount)
         {
-        
+
         }
 
         public void UpdateMembership(int membershipId, string name, decimal price, DateTime startDate, DateTime endDate)
@@ -91,12 +93,12 @@ namespace eUseControl.BusinessLogic.Core
 
         public Membership GetMembershipById(int membershipId)
         {
-            if(membershipId < 0)
+            if (membershipId < 0)
             {
                 return null;
             }
 
-            foreach(Membership membership in membershipsList)
+            foreach (Membership membership in membershipsList)
             {
                 if (membership.Id == membershipId)
                 {
@@ -107,7 +109,7 @@ namespace eUseControl.BusinessLogic.Core
         }
 
 
-        public void CreateOrder(Order order) 
+        public void CreateOrder(Order order)
         {
             //TODO
 

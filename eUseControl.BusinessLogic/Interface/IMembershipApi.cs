@@ -11,6 +11,6 @@ namespace eUseControl.BusinessLogic.Interface
         void RemoveMembership(int membershipId);
         Membership GetMembershipById(int membershipId);
         void ApplyDiscount(int membershipId, decimal discountAmount);
-        void UpdateMembership(string name, decimal price, DateTime startDate, DateTime endDate);
+        void UpdateMembership(int membershipId, string name, decimal price, DateTime startDate, DateTime endDate);
     }
 }
