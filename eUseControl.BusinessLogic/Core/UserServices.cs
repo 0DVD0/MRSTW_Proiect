@@ -7,23 +7,18 @@ using System.Threading.Tasks;
 
 namespace eUseControl.BusinessLogic.Core
 {
-    public class UserServices: IUserServices 
+    public class UserServices: IUserServices
     {
           private readonly IUserActions _userAction;
-          private readonly string _token = "Thisisatoken";
 
-          public UserServices(IUserActions userAction)
-          {
-               _userAction = userAction;
-          }
-
-          public bool RegisterUser(string name, string email, string password)
+          public void RegisterUser(string name, string email, string password)
           {
                if (_userAction.UserExists(name, password))
                {
-                    return false;
+                    return;
                }
-               return _userAction.UserCreate(name, email, password);
+               _userAction.UserCreate(name, email, password);
+               return; 
           }
 
           public string AuthUser(string name, string password)

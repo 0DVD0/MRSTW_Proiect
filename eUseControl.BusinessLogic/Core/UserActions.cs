@@ -8,26 +8,46 @@ using eUseControl.Domain.Entities.User;
 
 namespace eUseControl.BusinessLogic.Core
 {
-    
      internal class UserActions : IUserActions
      {
-          
-      public bool UserCreate(string name, string email, string password)
+          public List<User> userList = new List<User>();
+
+          public void UserCreate(string name, string email, string password)
           {
-               // User creation logic
-               return true;
+               User user = new User();
+               {
+                    user.Name = name;
+                    user.Email = email;
+                    user.Password = password;
+               }
+
+               userList.Add(user);
+               return;
           }
 
-          public bool UserDelete(string name, string password)
+          public void UserDelete(string name, string password)
           {
-               // User deletion logic
-               return true;
+               foreach (User user in userList) 
+               {
+                    if ((user.Name == name) & (user.Password == password))
+                    {
+                         userList.Remove(user);
+                         return;
+                    }
+               }
+               return;
           }
 
           public bool UserExists(string name, string password)
           {
-               // User existence logic
-               return true;
+               foreach (User user in userList)
+               {
+                    if ((user.Name == name) & (user.Password == password))
+                    {
+                         return true;
+                    }
+               }
+               return false;
           }
      }
 }
