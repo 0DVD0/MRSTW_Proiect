@@ -2,7 +2,7 @@
 {
     public interface IUserServices
     {
-        bool RegisterUser(string name, string email, string password);
+        void RegisterUser(string name, string email, string password);
         string AuthUser(string name, string password);
     }
 }
