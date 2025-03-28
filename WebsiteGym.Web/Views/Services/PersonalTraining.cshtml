@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/Content/PersonalTraining.css">
+    <link rel="stylesheet" href="~/Content/home_style.css">
+</head>
+<body>
+
+    <header class="personal-training-header">
+        <h1>Your Personalized Fitness Journey</h1>
+        <p>Achieve your fitness goals with the help of our expert personal trainers!</p>
+    </header>
+
+    <section class="personal-training-info">
+        <div class="personal-training-image">
+            <img src="@Url.Content("~/Content/img/personal-training-image.jpg")" alt="Personal Training">
+        </div>
+        <div class="personal-training-description">
+            <h2>What is Personal Training?</h2>
+            <p>Our personal training service is designed to give you tailored workouts and one-on-one guidance. Whether you're new to fitness or looking to push yourself further, our trainers will work with you to create a personalized program that helps you reach your goals faster and more effectively.</p>
+        </div>
+    </section>
+
+    <section class="personal-training-benefits">
+        <h2>Benefits of Personal Training</h2>
+        <ul>
+            <li>Customized workout plans</li>
+            <li>Expert trainers for motivation and support</li>
+            <li>Faster results with tailored guidance</li>
+            <li>Flexible scheduling to fit your needs</li>
+            <li>Ongoing assessments and progress tracking</li>
+        </ul>
+    </section>
+
+    <section class="personal-training-cta">
+        <p>Ready to start your fitness transformation?</p>
+        <a href="@Url.Action("Contact", "Home")" class="btn-cta">Contact Us to Book Your Session</a>
+    </section>
+
+</body>
+</html>
