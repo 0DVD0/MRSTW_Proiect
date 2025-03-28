@@ -130,6 +130,7 @@
   <ItemGroup>
     <Content Include="Content\admin_style.css" />
     <Content Include="Content\CheckoutMembership.css" />
+    <Content Include="Content\GroupPrograms.css" />
     <Content Include="Content\img\360_F_120756997_1PELclEVhEn9N1HRUdq9ItQFY43yOwtF.jpg" />
     <Content Include="Content\img\360_F_338166432_0o8qtAQIE5VMynSeJql9rekVtDaUiPKZ.jpg" />
     <Content Include="Content\img\antrenor-personal-fitness-400x250.jpg" />
