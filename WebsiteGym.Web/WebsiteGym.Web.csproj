@@ -160,6 +160,7 @@
     <Content Include="Scripts\logscript.js" />
     <Content Include="Views\Admin\IndexAdmin.cshtml" />
     <Content Include="Scripts\CheckoutMembership.js" />
+    <Content Include="Views\Checkout\TermsAndConditions.cshtml" />
     <None Include="Views\Home\About.cshtml" />
     <Content Include="Views\Checkout\CheckoutMembership.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />

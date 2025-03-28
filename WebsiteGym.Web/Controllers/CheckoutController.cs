@@ -9,5 +9,9 @@ namespace WebsiteGym.Web.Controllers
             return View("CheckoutMembership");
         }
 
+        public ActionResult TermsAndConditions()
+        {
+            return View("TermsAndConditions");
+        }
     }
 }

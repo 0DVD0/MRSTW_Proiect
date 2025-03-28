@@ -59,9 +59,12 @@ function applyDiscount() {
 document.addEventListener('DOMContentLoaded', function () {
 
     const membershipSelect = document.getElementById('membership');
-    const durationSelect = document.getElementById('duration');
-    const subtotalElement = document.getElementById('subtotal');
-    const totalElement = document.getElementById('finalTotal');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedMembership = urlParams.get('membership');
+
+    if (selectedMembership) {
+        membershipSelect.value = selectedMembership;
 
     function updatePrice() {
         const membershipPrice = parseFloat(membershipSelect.value);
