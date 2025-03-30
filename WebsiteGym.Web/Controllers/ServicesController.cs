@@ -18,7 +18,7 @@ namespace WebsiteGym.Web.Controllers
             return View("GroupPrograms");
         }
 
-        public ActionResult NutritionCoachings()
+        public ActionResult NutritionCoaching()
         {
             return View("NutritionCoaching");
         }

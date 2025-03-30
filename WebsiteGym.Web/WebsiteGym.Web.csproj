@@ -156,6 +156,7 @@
     <Content Include="Content\layout.css" />
     <Content Include="Content\logstyle.css" />
     <Content Include="Content\MembershipPage.css" />
+    <Content Include="Content\NutritionCoaching.css" />
     <Content Include="Content\PersonalTraining.css" />
     <Content Include="Content\service_style.css" />
     <Content Include="favicon.ico" />

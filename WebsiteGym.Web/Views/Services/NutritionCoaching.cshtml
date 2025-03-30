@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/Content/NutritionCoaching.css">
+    <link rel="stylesheet" href="~/Content/home_style.css">
+</head>
+<body>
+    <header class="nutrition-coaching-header">
+        <h1>Personalized Nutrition Coaching</h1>
+        <p>Get expert advice and a customized meal plan to fuel your fitness journey!</p>
+    </header>
+
+    <section class="nutrition-coaching-info">
+        <div class="nutrition-coaching-image">
+            <img src="@Url.Content("~/Content/img/f710044bf79a4b1f5d8b085e5e5d9711_M.jpg")" alt="Nutrition Coaching">
+        </div>
+        <div class="nutrition-coaching-description">
+            <h2>What is Nutrition Coaching?</h2>
+            <p>Our nutrition coaching program is designed to help you build a healthy relationship with food. Whether your goal is weight loss, muscle gain, or overall wellness, our certified nutritionists will create a personalized meal plan and provide ongoing support to ensure you achieve sustainable results.</p>
+        </div>
+    </section>
+
+    <section class="nutrition-coaching-benefits">
+        <h2>Benefits of Nutrition Coaching</h2>
+        <ul>
+            <li>Personalized meal plans tailored to your goals</li>
+            <li>Expert guidance from certified nutritionists</li>
+            <li>Improved energy levels and performance</li>
+            <li>Long-term sustainable healthy eating habits</li>
+            <li>Regular check-ins to track progress and adjust plans</li>
+        </ul>
+    </section>
+
+    <section class="nutrition-coaching-cta">
+        <p>Ready to take control of your diet?</p>
+        <a href="@Url.Action("Contact", "Home")" class="btn-cta">Book Your Consultation</a>
+    </section>
+</body>
+</html>
