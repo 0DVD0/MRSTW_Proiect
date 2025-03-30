@@ -63,9 +63,22 @@ namespace eUseControl.BusinessLogic.Core
             }
         }
 
-        public void ApplyDiscount(int membershipId, decimal discountAmount)
+        public void ApplyDiscount(int membershipId, decimal discountAmount, decimal newPrice)
         {
+            if (membershipId < 0 || discountAmount < 0)
+            {
+                return;
+            }
 
+            foreach (Membership membership in membershipsList)
+            {
+                if (membership.Id == membershipId)
+                {
+                    newPrice = membership.Price - discountAmount;
+                }
+                membership.Price = newPrice >= 0 ? newPrice : 0;
+                return;
+            }
         }
 
         public void UpdateMembership(int membershipId, string name, decimal price, DateTime startDate, DateTime endDate)

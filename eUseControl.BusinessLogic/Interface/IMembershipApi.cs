@@ -10,7 +10,7 @@ namespace eUseControl.BusinessLogic.Interface
         void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate);
         void RemoveMembership(int membershipId);
         Membership GetMembershipById(int membershipId);
-        void ApplyDiscount(int membershipId, decimal discountAmount);
+        void ApplyDiscount(int membershipId, decimal discountAmount, decimal newPrice);
         void UpdateMembership(int membershipId, string name, decimal price, DateTime startDate, DateTime endDate);
     }
 }
