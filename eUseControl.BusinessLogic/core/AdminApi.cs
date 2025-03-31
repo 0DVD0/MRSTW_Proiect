@@ -124,21 +124,43 @@ namespace eUseControl.BusinessLogic.Core
         public void CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId)
         {
 
-            Order order = new Order()
+            if (userId < 0 || membershipId == 0 || Id == 0 || totalPrice < 0 || userId < 0) { return; }
+
+            Order newOrder = new Order
             {
-                MembershipId = membershipId,    
+                Id = Id,
+                MembershipId = membershipId,
                 OrderDate = orderDate,
                 TotalPrice = totalPrice,
                 UserId = userId
             };
-            
-            ordersList.Add(order);
+
+            ordersList.Add(newOrder);
         }
+
 
         public List<Order> GetAllOrders()
         {
             return ordersList;
         }
+
+        public bool DeleteOrder(int orderId)
+        {
+            if (orderId < 0)
+            {
+                return false;
+            }
+
+            Order orderToRemove = ordersList.FirstOrDefault(o => o.Id == orderId);
+
+            if (orderToRemove != null)
+            {
+                ordersList.Remove(orderToRemove);
+                return true;
+            }
+            return false;
+        }
+
 
         public void CreateCoach(string name, string surname, DateTime birthdate)
         {
