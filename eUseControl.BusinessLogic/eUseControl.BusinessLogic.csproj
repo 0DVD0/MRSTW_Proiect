@@ -55,6 +55,7 @@
     <Compile Include="Core\OrderApi.cs" />
     <Compile Include="Core\UserActions.cs" />
     <Compile Include="Core\UserServices.cs" />
+    <Compile Include="DBModel\MembershipContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interface\BussinesLogic.cs" />
     <Compile Include="Interface\ICoachApi.cs" />
