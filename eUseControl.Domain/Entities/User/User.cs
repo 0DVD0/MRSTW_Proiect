@@ -1,9 +1,7 @@
 ﻿using eUseControl.Domain.Entities.BaseEntities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eUseControl.Domain.Entities.User
 {
@@ -14,4 +12,11 @@ namespace eUseControl.Domain.Entities.User
           public string Password { get; set; }
           public DateTime LoginDateTime { get; set; }
      }
+
+    class UDbTable
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; } 
+    }
 }
