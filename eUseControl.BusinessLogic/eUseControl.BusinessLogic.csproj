@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BLStruct\" />
+    <Folder Include="DBModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
