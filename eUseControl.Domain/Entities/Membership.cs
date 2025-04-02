@@ -3,7 +3,7 @@ using eUseControl.Domain.Entities.BaseEntities;
 
 namespace eUseControl.Domain.Entities
 {
-    public class Membership : DBEntity
+    public class Membership : BaseEntity
     {
         public string Name { get; set; }
         // Timespan is for months count for membership
