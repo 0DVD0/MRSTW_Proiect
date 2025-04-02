@@ -10,11 +10,11 @@ namespace eUseControl.BusinessLogic.Core
 {
      internal class UserActions : IUserActions
      {
-          public List<User> userList = new List<User>();
+          public List<UDBTable> userList = new List<UDBTable>();
 
           public void UserCreate(string name, string email, string password)
           {
-               User user = new User();
+               UDBTable user = new UDBTable();
                {
                     user.Name = name;
                     user.Email = email;
@@ -27,7 +27,7 @@ namespace eUseControl.BusinessLogic.Core
 
           public void UserDelete(string name, string password)
           {
-               foreach (User user in userList) 
+               foreach (UDBTable user in userList) 
                {
                     if ((user.Name == name) & (user.Password == password))
                     {
@@ -40,7 +40,7 @@ namespace eUseControl.BusinessLogic.Core
 
           public bool UserExists(string name, string password)
           {
-               foreach (User user in userList)
+               foreach (UDBTable user in userList)
                {
                     if ((user.Name == name) & (user.Password == password))
                     {

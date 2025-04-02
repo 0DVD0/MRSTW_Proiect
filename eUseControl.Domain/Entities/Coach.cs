@@ -7,7 +7,7 @@ using eUseControl.Domain.Entities.BaseEntities;
 
 namespace eUseControl.Domain.Entities
 {
-    public class Coach : BaseEntity
+    public class Coach : DBEntity
     {
         public string Name { get; set; }
         public string Surname { get; set; }

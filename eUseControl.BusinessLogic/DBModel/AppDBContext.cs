@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace eUseControl.BusinessLogic.DBModel
 {
-    class UserContext
-    {
+     public class AppDBContext
+     {
 
-    }
+     }
 }
