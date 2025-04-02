@@ -50,11 +50,10 @@
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Coach.cs" />
     <Compile Include="Entities\User\User.cs" />
+    <Compile Include="Enums\UserRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

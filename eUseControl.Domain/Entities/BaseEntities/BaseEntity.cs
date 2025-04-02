@@ -1,7 +1,13 @@
-﻿namespace eUseControl.Domain.Entities.BaseEntities
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace eUseControl.Domain.Entities.BaseEntities
 {
-    public abstract class BaseEntity
+    public class BaseEntity
     {
-        public int Id { get; set; }
+          [Key]
+          [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+          public int Id { get; set; }
     }
 }
