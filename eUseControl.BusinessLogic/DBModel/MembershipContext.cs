@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using eUseControl.Domain.Entities;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace eUseControl.BusinessLogic.DBModel
 {
-    internal class MembershipContext : DbContext
+    public class MembershipContext : DbContext
     {
-        public MembershipContex() : base("name=eUseControl")
+        public MembershipContext() : base("name=eUseControl")
         {
         }
-        public virtual DbSet<Membership> Memberships { get; set; }
+        public virtual DbSet<MDbTable> Memberships { get; set; }
 
     }
 }
