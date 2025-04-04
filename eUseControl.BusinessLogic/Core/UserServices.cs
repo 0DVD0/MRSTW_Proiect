@@ -1,30 +1,36 @@
 ﻿using eUseControl.BusinessLogic.Interface;
+using eUseControl.Domain.Entities.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eUseControl.BusinessLogic.DBModel;
 
 namespace eUseControl.BusinessLogic.Core
 {
     public class UserServices: IUserServices
     {
-          private readonly IUserActions _userAction;
 
-          public void RegisterUser(string name, string email, string password)
+          public bool RegisterUser(User user)
           {
-               if (_userAction.UserExists(name, password))
-               {
-                    return;
+               var context = new UserContext();
+               if ((context.Users.Any(u => u.Email == user.Email) | (context.Users.Any(u => u.Name == user.Name)))){
+                    return false;
                }
-               _userAction.UserCreate(name, email, password);
-               return; 
+               context.Users.Add(user);
+               context.SaveChanges();
+               return true;
           }
 
-          public string AuthUser(string name, string password)
+          public bool LoginUser(User user)
           {
-               // User authorization logic
-               return null;
+               return false;
+          }
+
+          public bool RemoveUser(string name, string email)
+          {
+               return true;
           }
      }
 }

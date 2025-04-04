@@ -26,7 +26,7 @@ namespace WebsiteGym.Web.Controllers
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult AuthPage()
         {
             return View();
         }

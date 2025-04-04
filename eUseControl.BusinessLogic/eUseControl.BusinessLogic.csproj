@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\OrderApi.cs" />
-    <Compile Include="Core\UserActions.cs" />
     <Compile Include="Core\UserServices.cs" />
     <Compile Include="DBModel\MembershipContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
@@ -62,7 +61,6 @@
     <Compile Include="Interface\IMembershipApi.cs" />
     <Compile Include="Interface\IOrderApi.cs" />
     <Compile Include="Interface\ISession.cs" />
-    <Compile Include="Interface\IUserActions.cs" />
     <Compile Include="Interface\IUserServices.cs" />
     <Compile Include="Interface\SessionBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

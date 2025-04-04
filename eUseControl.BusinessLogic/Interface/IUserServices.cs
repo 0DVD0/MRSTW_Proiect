@@ -1,8 +1,11 @@
-﻿namespace eUseControl.BusinessLogic.Interface
+﻿using eUseControl.Domain.Entities.User;
+
+namespace eUseControl.BusinessLogic.Interface
 {
     public interface IUserServices
     {
-        void RegisterUser(string name, string email, string password);
-        string AuthUser(string name, string password);
-    }
+        bool RegisterUser(User user);
+        bool LoginUser(User user);
+        bool RemoveUser(string name, string email);
+     }
 }
