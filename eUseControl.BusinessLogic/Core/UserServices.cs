@@ -14,18 +14,33 @@ namespace eUseControl.BusinessLogic.Core
 
           public bool RegisterUser(User user)
           {
-               var context = new UserContext();
-               if ((context.Users.Any(u => u.Email == user.Email) | (context.Users.Any(u => u.Name == user.Name)))){
+               using (var context = new UserContext())
+               {
+                  if ((context.Users.Any(u => u.Email == user.Email) || (context.Users.Any(u => u.Name == user.Name)))){
                     return false;
-               }
+                  }
+
                context.Users.Add(user);
                context.SaveChanges();
                return true;
+               }
+              
           }
 
           public bool LoginUser(User user)
           {
-               return false;
+               using (var context = new UserContext())
+               {
+                    var UserExists = context.Users.FirstOrDefault(u => u.Name == user.Name && u.Password == user.Password);
+                    if (UserExists != null)
+                    {
+                         return true;
+                    }
+                    else
+                    {
+                         return false;
+                    }
+               }
           }
 
           public bool RemoveUser(string name, string email)

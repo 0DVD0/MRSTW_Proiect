@@ -1,10 +1,16 @@
 ﻿using System.Web.Mvc;
+using WebsiteGym.Web.Models;
 
 namespace WebsiteGym.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+          [HttpGet]
+          public ActionResult AuthPage()
+          {
+               return View("AuthPage", new AuthPageModel());
+          }
+          public ActionResult Index()
         {
             return View();
         }
@@ -26,10 +32,6 @@ namespace WebsiteGym.Web.Controllers
             return View();
         }
 
-        public ActionResult AuthPage()
-        {
-            return View();
-        }
         public ActionResult Membership()
         {
             return View();

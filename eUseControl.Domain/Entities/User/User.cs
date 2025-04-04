@@ -20,8 +20,6 @@ namespace eUseControl.Domain.Entities.User
           [Display(Name = "User Password")]
           [StringLength(50, MinimumLength = 8, ErrorMessage = "Password is not valid")]
           public string Password { get; set; }
-          [Display(Name = "LoginDateTime")]
-          public DateTime LoginDateTime { get; set; }
           [Display(Name = "RegisterDateTime")]
           public DateTime ReggisterDateTime { get; set; }   
           public UserRoles Role { get; set; }
