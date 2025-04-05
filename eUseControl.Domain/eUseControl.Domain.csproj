@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="Entities\BaseEntities\BaseEntity.cs" />
     <Compile Include="Entities\MDbTable.cs" />
-    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\ODbTable.cs" />
     <Compile Include="Entities\Coach.cs" />
     <Compile Include="Entities\User\User.cs" />
     <Compile Include="Enums\UserRoles.cs" />

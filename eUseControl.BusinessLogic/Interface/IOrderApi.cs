@@ -6,7 +6,7 @@ namespace eUseControl.BusinessLogic.Interface
 {
     public interface IOrderApi
     {
-        List<Order> GetAllOrders();
+        List<ODbTable> GetAllOrders();
        
         void CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId);
 

@@ -13,7 +13,7 @@ namespace eUseControl.BusinessLogic.Core
     public class AdminApi : IMembershipApi, IOrderApi
     {
         private List<MDbTable> membershipsList = new List<MDbTable>();
-        private List<Order> ordersList = new List<Order>();
+        private List<ODbTable> ordersList = new List<ODbTable>();
         private List<Coach> coachList = new List<Coach>();
 
         public void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate)
@@ -126,9 +126,9 @@ namespace eUseControl.BusinessLogic.Core
 
             if (userId < 0 || membershipId == 0 || Id == 0 || totalPrice < 0 || userId < 0) { return; }
 
-            Order newOrder = new Order
+            ODbTable newOrder = new ODbTable
             {
-                Id = Id,
+                OrderId = Id,
                 MembershipId = membershipId,
                 OrderDate = orderDate,
                 TotalPrice = totalPrice,
@@ -139,7 +139,7 @@ namespace eUseControl.BusinessLogic.Core
         }
 
 
-        public List<Order> GetAllOrders()
+        public List<ODbTable> GetAllOrders()
         {
             return ordersList;
         }
@@ -151,7 +151,7 @@ namespace eUseControl.BusinessLogic.Core
                 return false;
             }
 
-            Order orderToRemove = ordersList.FirstOrDefault(o => o.Id == orderId);
+            ODbTable orderToRemove = ordersList.FirstOrDefault(o => o.OrderId == orderId);
 
             if (orderToRemove != null)
             {

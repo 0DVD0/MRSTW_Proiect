@@ -15,6 +15,7 @@ namespace eUseControl.BusinessLogic.DBModel
         {
         }
         public virtual DbSet<MDbTable> Memberships { get; set; }
+        public virtual DbSet<ODbTable> Orders { get; set; }
 
     }
 }
