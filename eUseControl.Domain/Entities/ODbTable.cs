@@ -11,6 +11,10 @@ namespace eUseControl.Domain.Entities
         public int OrderId { get; set; }
 
         [Required]
+        [Display(Name = "User ID")]
+        public int UserId { get; set; }
+
+        [Required]
         [Display(Name = "Membership ID")]
         public int MembershipId { get; set; }
 
@@ -22,9 +26,7 @@ namespace eUseControl.Domain.Entities
         [Display(Name = "Total Price")]
         public int TotalPrice { get; set; }
 
-        [Required]
-        [Display(Name = "User ID")]
-        public int UserId { get; set; }
+      
     }
 }
 

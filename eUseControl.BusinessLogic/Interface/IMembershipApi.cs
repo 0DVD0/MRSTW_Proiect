@@ -7,6 +7,7 @@ namespace eUseControl.BusinessLogic.Interface
 {
     public interface IMembershipApi
     {
+        List<MDbTable> GetAllMemberships();
         void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate);
         void RemoveMembership(int membershipId);
         MDbTable GetMembershipById(int membershipId);

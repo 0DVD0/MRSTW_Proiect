@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using eUseControl.BusinessLogic.DBModel;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
 
@@ -12,8 +13,6 @@ namespace eUseControl.BusinessLogic.Core
 {
     public class AdminApi : IMembershipApi, IOrderApi
     {
-        private List<MDbTable> membershipsList = new List<MDbTable>();
-        private List<ODbTable> ordersList = new List<ODbTable>();
         private List<Coach> coachList = new List<Coach>();
 
         public void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate)
@@ -33,32 +32,59 @@ namespace eUseControl.BusinessLogic.Core
                 return;
             }
 
-
-            MDbTable membership = new MDbTable()
+            using (var context = new MembershipContext())
             {
-                Price = price,
-                Name = name,
-                StartDate = startDate,
-                EndDate = endDate
-            };
+                MDbTable membership = new MDbTable()
+                {
+                    Name = name,
+                    Price = price,
+                    StartDate = startDate,
+                    EndDate = endDate
+                };
 
-            membershipsList.Add(membership);
+                context.Memberships.Add(membership);
+                context.SaveChanges();
+            }
         }
 
         public void RemoveMembership(int membershipId)
         {
             if (membershipId < 0)
             {
-                // todo refactor this
                 return;
             }
 
-
-            foreach (MDbTable membership in membershipsList)
+            using (var context = new MembershipContext())
             {
-                if (membership.Id == membershipId)
+                var membership = context.Memberships.FirstOrDefault(m => m.Id == membershipId);
+
+                if (membership != null)
                 {
-                    membershipsList.Remove(membership);
+                    context.Memberships.Remove(membership);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void UpdateMembership(int membershipId, string name, decimal price, DateTime startDate, DateTime endDate)
+        {
+            if (membershipId < 0)
+            {
+                return;
+            }
+
+            using (var context = new MembershipContext())
+            {
+                var membership = context.Memberships.FirstOrDefault(m => m.Id == membershipId);
+
+                if (membership != null)
+                {
+                    membership.Name = name;
+                    membership.Price = price;
+                    membership.StartDate = startDate;
+                    membership.EndDate = endDate;
+
+                    context.SaveChanges();
                 }
             }
         }
@@ -70,38 +96,18 @@ namespace eUseControl.BusinessLogic.Core
                 return;
             }
 
-            foreach (MDbTable membership in membershipsList)
+            using (var context = new MembershipContext())
             {
-                if (membership.Id == membershipId)
+
+                var membership = context.Memberships.FirstOrDefault(m => m.Id == membershipId);
+                if (membership != null)
                 {
-                    newPrice = membership.Price - discountAmount;
-                }
-                membership.Price = newPrice >= 0 ? newPrice : 0;
-                return;
-            }
-        }
-
-        public void UpdateMembership(int membershipId, string name, decimal price, DateTime startDate, DateTime endDate)
-        {
-            // validate 
-            if (membershipId < 0)
-            {
-                return;
-            }
-
-            foreach (MDbTable membership in membershipsList)
-            {
-                if (membership.Id == membershipId)
-                {
-                    membership.Name = name;
-                    membership.Price = price;
-                    membership.StartDate = startDate;
-                    membership.EndDate = endDate;
-
-                    return;
+                    membership.Price = membership.Price - discountAmount >= 0 ? membership.Price - discountAmount : 0;
+                    context.SaveChanges();
                 }
             }
         }
+
 
         public MDbTable GetMembershipById(int membershipId)
         {
@@ -110,38 +116,50 @@ namespace eUseControl.BusinessLogic.Core
                 return null;
             }
 
-            foreach (MDbTable membership in membershipsList)
+            using (var context = new MembershipContext())
             {
-                if (membership.Id == membershipId)
-                {
-                    return membership;
-                }
+                return context.Memberships.FirstOrDefault(m => m.Id == membershipId);
             }
-            return null;
         }
 
-
-        public void CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId)
+        public List<MDbTable> GetAllMemberships()
         {
-
-            if (userId < 0 || membershipId == 0 || Id == 0 || totalPrice < 0 || userId < 0) { return; }
-
-            ODbTable newOrder = new ODbTable
+            using (var context = new MembershipContext())
             {
-                OrderId = Id,
-                MembershipId = membershipId,
-                OrderDate = orderDate,
-                TotalPrice = totalPrice,
-                UserId = userId
-            };
-
-            ordersList.Add(newOrder);
+                return context.Memberships.ToList();
+            }
         }
 
+        public bool CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId)
+        {
+            if (userId < 0 || membershipId == 0 || Id == 0 || totalPrice < 0)
+            {
+                return false;
+            }
+
+            using (var context = new OrderContext())
+            {
+                ODbTable newOrder = new ODbTable
+                {
+                    OrderId = Id,
+                    MembershipId = membershipId,
+                    OrderDate = orderDate,
+                    TotalPrice = totalPrice,
+                    UserId = userId
+                };
+
+                context.Orders.Add(newOrder);
+                context.SaveChanges();
+            }
+            return true;
+        }
 
         public List<ODbTable> GetAllOrders()
         {
-            return ordersList;
+            using (var context = new OrderContext())
+            {
+                return context.Orders.ToList();
+            }
         }
 
         public bool DeleteOrder(int orderId)
@@ -151,15 +169,23 @@ namespace eUseControl.BusinessLogic.Core
                 return false;
             }
 
-            ODbTable orderToRemove = ordersList.FirstOrDefault(o => o.OrderId == orderId);
-
-            if (orderToRemove != null)
+            using (var context = new OrderContext())
             {
-                ordersList.Remove(orderToRemove);
-                return true;
+                var orderToRemove = context.Orders.FirstOrDefault(o => o.OrderId == orderId);
+
+                if (orderToRemove != null)
+                {
+                    context.Orders.Remove(orderToRemove);
+                    context.SaveChanges();
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
+
+
+
+
 
 
         public void CreateCoach(string name, string surname, DateTime birthdate)
