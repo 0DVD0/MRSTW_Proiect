@@ -27,18 +27,18 @@ namespace eUseControl.BusinessLogic.Core
               
           }
 
-          public bool LoginUser(User user)
+          public User LoginUser(User user)
           {
                using (var context = new UserContext())
                {
                     var UserExists = context.Users.FirstOrDefault(u => u.Name == user.Name && u.Password == user.Password);
                     if (UserExists != null)
                     {
-                         return true;
+                         return UserExists;
                     }
                     else
                     {
-                         return false;
+                         return null;
                     }
                }
           }

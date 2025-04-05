@@ -101,7 +101,7 @@
                <div class="col-md-6 p-5 text-center form-container" id="loginFormContainer">
                     <h2 class="fw-bold">Welcome</h2>
                     <p class="text-muted">Login with Email</p>
-                    @using (Html.BeginForm("Login", "AccountController", FormMethod.Post))
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
                     {
                          @Html.AntiForgeryToken()
                          <div class="mb-3">

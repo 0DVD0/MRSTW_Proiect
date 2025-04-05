@@ -58,10 +58,12 @@ namespace WebsiteGym.Web.Controllers
                          Password = model.Login.Password,
                     };
                     var userService = new UserServices();
-                    bool result = userService.LoginUser(user);
-                    if (result)
+                    var foundUser = userService.LoginUser(user);
+                    if (foundUser != null)
                     {
-                         Session["User"] = user;
+                              Session["UserName"] = foundUser.Name;
+                              Session["UserRole"] = foundUser.Role;
+                         
                          return RedirectToAction("Index", "Home");
                     }
                     else
