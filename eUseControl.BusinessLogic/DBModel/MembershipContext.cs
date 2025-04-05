@@ -11,7 +11,7 @@ namespace eUseControl.BusinessLogic.DBModel
 {
     public class MembershipContext : DbContext
     {
-        public MembershipContext() : base("name=eUseControl")
+        public MembershipContext() : base("name=GymMembershipDb")
         {
         }
         public virtual DbSet<MDbTable> Memberships { get; set; }

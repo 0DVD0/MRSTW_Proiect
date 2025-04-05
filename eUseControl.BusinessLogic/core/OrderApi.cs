@@ -10,7 +10,7 @@ namespace eUseControl.BusinessLogic.Core
     {
         private List<ODbTable> orders = new List<ODbTable>();
 
-        public void CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId)
+        public bool CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId)
         {
             throw new NotImplementedException();
         }
