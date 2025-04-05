@@ -1,18 +1,31 @@
 ﻿using System.Web.Mvc;
-using eUseControl.BusinessLogic.Interface;
 using WebsiteGym.Web.Models;
 using eUseControl.BusinessLogic.Core;
-using eUseControl.Domain.Entities;
+using eUseControl.Domain.Enums;
 using System;
-using System.Collections.Generic;
 
 namespace WebsiteGym.Web.Controllers
 {
     public class CheckoutController : Controller
     {
-     
+
+        // GET: Checkout/CheckoutMembership
+        public ActionResult CheckoutMembership(int? membershipId, int? duration)
+        {
+            var model = new OrderViewModel();
+
+            if (membershipId.HasValue)
+                model.MembershipId = membershipId.Value; //cand apas Choose sa fie deja selectat in Checkout ceea ce am ales din Membership
+
+            if (duration.HasValue)
+                model.Duration = duration.Value;
+
+            return View(model);
+        }
+
+
         [HttpPost]
-        public ActionResult CheckoutOrder(OrderViewModel model)
+        public ActionResult CheckoutMembership(OrderViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -39,6 +52,7 @@ namespace WebsiteGym.Web.Controllers
                 return View("CheckoutMembership", model);
             }
         }
+
 
         // GET: Checkout
         public ActionResult OrderSuccess()
