@@ -12,7 +12,7 @@ namespace eUseControl.BusinessLogic.Core
 {
     public class AdminApi : IMembershipApi, IOrderApi
     {
-        private List<Membership> membershipsList = new List<Membership>();
+        private List<MDbTable> membershipsList = new List<MDbTable>();
         private List<Order> ordersList = new List<Order>();
         private List<Coach> coachList = new List<Coach>();
 
@@ -34,7 +34,7 @@ namespace eUseControl.BusinessLogic.Core
             }
 
 
-            Membership membership = new Membership()
+            MDbTable membership = new MDbTable()
             {
                 Price = price,
                 Name = name,
@@ -54,7 +54,7 @@ namespace eUseControl.BusinessLogic.Core
             }
 
 
-            foreach (Membership membership in membershipsList)
+            foreach (MDbTable membership in membershipsList)
             {
                 if (membership.Id == membershipId)
                 {
@@ -70,7 +70,7 @@ namespace eUseControl.BusinessLogic.Core
                 return;
             }
 
-            foreach (Membership membership in membershipsList)
+            foreach (MDbTable membership in membershipsList)
             {
                 if (membership.Id == membershipId)
                 {
@@ -89,7 +89,7 @@ namespace eUseControl.BusinessLogic.Core
                 return;
             }
 
-            foreach (Membership membership in membershipsList)
+            foreach (MDbTable membership in membershipsList)
             {
                 if (membership.Id == membershipId)
                 {
@@ -103,14 +103,14 @@ namespace eUseControl.BusinessLogic.Core
             }
         }
 
-        public Membership GetMembershipById(int membershipId)
+        public MDbTable GetMembershipById(int membershipId)
         {
             if (membershipId < 0)
             {
                 return null;
             }
 
-            foreach (Membership membership in membershipsList)
+            foreach (MDbTable membership in membershipsList)
             {
                 if (membership.Id == membershipId)
                 {
