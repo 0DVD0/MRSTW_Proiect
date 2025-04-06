@@ -1,17 +1,64 @@
 ﻿using System.Web.Mvc;
+using WebsiteGym.Web.Models;
+using eUseControl.BusinessLogic.Core;
+using eUseControl.Domain.Enums;
+using System;
 
 namespace WebsiteGym.Web.Controllers
 {
     public class CheckoutController : Controller
     {
-        public ActionResult CheckoutMembership()
+
+        // GET: Checkout/CheckoutMembership
+        public ActionResult CheckoutMembership(int? membershipId, int? duration)
         {
-            return View("CheckoutMembership");
+            var model = new OrderViewModel();
+
+            if (membershipId.HasValue)
+                model.MembershipId = membershipId.Value; //cand apas Choose sa fie deja selectat in Checkout ceea ce am ales din Membership
+
+            if (duration.HasValue)
+                model.Duration = duration.Value;
+
+            return View(model);
         }
 
-        public ActionResult TermsAndConditions()
+
+        [HttpPost]
+        public ActionResult CheckoutMembership(OrderViewModel model)
         {
-            return View("TermsAndConditions");
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Invalid order data");
+                return View("CheckoutMembership", model);
+            }
+
+            var orderService = new AdminApi(); 
+            bool result = orderService.CreateOrder(
+                model.OrderId,
+                model.MembershipId,
+                model.OrderDate,
+                model.TotalPrice,
+                model.UserId
+            );
+
+            if (result)
+            {
+                return RedirectToAction("OrderSuccess"); //TODO: To add View cu Oder success sau sa redirectioneze pe pagina utilizatorului in care sa-i arate ceeeeeee abonamente are
+            }
+            else
+            {
+                ModelState.AddModelError("", "Failed to create order");
+                return View("CheckoutMembership", model);
+            }
         }
+
+
+        // GET: Checkout
+        public ActionResult OrderSuccess()
+        {
+            return View("OrderSuccess");
+        }
+
     }
 }
