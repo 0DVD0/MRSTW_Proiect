@@ -7,9 +7,6 @@ namespace eUseControl.Domain.Entities
 {
     public class MDbTable : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         [Required]
         [Display(Name = "Membership Name")]
         [StringLength(50, MinimumLength = 5, ErrorMessage = "Membership Name is not valid")]

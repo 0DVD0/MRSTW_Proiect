@@ -5,7 +5,7 @@ namespace eUseControl.BusinessLogic.DBModel
 {
     public class OrderContext : DbContext
     {
-        public OrderContext() : base("GymMembershipDb")
+        public OrderContext() : base("name=eUseControl")
         {
         }
         public virtual DbSet<ODbTable> Orders { get; set; }

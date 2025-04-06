@@ -181,7 +181,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\logscript.js" />
-    <Content Include="Views\Admin\IndexAdmin.cshtml" />
+    <Content Include="Views\Admin\AdminDash.cshtml" />
     <Content Include="Scripts\CheckoutMembership.js" />
     <Content Include="Views\Checkout\TermsAndConditions.cshtml" />
     <None Include="Views\Home\About.cshtml" />

@@ -4,8 +4,7 @@ namespace WebsiteGym.Web.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
-        public ActionResult IndexAdmin()
+        public ActionResult AdminDash()
         {
             return View();
         }

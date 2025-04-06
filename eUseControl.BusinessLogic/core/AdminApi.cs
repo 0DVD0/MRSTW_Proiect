@@ -141,7 +141,6 @@ namespace eUseControl.BusinessLogic.Core
             {
                 ODbTable newOrder = new ODbTable
                 {
-                    OrderId = Id,
                     MembershipId = membershipId,
                     OrderDate = orderDate,
                     TotalPrice = totalPrice,
@@ -161,31 +160,6 @@ namespace eUseControl.BusinessLogic.Core
                 return context.Orders.ToList();
             }
         }
-
-        public bool DeleteOrder(int orderId)
-        {
-            if (orderId < 0)
-            {
-                return false;
-            }
-
-            using (var context = new OrderContext())
-            {
-                var orderToRemove = context.Orders.FirstOrDefault(o => o.OrderId == orderId);
-
-                if (orderToRemove != null)
-                {
-                    context.Orders.Remove(orderToRemove);
-                    context.SaveChanges();
-                    return true;
-                }
-                return false;
-            }
-        }
-
-
-
-
 
 
         public void CreateCoach(string name, string surname, DateTime birthdate)

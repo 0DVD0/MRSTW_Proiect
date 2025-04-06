@@ -62,7 +62,12 @@
     <Compile Include="Enums\UserRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\eUseControl.Helper\eUseControl.Helper.csproj">
+      <Project>{40315df3-3c91-4322-9a70-7c644d7fa9d1}</Project>
+      <Name>eUseControl.Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

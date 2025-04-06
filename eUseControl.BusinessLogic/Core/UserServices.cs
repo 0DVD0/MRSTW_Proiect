@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eUseControl.BusinessLogic.DBModel;
+using eUseControl.Helper.AssistingLogic;
+using Microsoft.Win32;
 
 namespace eUseControl.BusinessLogic.Core
 {
@@ -14,24 +16,28 @@ namespace eUseControl.BusinessLogic.Core
 
           public bool RegisterUser(User user)
           {
+               var helper = new UserHelper();
                using (var context = new UserContext())
                {
                   if ((context.Users.Any(u => u.Email == user.Email) || (context.Users.Any(u => u.Name == user.Name)))){
                     return false;
                   }
 
-               context.Users.Add(user);
-               context.SaveChanges();
-               return true;
+                  user.Password = helper.PasswordHash(user.Password);
+                  context.Users.Add(user);
+                  context.SaveChanges();
+                  return true;
                }
               
           }
 
           public User LoginUser(User user)
           {
+               var helper = new UserHelper();
+               var hashedPassword= helper.PasswordHash(user.Password);
                using (var context = new UserContext())
                {
-                    var UserExists = context.Users.FirstOrDefault(u => u.Name == user.Name && u.Password == user.Password);
+                    var UserExists = context.Users.FirstOrDefault(u => u.Name == user.Name && u.Password == hashedPassword);
                     if (UserExists != null)
                     {
                          return UserExists;

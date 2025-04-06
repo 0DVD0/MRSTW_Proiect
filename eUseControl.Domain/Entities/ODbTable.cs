@@ -2,13 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using eUseControl.Domain.Entities.User;
+using eUseControl.Domain.Entities.BaseEntities;   
 
 namespace eUseControl.Domain.Entities
 {
-    public class ODbTable
+    public class ODbTable : BaseEntity
     {
-        [Key]
-        public int OrderId { get; set; }
 
         [Required]
         [Display(Name = "User ID")]

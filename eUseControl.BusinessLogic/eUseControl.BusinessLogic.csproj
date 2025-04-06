@@ -80,6 +80,10 @@
     <Compile Include="Migrations\202504061512525_InitUsersTable2.designer.cs">
       <DependentUpon>202504061512525_InitUsersTable2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504062236505_UpdatePasswordLength.cs" />
+    <Compile Include="Migrations\202504062236505_UpdatePasswordLength.Designer.cs">
+      <DependentUpon>202504062236505_UpdatePasswordLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +91,10 @@
     <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
       <Project>{ad325b44-1176-40c4-98d0-0c1fba596d2c}</Project>
       <Name>eUseControl.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eUseControl.Helper\eUseControl.Helper.csproj">
+      <Project>{40315df3-3c91-4322-9a70-7c644d7fa9d1}</Project>
+      <Name>eUseControl.Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504061512525_InitUsersTable2.resx">
       <DependentUpon>202504061512525_InitUsersTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504062236505_UpdatePasswordLength.resx">
+      <DependentUpon>202504062236505_UpdatePasswordLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
