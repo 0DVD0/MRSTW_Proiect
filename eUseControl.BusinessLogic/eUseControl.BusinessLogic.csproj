@@ -84,6 +84,14 @@
     <Compile Include="Migrations\202504062236505_UpdatePasswordLength.Designer.cs">
       <DependentUpon>202504062236505_UpdatePasswordLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504071230186_InitMDbTable.cs" />
+    <Compile Include="Migrations\202504071230186_InitMDbTable.Designer.cs">
+      <DependentUpon>202504071230186_InitMDbTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202504071235590_InitODbTable.cs" />
+    <Compile Include="Migrations\202504071235590_InitODbTable.Designer.cs">
+      <DependentUpon>202504071235590_InitODbTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -120,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504062236505_UpdatePasswordLength.resx">
       <DependentUpon>202504062236505_UpdatePasswordLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504071230186_InitMDbTable.resx">
+      <DependentUpon>202504071230186_InitMDbTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504071235590_InitODbTable.resx">
+      <DependentUpon>202504071235590_InitODbTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

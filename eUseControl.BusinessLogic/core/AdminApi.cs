@@ -38,8 +38,6 @@ namespace eUseControl.BusinessLogic.Core
                 {
                     Name = name,
                     Price = price,
-                    StartDate = startDate,
-                    EndDate = endDate
                 };
 
                 context.Memberships.Add(membership);
@@ -81,8 +79,6 @@ namespace eUseControl.BusinessLogic.Core
                 {
                     membership.Name = name;
                     membership.Price = price;
-                    membership.StartDate = startDate;
-                    membership.EndDate = endDate;
 
                     context.SaveChanges();
                 }
@@ -141,10 +137,10 @@ namespace eUseControl.BusinessLogic.Core
             {
                 ODbTable newOrder = new ODbTable
                 {
-                    MembershipId = membershipId,
+                    MembershipName = membershipId,
                     OrderDate = orderDate,
                     TotalPrice = totalPrice,
-                    UserId = userId
+                    UserName = userId
                 };
 
                 context.Orders.Add(newOrder);

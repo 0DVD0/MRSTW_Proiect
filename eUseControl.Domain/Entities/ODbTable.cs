@@ -10,12 +10,12 @@ namespace eUseControl.Domain.Entities
     {
 
         [Required]
-        [Display(Name = "User ID")]
-        public int UserId { get; set; }
+        [Display(Name = "User name")]
+        public int UserName { get; set; }
 
         [Required]
-        [Display(Name = "Membership ID")]
-        public int MembershipId { get; set; }
+        [Display(Name = "Membership name")]
+        public int MembershipName { get; set; }
 
         [Required]
         [Display(Name = "Order Date")]

@@ -13,23 +13,7 @@ namespace eUseControl.Domain.Entities
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "MembershipTimeSpan")]
-        // Timespan is for months count for membership
-        public TimeSpan TimeSpan { get; set; }
-
-        [Required]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
-
-        [Required]
-        [Display(Name = "StartDate")]
-        public DateTime StartDate { get; set; }
-
-        [Required]
-        [Display(Name = "EndDate")]
-        public DateTime EndDate { get; set; }
-
-        [Display(Name = "DiscountPrice")]
-        public decimal? DiscountPrice { get; set; }
     }
 }
