@@ -15,10 +15,14 @@ namespace WebsiteGym.Web.Controllers
             var model = new OrderViewModel();
 
             if (membershipId.HasValue)
-                model.MembershipId = membershipId.Value; //cand apas Choose sa fie deja selectat in Checkout ceea ce am ales din Membership
+            {
+                model.MembershipId = membershipId.Value;
+            }
 
             if (duration.HasValue)
+            {
                 model.Duration = duration.Value;
+            }
 
             return View(model);
         }

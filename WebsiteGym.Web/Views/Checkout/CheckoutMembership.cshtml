@@ -49,12 +49,12 @@
                             @Html.DropDownListFor(m => m.MembershipId, new SelectList(
                              new List<SelectListItem>
                                 {
-                                     new SelectListItem { Text = "Basic", Value = "20" },
+                                     new SelectListItem { Text = "Basic", Value = "10" },
                                      new SelectListItem { Text = "Standard", Value = "40" },
                                      new SelectListItem { Text = "Premium", Value = "50" },
                                      new SelectListItem { Text = "Ultimate", Value = "100" },
                                      new SelectListItem { Text = "Friends", Value = "120" }
-                                 }, "Value", "Text", Model.MembershipId), // <- cheia e aici
+                                 }, "Value", "Text", Model.MembershipId),
                              "Select a membership",
                              new { @class = "form-control", required = "required", onchange = "updatePrice()", id = "membership" })
 
@@ -76,18 +76,40 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label for="cardNumber" class="form-label">Card Number</label>
-                                    @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = "1234 5678 9012 3456", required = "required" })
+                                    @Html.TextBoxFor(m => m.CardNumber, new
+                                     {
+                                     @class = "form-control",
+                                     placeholder = "1234 5678 9012 3456",
+                                     required = "required",
+                                     maxlength = "19",
+                                     id = "CardNumber"
+                                     })
                                 </div>
                                 <div class="col-md-4">
                                     <label for="cvv" class="form-label">CVV</label>
-                                    @Html.TextBoxFor(m => m.CVV, new { @class = "form-control", placeholder = "123", required = "required" })
+                                    @Html.TextBoxFor(m => m.CVV, new
+                                    {
+                                    @class = "form-control",
+                                    placeholder = "123",
+                                    required = "required",
+                                    maxlength = "3",
+                                    inputmode = "numeric",
+                                    oninput = "this.value = this.value.replace(/[^0-9]/g, '').slice(0,3)"
+                                    })
                                 </div>
                             </div>
-
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <label for="expDate" class="form-label">Expiration Date (MM/YY)</label>
-                                    @Html.TextBoxFor(m => m.ExpDate, new { @class = "form-control", placeholder = "MM/YY", required = "required" })
+                                    @Html.TextBoxFor(m => m.ExpDate, new
+                                    {
+                                     @class = "form-control",
+                                     placeholder = "MM/YY",
+                                     required = "required",
+                                     maxlength = "5",
+                                     id = "ExpDate"
+                                    })
+
                                 </div>
                             </div>
 
