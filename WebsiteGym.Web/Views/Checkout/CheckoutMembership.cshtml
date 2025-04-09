@@ -46,7 +46,7 @@
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required" })
 
                             <label for="membership" class="form-label mt-3">Membership Plan</label>
-                            @Html.DropDownListFor(m => m.MembershipId, new SelectList(
+                            @Html.DropDownListFor(m => m.MembershipName, new SelectList(
                              new List<SelectListItem>
                                 {
                                      new SelectListItem { Text = "Basic", Value = "10" },
@@ -54,14 +54,14 @@
                                      new SelectListItem { Text = "Premium", Value = "50" },
                                      new SelectListItem { Text = "Ultimate", Value = "100" },
                                      new SelectListItem { Text = "Friends", Value = "120" }
-                                 }, "Value", "Text", Model.MembershipId),
+                                 }, "Value", "Text", Model.MembershipName),
                              "Select a membership",
                              new { @class = "form-control", required = "required", onchange = "updatePrice()", id = "membership" })
 
 
                             <div class="form-group mt-3">
                                 <label for="duration" class="form-label">Membership Duration:</label>
-                                @Html.DropDownListFor(m => m.Duration, new SelectList(
+                                @Html.DropDownListFor(m => m.MembershipDuration, new SelectList(
                                     new List<SelectListItem>
                                     {
                                         new SelectListItem { Text = "1 Month", Value = "1" },

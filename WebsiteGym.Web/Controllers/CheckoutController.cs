@@ -18,18 +18,13 @@ namespace WebsiteGym.Web.Controllers
         }
 
         // GET: Checkout/CheckoutMembership
-        public ActionResult CheckoutMembership(int? membershipId, int? duration)
+        public ActionResult CheckoutMembership(int? membershipId)
         {
             var model = new OrderViewModel();
 
             if (membershipId.HasValue)
             {
-                model.MembershipId = membershipId.Value;
-            }
-
-            if (duration.HasValue)
-            {
-                model.Duration = duration.Value;
+                model.MembershipName = membershipId.Value;
             }
 
             return View(model);
@@ -44,8 +39,6 @@ namespace WebsiteGym.Web.Controllers
                 ModelState.AddModelError("", "Invalid order data");
                 return View("CheckoutMembership", model);
             }
-
-
 
             var orderData = new NewOrderDto()
             {
@@ -69,7 +62,6 @@ namespace WebsiteGym.Web.Controllers
                 return View("CheckoutMembership", model);
             }
         }
-
 
         // GET: Checkout
         public ActionResult OrderSuccess()

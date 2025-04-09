@@ -15,5 +15,10 @@ namespace eUseControl.Domain.Entities
         [Required]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
+
+        [Required]
+        [Display(Name = "Details")]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "Details are not valid")]
+        public string Details { get; set; }
     }
 }

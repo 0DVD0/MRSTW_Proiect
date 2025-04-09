@@ -22,7 +22,6 @@ namespace WebsiteGym.Web.Models
         public string CardNumber { get; set; }
         public string CVV { get; set; }
         public string ExpDate { get; set; }
-        public int Duration { get; set; }
 
     }
 }

@@ -3,16 +3,16 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddMembershipStatusToUserTable : DbMigration
+    public partial class InsertDetailsInMDbTable : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Users", "Details", c => c.Boolean(nullable: false));
+            AddColumn("dbo.Memberships", "Details", c => c.String(nullable: false, maxLength: 250));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Users", "Details");
+            DropColumn("dbo.Memberships", "Details");
         }
     }
 }
