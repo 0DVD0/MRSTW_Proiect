@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using eUseControl.BusinessLogic.DBModel;     
 
 namespace WebsiteGym.Web.Controllers
 {
@@ -6,7 +8,16 @@ namespace WebsiteGym.Web.Controllers
     {
         public ActionResult AdminDash()
         {
-            return View();
+               using (var context = new UserContext())
+               {
+                    ViewBag.Users = context.Users.Count();
+               }
+               
+                    return View();
         }
+          public ActionResult ListOfUsers()
+          {
+               return View();
+          }
     }
 }

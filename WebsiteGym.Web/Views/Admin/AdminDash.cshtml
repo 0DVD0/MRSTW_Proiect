@@ -23,7 +23,12 @@
                     <div class="col-md-3 col-sm-6 admin-card">
                          <div class="stat-card bg-primary text-white">
                               <div class="stat-icon">
-                                   <i class="fas fa-users"></i>
+                                   <i class="fas fa-users" style=""></i>
+                              </div>
+                              <div class="stat-value">
+                                   <h2>
+                                        @ViewBag.Users
+                                   </h2>
                               </div>
                               <div class="stat-label">Total Users</div>
                          </div>
@@ -33,6 +38,11 @@
                               <div class="stat-icon">
                                    <i class="fas fa-id-card"></i>
                               </div>
+                              <div class="stat-value">
+                                   <h2>
+                                        @ViewBag.ActiveMemberships
+                                   </h2>
+                              </div>
                               <div class="stat-label">Active Memberships</div>
                          </div>
                     </div>
@@ -41,6 +51,11 @@
                               <div class="stat-icon">
                                    <i class="fas fa-dollar-sign"></i>
                               </div>
+                              <div class="stat-value">
+                                   <h2>
+                                        @ViewBag.TotalRevenue
+                                   </h2>
+                              </div>
                               <div class="stat-label">Total Revenue</div>
                          </div>
                     </div>
@@ -48,6 +63,11 @@
                          <div class="stat-card bg-warning text-white">
                               <div class="stat-icon">
                                    <i class="fas fa-comments"></i>
+                              </div>
+                              <div class="stat-value">
+                                   <h2>
+                                        @ViewBag.Feedbacks
+                                   </h2>
                               </div>
                               <div class="stat-label">Pending Feedbacks</div>
                          </div>

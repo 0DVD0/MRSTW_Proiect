@@ -49,12 +49,11 @@ namespace WebsiteGym.Web.Controllers
 
             var orderData = new NewOrderDto()
             {
-
                 Id = model.OrderId,
-                membershipName = model.MembershipId,
+                membershipName = model.MembershipName,
                 orderDate = model.OrderDate,
                 totalPrice = model.TotalPrice,
-                userName = model.UserId
+                userName = model.UserName
 
             };
 

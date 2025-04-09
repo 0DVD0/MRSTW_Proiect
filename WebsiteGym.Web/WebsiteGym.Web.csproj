@@ -184,6 +184,7 @@
     <Content Include="Views\Admin\AdminDash.cshtml" />
     <Content Include="Scripts\CheckoutMembership.js" />
     <Content Include="Views\Checkout\TermsAndConditions.cshtml" />
+    <Content Include="Views\Admin\ListOfUsers.cshtml" />
     <None Include="Views\Home\About.cshtml" />
     <Content Include="Views\Checkout\CheckoutMembership.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />

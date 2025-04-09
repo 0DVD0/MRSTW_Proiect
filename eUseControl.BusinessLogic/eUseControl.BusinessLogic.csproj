@@ -92,6 +92,10 @@
     <Compile Include="Migrations\202504071235590_InitODbTable.Designer.cs">
       <DependentUpon>202504071235590_InitODbTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504091306106_AddMembershipStatusToUserTable.cs" />
+    <Compile Include="Migrations\202504091306106_AddMembershipStatusToUserTable.Designer.cs">
+      <DependentUpon>202504091306106_AddMembershipStatusToUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -134,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504071235590_InitODbTable.resx">
       <DependentUpon>202504071235590_InitODbTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504091306106_AddMembershipStatusToUserTable.resx">
+      <DependentUpon>202504091306106_AddMembershipStatusToUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

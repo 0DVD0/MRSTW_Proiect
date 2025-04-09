@@ -8,8 +8,8 @@ namespace WebsiteGym.Web.Models
     public class OrderViewModel // ACESTEA Se vor SALVA in DB!!!!!! NOI DOAR de acestea avem nevoie
     {
         public int OrderId { get; set; } 
-        public int MembershipId { get; set; }  
-        public int UserId { get; set; }
+        public int MembershipName { get; set; }  
+        public int UserName { get; set; }
         public int MembershipDuration { get; set; }
         public DateTime OrderDate { get; set; } 
         public decimal Subtotal { get; set; }  

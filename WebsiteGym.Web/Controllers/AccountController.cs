@@ -27,6 +27,7 @@ namespace WebsiteGym.Web.Controllers
                          Password = model.Register.Password,
                          Role = UserRoles.User,
                          ReggisterDateTime = DateTime.Now,
+                         MembershipStatus = false,
                     };
 
                     var userService = new UserServices();

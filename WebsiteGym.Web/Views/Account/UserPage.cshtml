@@ -1,0 +1,274 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+     <div class="container py-5">
+          @if (TempData["SuccessMessage"] != null)
+          {
+               <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                    </button>
+               </div>
+          }
+
+          @if (TempData["ErrorMessage"] != null)
+          {
+               <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                    </button>
+               </div>
+          }
+
+          <div class="row">
+               <div class="col-md-3">
+                    <div class="card mb-4">
+                         <div class="card-body text-center">
+                              <div class="mb-3">
+                                   <img src="https://via.placeholder.com/150" class="rounded-circle img-fluid" alt="Profile Picture">
+                              </div>
+                              <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
+                              <p class="text-muted">@Model.Email</p>
+                              <p class="text-muted">
+                                   <small>Member since @Model.DateRegistered.ToString("MMMM dd, yyyy")</small>
+                              </p>
+                         </div>
+                    </div>
+
+                    <div class="list-group mb-4">
+                         <a href="#profile" class="list-group-item list-group-item-action active" data-toggle="list">
+                              <i class="fas fa-user mr-2"></i> Profile
+                         </a>
+                         <a href="#membership" class="list-group-item list-group-item-action" data-toggle="list">
+                              <i class="fas fa-id-card mr-2"></i> Membership
+                         </a>
+                         <a href="#password" class="list-group-item list-group-item-action" data-toggle="list">
+                              <i class="fas fa-key mr-2"></i> Change Password
+                         </a>
+                         <a href="#history" class="list-group-item list-group-item-action" data-toggle="list">
+                              <i class="fas fa-history mr-2"></i> Activity History
+                         </a>
+                    </div>
+               </div>
+
+               <div class="col-md-9">
+                    <div class="tab-content">
+                         <!-- Profile Tab -->
+                         <div class="tab-pane fade show active" id="profile">
+                              <div class="card">
+                                   <div class="card-header">
+                                        <h5 class="mb-0">Profile Information</h5>
+                                   </div>
+                                   <div class="card-body">
+                                        @using (Html.BeginForm("UpdateProfile", "UserAccount", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                                        {
+                                         
+
+                                             <div class="form-row">
+                                                  <div class="form-group col-md-6">
+                                                      
+                                                  </div>
+                                                  <div class="form-group col-md-6">
+                                                      
+                                                  </div>
+                                             </div>
+
+                                             <div class="form-row">
+                                                  <div class="form-group col-md-6">
+                                                      <small class="form-text text-muted">Email cannot be changed.</small>
+                                                  </div>
+                                                  <div class="form-group col-md-6">
+                                                       </div>
+                                             </div>
+
+                                             <button type="submit" class="btn btn-primary">
+                                                  <i class="fas fa-save mr-1"></i> Save Changes
+                                             </button>
+                                        }
+                                   </div>
+                              </div>
+                         </div>
+
+                         <!-- Membership Tab -->
+                         <div class="tab-pane fade" id="membership">
+                              <div class="card mb-4">
+                                   <div class="card-header">
+                                        <h5 class="mb-0">Current Membership</h5>
+                                   </div>
+                                   <div class="card-body">
+                                        @if (Model.HasActiveMembership)
+                                        {
+                                             <div class="alert alert-success">
+                                                  <h5 class="alert-heading">Active Membership: @Model.CurrentMembershipName</h5>
+                                                  <p>
+                                                       <strong>Start Date:</strong> @Model.MembershipStartDate?.ToString("MMMM dd, yyyy")<br>
+                                                       <strong>End Date:</strong> @Model.MembershipEndDate?.ToString("MMMM dd, yyyy")<br>
+                                                       <strong>Days Remaining:</strong> @Model.DaysRemaining
+                                                  </p>
+                                             </div>
+                                        }
+                                        else
+                                        {
+                                             <div class="alert alert-warning">
+                                                  <h5 class="alert-heading">No Active Membership</h5>
+                                                  <p>You currently don't have an active membership. Choose a plan below to get started.</p>
+                                             </div>
+                                        }
+                                   </div>
+                              </div>
+
+                              <div class="card">
+                                   <div class="card-header">
+                                        <h5 class="mb-0">Available Membership Plans</h5>
+                                   </div>
+                                   <div class="card-body">
+                                        <div class="row">
+                                             @foreach (var plan in Model.AvailableMembershipPlans)
+                                             {
+                                                  <div class="col-md-4 mb-4">
+                                                       <div class="card h-100 @(plan.IsRecommended ? "border-primary" : "")">
+                                                            @if (plan.IsRecommended)
+                                                            {
+                                                                 <div class="card-header bg-primary text-white text-center">
+                                                                      <strong>Recommended</strong>
+                                                                 </div>
+                                                            }
+                                                            <div class="card-body">
+                                                                 <h5 class="card-title">@plan.Name</h5>
+                                                                 <h6 class="card-subtitle mb-2 text-muted">$@plan.Price.ToString("0.00")</h6>
+                                                                 <p class="card-text">@plan.Description</p>
+                                                                 <p class="card-text"><small class="text-muted">Duration: @plan.DurationInDays days</small></p>
+                                                            </div>
+                                                            <div class="card-footer bg-transparent">
+                                                                 <a href="@Url.Action("ChangeMembership", "UserAccount", new { id = plan.MembershipTypeId })" class="btn btn-primary btn-block">
+                                                                      @(Model.HasActiveMembership ? "Change to This Plan" : "Select This Plan")
+                                                                 </a>
+                                                            </div>
+                                                       </div>
+                                                  </div>
+                                             }
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+
+                         <!-- Password Tab -->
+                         <div class="tab-pane fade" id="password">
+                              <div class="card">
+                                   <div class="card-header">
+                                        <h5 class="mb-0">Change Password</h5>
+                                   </div>
+                                   <div class="card-body">
+                                        @using (Html.BeginForm("ChangePassword", "UserAccount", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                                        {
+                                             @Html.AntiForgeryToken()
+
+                                             <div class="form-group">
+                                                 </div>
+
+                                             <div class="form-group">
+                                                 </div>
+
+                                             <div class="form-group">
+                                                 </div>
+
+                                             <button type="submit" class="btn btn-primary">
+                                                  <i class="fas fa-key mr-1"></i> Change Password
+                                             </button>
+                                        }
+                                   </div>
+                              </div>
+                         </div>
+
+                         <!-- Activity History Tab -->
+                         <div class="tab-pane fade" id="history">
+                              <div class="card">
+                                   <div class="card-header">
+                                        <h5 class="mb-0">Activity History</h5>
+                                   </div>
+                                   <div class="card-body">
+                                        <div class="table-responsive">
+                                             <table class="table table-striped">
+                                                  <thead>
+                                                       <tr>
+                                                            <th>Date</th>
+                                                            <th>Activity</th>
+                                                            <th>Details</th>
+                                                       </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                       <!-- This would be populated with actual data in a real implementation -->
+                                                       <tr>
+                                                            <td>@DateTime.Now.AddDays(-5).ToString("MM/dd/yyyy")</td>
+                                                            <td>Membership Purchase</td>
+                                                            <td>Purchased Monthly Membership</td>
+                                                       </tr>
+                                                       <tr>
+                                                            <td>@DateTime.Now.AddDays(-10).ToString("MM/dd/yyyy")</td>
+                                                            <td>Class Booking</td>
+                                                            <td>Booked Yoga Class</td>
+                                                       </tr>
+                                                       <tr>
+                                                            <td>@DateTime.Now.AddDays(-15).ToString("MM/dd/yyyy")</td>
+                                                            <td>Profile Update</td>
+                                                            <td>Updated contact information</td>
+                                                       </tr>
+                                                       <tr>
+                                                            <td>@Model.DateRegistered.ToString("MM/dd/yyyy")</td>
+                                                            <td>Account Creation</td>
+                                                            <td>Registered new account</td>
+                                                       </tr>
+                                                  </tbody>
+                                             </table>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     @section Scripts {
+          <script>
+               $(document).ready(function () {
+                    // Form validation
+                    (function () {
+                         'use strict';
+                         window.addEventListener('load', function () {
+                              var forms = document.getElementsByClassName('needs-validation');
+                              var validation = Array.prototype.filter.call(forms, function (form) {
+                                   form.addEventListener('submit', function (event) {
+                                        if (form.checkValidity() === false) {
+                                             event.preventDefault();
+                                             event.stopPropagation();
+                                        }
+                                        form.classList.add('was-validated');
+                                   }, false);
+                              });
+                         }, false);
+                    })();
+
+                    // Handle tab navigation from URL hash
+                    var hash = window.location.hash;
+                    if (hash) {
+                         $('.list-group a[href="' + hash + '"]').tab('show');
+                    }
+
+                    // Update URL hash when tab changes
+                    $('.list-group a').on('shown.bs.tab', function (e) {
+                         window.location.hash = e.target.hash;
+                    });
+               });
+          </script>
+     }
+</body>
+</html>

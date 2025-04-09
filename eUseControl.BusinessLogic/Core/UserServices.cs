@@ -67,10 +67,10 @@ namespace eUseControl.BusinessLogic.Core
             {
                 ODbTable newOrder = new ODbTable
                 {
-                    MembershipName = membershipName,
-                    OrderDate = orderDate,
-                    TotalPrice = totalPrice,
-                    UserName = userName
+                    MembershipName = order.membershipName,
+                    OrderDate = order.orderDate,
+                    TotalPrice = order.totalPrice,
+                    UserName = order.userName
                 };
 
                 context.Orders.Add(newOrder);

@@ -21,6 +21,7 @@ namespace eUseControl.Domain.Entities.User
           [StringLength(250, MinimumLength = 8, ErrorMessage = "Password is not valid")]
           public string Password { get; set; }
           [Display(Name = "RegisterDateTime")]
+          public bool MembershipStatus { get; set; } = false;
           public DateTime ReggisterDateTime { get; set; }   
           public UserRoles Role { get; set; }
      }

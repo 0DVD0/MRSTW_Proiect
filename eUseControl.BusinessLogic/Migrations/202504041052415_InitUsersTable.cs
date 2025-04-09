@@ -18,7 +18,7 @@
                         LoginDateTime = c.DateTime(nullable: false),
                         ReggisterDateTime = c.DateTime(nullable: false),
                         Role = c.Int(nullable: false),
-                    })
+                })
                 .PrimaryKey(t => t.Id);
             
         }
