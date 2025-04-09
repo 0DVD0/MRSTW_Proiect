@@ -13,7 +13,7 @@ namespace WebsiteGym.Web.Models
           [StringLength(50,MinimumLength = 8, ErrorMessage ="Username not valid")]
           public string UserName { get; set; }
           [Required(ErrorMessage ="Password is required")]
-          [StringLength(50, MinimumLength = 8, ErrorMessage ="Password not valid")]
+          [StringLength(50, MinimumLength = 5, ErrorMessage ="Password not valid")]
           public string Password { get; set; }
           public DateTime LoginDateTime { get; set; }
      }
