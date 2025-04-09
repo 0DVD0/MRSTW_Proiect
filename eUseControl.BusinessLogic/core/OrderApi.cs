@@ -4,34 +4,17 @@ using System.Linq;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
+using eUseControl.Domain.Entities.Order;
 
 namespace eUseControl.BusinessLogic.Core
 {
-    public class OrderApi : IOrderApi
+    public class OrderApi : UserServices, IOrderApi
     {
         private List<ODbTable> orders = new List<ODbTable>();
 
-        public bool CreateOrder(int Id, int membershipName, DateTime orderDate, int totalPrice, int userName)
+        public bool CreateOrder(NewOrderDto order)
         {
-            if (Id == 0 || totalPrice < 0)
-            {
-                return false;
-            }
-
-            using (var context = new OrderContext())
-            {
-                ODbTable newOrder = new ODbTable
-                {
-                    MembershipName = membershipName,
-                    OrderDate = orderDate,
-                    TotalPrice = totalPrice,
-                    UserName = userName
-                };
-
-                context.Orders.Add(newOrder);
-                context.SaveChanges();
-            }
-            return true;
+            return CreateNewOrderAction(order);
         }
 
         public List<ODbTable> GetAllOrders()

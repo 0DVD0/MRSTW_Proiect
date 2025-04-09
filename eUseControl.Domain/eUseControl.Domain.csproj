@@ -58,6 +58,7 @@
     <Compile Include="Entities\MDbTable.cs" />
     <Compile Include="Entities\ODbTable.cs" />
     <Compile Include="Entities\Coach.cs" />
+    <Compile Include="Entities\Order\NewOrderDto.cs" />
     <Compile Include="Entities\User\User.cs" />
     <Compile Include="Enums\UserRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

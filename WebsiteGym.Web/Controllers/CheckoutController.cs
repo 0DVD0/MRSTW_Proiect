@@ -3,11 +3,19 @@ using WebsiteGym.Web.Models;
 using eUseControl.BusinessLogic.Core;
 using eUseControl.Domain.Enums;
 using System;
+using eUseControl.BusinessLogic.Interface;
+using eUseControl.Domain.Entities.Order;
 
 namespace WebsiteGym.Web.Controllers
 {
     public class CheckoutController : Controller
     {
+        private readonly IOrderApi _order;
+        public CheckoutController()
+        {
+            var bl = new BussinesLogic();
+            _order = bl.GetOrderApi();
+        }
 
         // GET: Checkout/CheckoutMembership
         public ActionResult CheckoutMembership(int? membershipId, int? duration)
@@ -37,14 +45,20 @@ namespace WebsiteGym.Web.Controllers
                 return View("CheckoutMembership", model);
             }
 
-            var orderService = new AdminApi(); 
-            bool result = orderService.CreateOrder(
-                model.OrderId,
-                model.MembershipId,
-                model.OrderDate,
-                model.TotalPrice,
-                model.UserId
-            );
+
+
+            var orderData = new NewOrderDto()
+            {
+
+                Id = model.OrderId,
+                membershipName = model.MembershipId,
+                orderDate = model.OrderDate,
+                totalPrice = model.TotalPrice,
+                userName = model.UserId
+
+            };
+
+            bool result = _order.CreateOrder(orderData);
 
             if (result)
             {

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.Helper.AssistingLogic;
 using Microsoft.Win32;
+using eUseControl.Domain.Entities;
+using eUseControl.Domain.Entities.Order;
 
 namespace eUseControl.BusinessLogic.Core
 {
@@ -53,5 +55,28 @@ namespace eUseControl.BusinessLogic.Core
           {
                return true;
           }
+
+        public bool CreateNewOrderAction(NewOrderDto order)
+        {
+            if (order.Id == 0 || order.totalPrice < 0)
+            {
+                return false;
+            }
+
+            using (var context = new OrderContext())
+            {
+                ODbTable newOrder = new ODbTable
+                {
+                    MembershipName = membershipName,
+                    OrderDate = orderDate,
+                    TotalPrice = totalPrice,
+                    UserName = userName
+                };
+
+                context.Orders.Add(newOrder);
+                context.SaveChanges();
+            }
+            return true;
+        }
      }
 }
