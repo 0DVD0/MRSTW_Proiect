@@ -11,7 +11,7 @@ using eUseControl.Domain.Entities;
 
 namespace eUseControl.BusinessLogic.Core
 {
-    public class AdminApi : IMembershipApi, IOrderApi
+    public class AdminApi : IMembershipApi
     {
         private List<Coach> coachList = new List<Coach>();
 
@@ -123,37 +123,6 @@ namespace eUseControl.BusinessLogic.Core
             using (var context = new MembershipContext())
             {
                 return context.Memberships.ToList();
-            }
-        }
-
-        public bool CreateOrder(int Id, int membershipId, DateTime orderDate, int totalPrice, int userId)
-        {
-            if (userId < 0 || membershipId == 0 || Id == 0 || totalPrice < 0)
-            {
-                return false;
-            }
-
-            using (var context = new OrderContext())
-            {
-                ODbTable newOrder = new ODbTable
-                {
-                    MembershipName = membershipId,
-                    OrderDate = orderDate,
-                    TotalPrice = totalPrice,
-                    UserName = userId
-                };
-
-                context.Orders.Add(newOrder);
-                context.SaveChanges();
-            }
-            return true;
-        }
-
-        public List<ODbTable> GetAllOrders()
-        {
-            using (var context = new OrderContext())
-            {
-                return context.Orders.ToList();
             }
         }
 
