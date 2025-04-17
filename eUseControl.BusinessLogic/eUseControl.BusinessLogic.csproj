@@ -63,7 +63,6 @@
     <Compile Include="Interface\IOrderApi.cs" />
     <Compile Include="Interface\ISession.cs" />
     <Compile Include="Interface\IUserServices.cs" />
-    <Compile Include="Interface\SessionBL.cs" />
     <Compile Include="Migrations\202504041052415_InitUsersTable.cs" />
     <Compile Include="Migrations\202504041052415_InitUsersTable.Designer.cs">
       <DependentUpon>202504041052415_InitUsersTable.cs</DependentUpon>

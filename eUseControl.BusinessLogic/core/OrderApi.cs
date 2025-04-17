@@ -24,9 +24,5 @@ namespace eUseControl.BusinessLogic.Core
                 return context.Orders.ToList();
             }
         } 
-        public bool DeleteOrder(int orderId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
