@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
      <meta name="viewport" content="width=device-width" />
@@ -8,7 +7,7 @@
      <title></title>
 </head>
 <body>
-    <div>
+   <div>
     <form>
          <table class="table table-responsive table-hover">
               <thead>
@@ -18,36 +17,44 @@
                         <th>E-Mail</th>
                         <th>Date of Registration</th>
                         <th>Membership Status</th>
+                        <th>Action</th>
                    </tr>
               </thead>
               <tbody>
-                   @if (Model != null && Model.Any())
+                   @if (ViewBag.Users != null)
                    {
-                        foreach (var user in Model)
+                        foreach (var user in ViewBag.Users)
                         {
-                             <tr>
-                                  <td>@user.Id</td>
-                                  <td>@user.UserName</td>
-                                  <td>@user.Email</td>
-                                  <td>@user.DateOfRegistration.ToString("dd/MM/yyyy")</td>
-                                  <td>@user.MembershipStatus</td>
-                                  <td>
-                                       <div class=" btn-group btn-group-sn">
-                                            <a href="@Url.Action("RemoveUser", user)>Remove</a>
-                                       </div>
-                                  </td>
-                             </tr>
+                             if (user.Role == eUseControl.Domain.Enums.UserRoles.Admin)
+                             {
+                                  continue;
                              }
-                             } else {
-                             <tr>
-                                  <td colspan="5" class="text-center">No users found.</td>
-                             </tr>
-                        }
-                   }
-                   }
+                             else
+                             {
+                                  <tr>
+                                       <td>@user.Id</td>
+                                       <td>@user.Name</td>
+                                       <td>@user.Email</td>
+                                       <td>@user.ReggisterDateTime.ToString("dd/MM/yyyy")</td>
+                                       <td>@user.MembershipStatus</td>
+                                       <td>
+                                            <div class="btn btn-danger">
+                                                 Remove
+                                            </div>
+                                       </td>
+                                  </tr>
+                                            }
+                                       }
+
+                                  } else {
+                                  <tr>
+                                       <td colspan="5" class="text-center">No users found.</td>
+                                  </tr>
+                             }
+                 
                    </tbody>
          </table>
     </form>
-    </div>
+   </div>
 </body>
 </html>
