@@ -43,10 +43,10 @@ namespace WebsiteGym.Web.Controllers
             var orderData = new NewOrderDto()
             {
                 Id = model.OrderId,
-                membershipName = model.MembershipName,
+                membershipName = model.MembershipName.ToString(),
                 orderDate = model.OrderDate,
                 totalPrice = model.TotalPrice,
-                userName = model.UserName
+                userName = model.UserName.ToString()
 
             };
 

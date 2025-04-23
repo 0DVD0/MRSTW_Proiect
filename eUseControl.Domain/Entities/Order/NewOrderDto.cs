@@ -9,18 +9,18 @@ namespace eUseControl.Domain.Entities.Order
 {
     public class NewOrderDto : BaseEntity
     {
-        public int membershipName { get; set; }
+        public string membershipName { get; set; }
 
-        public int userName { get; set; }
+        public string userName { get; set; }
 
         public DateTime orderDate { get; set; }
 
         public DateTime endDate { get; set; }
 
-        public int subtotalPrice { get; set; }
+        public decimal subtotalPrice { get; set; }
 
-        public int totalPrice { get; set; }
+        public decimal totalPrice { get; set; }
 
-        public int discountAmount { get; set; }
+        public decimal discountAmount { get; set; }
     }
 }

@@ -13,8 +13,6 @@ namespace eUseControl.Domain.Entities.Membership
 
         public decimal price { get; set; }
 
-        public int userName { get; set; }
-
         public string details { get; set; }
     }
 }

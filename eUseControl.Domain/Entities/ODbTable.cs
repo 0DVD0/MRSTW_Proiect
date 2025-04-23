@@ -11,11 +11,11 @@ namespace eUseControl.Domain.Entities
 
         [Required]
         [Display(Name = "User name")]
-        public int UserName { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "Membership name")]
-        public int MembershipName { get; set; }
+        public string MembershipName { get; set; }
 
         [Required]
         [Display(Name = "Order Date")]
@@ -23,7 +23,7 @@ namespace eUseControl.Domain.Entities
 
         [Required]
         [Display(Name = "Total Price")]
-        public int TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
       
     }

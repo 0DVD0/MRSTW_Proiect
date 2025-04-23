@@ -140,11 +140,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthPageModel.cs" />
+    <Compile Include="Models\DiscountViewModel.cs" />
     <Compile Include="Models\MembershipViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\UserLogData.cs" />
     <Compile Include="Models\UserRegData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Views\Admin\ManageDiscountCodes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin_style.css" />

@@ -84,16 +84,16 @@ namespace eUseControl.BusinessLogic.Core
         }
 
 
-        public MDbTable GetMembershipById(int membershipId)
+        public MDbTable GetMembershipById(NewMembershipDto membership)
         {
-            if (membershipId < 0)
+            if (membership.Id < 0)
             {
                 return null;
             }
 
             using (var context = new MembershipContext())
             {
-                return context.Memberships.FirstOrDefault(m => m.Id == membershipId);
+                return context.Memberships.FirstOrDefault(m => m.Id == membership.Id);
             }
         }
 

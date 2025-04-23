@@ -13,7 +13,7 @@ namespace eUseControl.BusinessLogic.Interface
         void CreateMembership(NewMembershipDto membership);
         void RemoveMembership(NewMembershipDto membership);
         MDbTable GetMembershipById(NewMembershipDto membership);
-        void EditMembership(NewMembershipDto memberships);
+        void EditMembership(NewMembershipDto membership);
         
     }
 }

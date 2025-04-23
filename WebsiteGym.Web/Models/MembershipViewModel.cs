@@ -4,28 +4,29 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using eUseControl.Domain.Entities;
+using eUseControl.Domain.Entities.BaseEntities;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebsiteGym.Web.Models
 {
-    public class MembershipViewModel
+    public class MembershipViewModel : BaseEntity
     {
-        public int Id { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Membership Name is required")]
         [Display(Name = "Membership Name")]
         [StringLength(50, MinimumLength = 5, ErrorMessage = "Membership Name is not valid")]
         public string MembershipName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Price is required")]
         [Display(Name = "Price")]
         [Range(0, double.MaxValue)]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Details are required")]
         [Display(Name = "Details")]
         public string Details { get; set; }
 
         public DateTime StartDate { get; set; }
+
         public DateTime EndDate { get; set; }
 
         public List<MDbTable> Memberships { get; set; }

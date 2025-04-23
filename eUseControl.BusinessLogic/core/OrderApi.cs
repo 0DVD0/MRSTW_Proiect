@@ -24,22 +24,40 @@ namespace eUseControl.BusinessLogic.Core
                 return context.Orders.ToList();
             }
         }
-        public void ApplyDiscount(NewOrderDto order, int discountAmount)
+
+        public void ApplyDiscount(NewOrderDto order, string discountCode, decimal discountAmount)
         {
-            if (discountAmount < 0)
+            if (string.IsNullOrEmpty(discountCode))
             {
-                return;
+                throw new ArgumentException("Discount code cannot be empty.");
             }
 
-            if (discountAmount > order.totalPrice)
+            using (var context = new DiscountContext())
             {
-                discountAmount = order.totalPrice;
+                var discount = context.DiscountCodes
+                                      .FirstOrDefault(d => d.DiscountCode == discountCode);
+
+                if (discount == null)
+                {
+                    throw new ArgumentException("Invalid discount code.");
+                }
+
+            
+                discountAmount = (order.totalPrice * discount.DiscountPercentage) / 100;
+                
+                if (discountAmount > order.totalPrice)
+                {
+                    discountAmount = order.totalPrice;
+                }
+
+                order.totalPrice -= discountAmount;
+
+                order.discountAmount = discountAmount;
+
+                context.SaveChanges();
             }
-
-            order.totalPrice = order.totalPrice - discountAmount;
-
-            order.discountAmount = discountAmount;
-
         }
     }
+
 }
+   
