@@ -71,33 +71,25 @@
     <Compile Include="Migrations\202504041842309_UpdateUserSchema.Designer.cs">
       <DependentUpon>202504041842309_UpdateUserSchema.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202504061511063_InitUsersTable1.cs" />
-    <Compile Include="Migrations\202504061511063_InitUsersTable1.designer.cs">
-      <DependentUpon>202504061511063_InitUsersTable1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202504061512525_InitUsersTable2.cs" />
-    <Compile Include="Migrations\202504061512525_InitUsersTable2.designer.cs">
-      <DependentUpon>202504061512525_InitUsersTable2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202504062236505_UpdatePasswordLength.cs" />
     <Compile Include="Migrations\202504062236505_UpdatePasswordLength.Designer.cs">
       <DependentUpon>202504062236505_UpdatePasswordLength.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202504071230186_InitMDbTable.cs" />
-    <Compile Include="Migrations\202504071230186_InitMDbTable.Designer.cs">
-      <DependentUpon>202504071230186_InitMDbTable.cs</DependentUpon>
+    <Compile Include="Migrations\202504221217481_InitMembershipsTable.cs" />
+    <Compile Include="Migrations\202504221217481_InitMembershipsTable.Designer.cs">
+      <DependentUpon>202504221217481_InitMembershipsTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202504071235590_InitODbTable.cs" />
-    <Compile Include="Migrations\202504071235590_InitODbTable.Designer.cs">
-      <DependentUpon>202504071235590_InitODbTable.cs</DependentUpon>
+    <Compile Include="Migrations\202504221221229_InitOrderdsTable.cs" />
+    <Compile Include="Migrations\202504221221229_InitOrderdsTable.Designer.cs">
+      <DependentUpon>202504221221229_InitOrderdsTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202504091306106_AddMembershipStatusToUserTable.cs" />
-    <Compile Include="Migrations\202504091306106_AddMembershipStatusToUserTable.Designer.cs">
-      <DependentUpon>202504091306106_AddMembershipStatusToUserTable.cs</DependentUpon>
+    <Compile Include="Migrations\202504221231384_AddMembershipStatusToUsers.cs" />
+    <Compile Include="Migrations\202504221231384_AddMembershipStatusToUsers.Designer.cs">
+      <DependentUpon>202504221231384_AddMembershipStatusToUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202504091849185_InsertDetailsInMDbTable.cs" />
-    <Compile Include="Migrations\202504091849185_InsertDetailsInMDbTable.Designer.cs">
-      <DependentUpon>202504091849185_InsertDetailsInMDbTable.cs</DependentUpon>
+    <Compile Include="Migrations\202504221240184_UpdateMembershipStatusColumnType.cs" />
+    <Compile Include="Migrations\202504221240184_UpdateMembershipStatusColumnType.Designer.cs">
+      <DependentUpon>202504221240184_UpdateMembershipStatusColumnType.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,26 +119,20 @@
     <EmbeddedResource Include="Migrations\202504041842309_UpdateUserSchema.resx">
       <DependentUpon>202504041842309_UpdateUserSchema.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504061511063_InitUsersTable1.resx">
-      <DependentUpon>202504061511063_InitUsersTable1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504061512525_InitUsersTable2.resx">
-      <DependentUpon>202504061512525_InitUsersTable2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504062236505_UpdatePasswordLength.resx">
       <DependentUpon>202504062236505_UpdatePasswordLength.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504071230186_InitMDbTable.resx">
-      <DependentUpon>202504071230186_InitMDbTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202504221217481_InitMembershipsTable.resx">
+      <DependentUpon>202504221217481_InitMembershipsTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504071235590_InitODbTable.resx">
-      <DependentUpon>202504071235590_InitODbTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202504221221229_InitOrderdsTable.resx">
+      <DependentUpon>202504221221229_InitOrderdsTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504091306106_AddMembershipStatusToUserTable.resx">
-      <DependentUpon>202504091306106_AddMembershipStatusToUserTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202504221231384_AddMembershipStatusToUsers.resx">
+      <DependentUpon>202504221231384_AddMembershipStatusToUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504091849185_InsertDetailsInMDbTable.resx">
-      <DependentUpon>202504091849185_InsertDetailsInMDbTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202504221240184_UpdateMembershipStatusColumnType.resx">
+      <DependentUpon>202504221240184_UpdateMembershipStatusColumnType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

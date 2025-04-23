@@ -1,6 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
-using eUseControl.BusinessLogic.DBModel;     
+using eUseControl.BusinessLogic.DBModel;
+using eUseControl.Domain.Entities;
+using WebsiteGym.Web.Models;
+
 
 namespace WebsiteGym.Web.Controllers
 {
@@ -38,5 +43,60 @@ namespace WebsiteGym.Web.Controllers
                }
                return RedirectToAction("ListOfUsers");
           }
-     }
+
+        public ActionResult ManageMemberships()
+        {
+            using (var context = new MembershipContext())
+            {
+                var memberships = context.Memberships.ToList();
+
+                var model = new MembershipViewModel
+                {
+                    Memberships = memberships 
+                };
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddMembership(MembershipViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.Price < 0)
+                {
+                    ModelState.AddModelError("Price", "Price cannot be negative.");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    using (var context = new MembershipContext())
+                    {
+                        var newMembership = new MDbTable
+                        {
+                            MembershipName = model.MembershipName,
+                            Price = model.Price,
+                            Details = model.Details
+                        };
+
+                        context.Memberships.Add(newMembership);
+                        context.SaveChanges();
+                    }
+
+                    return RedirectToAction("ManageMemberships");
+                }
+            }
+
+            using (var context = new MembershipContext())
+            {
+                model.Memberships = context.Memberships.ToList(); 
+            }
+
+            return View("ManageMemberships", model);
+        }
+
+
+
+    }
 }

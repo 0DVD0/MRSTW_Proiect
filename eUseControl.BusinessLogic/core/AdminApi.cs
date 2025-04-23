@@ -36,7 +36,7 @@ namespace eUseControl.BusinessLogic.Core
             {
                 MDbTable membership = new MDbTable()
                 {
-                    Name = name,
+                    MembershipName = name,
                     Price = price,
                 };
 
@@ -77,7 +77,7 @@ namespace eUseControl.BusinessLogic.Core
 
                 if (membership != null)
                 {
-                    membership.Name = name;
+                    membership.MembershipName = name;
                     membership.Price = price;
 
                     context.SaveChanges();

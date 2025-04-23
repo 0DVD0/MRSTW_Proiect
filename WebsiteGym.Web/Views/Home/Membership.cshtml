@@ -1,7 +1,7 @@
-@{ 
-     Layout = "~/Views/Shared/_Layout.cshtml";
+@model List<eUseControl.Domain.Entities.MDbTable>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,68 +18,38 @@
     <!-- Cards Section -->
     <section id="plans" class="container my-1" style="padding-top: 100px;">
         <div class="row">
-            <div class="col-md-4 mt-3">
-                <div class="card text-center d-flex flex-column h-100">
-                    <div class="card-header membership-card-header bg-primary text-white" style="font-size: 1.5em;">Basic</div>
-                    <div class="card-body d-flex flex-column">
-                        <p class="card-text flex-grow-1 text-dark">Limited access to features.</p>
-                        <p class="card-text flex-grow-1 text-dark">Mon-Fri: 3:00 PM - 10:00 PM.</p>
-                        <p class="card-text flex-grow-1 text-dark">Sat-Sun: 8:00 AM - 3:00 PM.</p>
-                        <h5 class="card-title text-danger">$10/month</h5>
-                        <a href="@Url.Action("CheckoutMembership", "Checkout", new { membershipId = "10" })" class="btn btn-primary mt-auto" style="margin: 0 auto; display: block;">Choose</a>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var membership in Model)
+                {
+                    <div class="col-md-4 mt-3">
+                        <div class="card text-center d-flex flex-column h-100">
+                            <div class="card-header membership-card-header bg-primary text-white" style="font-size: 1.5em;">
+                                @membership.MembershipName
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div class="card-text flex-grow-1 text-dark">
+                                    @foreach (var line in membership.Details.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None))
+                                    {
+                                        <p>@line</p>
+                                    }
+                                </div>
+                                <h5 class="card-title text-danger">$@membership.Price/month</h5>
+                                <a href="@Url.Action("CheckoutMembership", "Checkout", new { membershipId = membership.Id })" class="btn btn-primary mt-auto" style="margin: 0 auto; display: block;">Choose</a>
+                            </div>
+                        </div>
                     </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center mt-5">
+                    <h4 class="text-muted">No memberships available at the moment.</h4>
                 </div>
-            </div>
-            <div class="col-md-4 mt-3">
-                <div class="card text-center d-flex flex-column h-100">
-                    <div class="card-header membership-card-header bg-primary text-white" style="font-size: 1.5em;">Standard</div>
-                    <div class="card-body d-flex flex-column">
-                        <p class="card-text flex-grow-1 text-dark">Access to all equipment.</p>
-                        <p class="card-text flex-grow-1 text-dark">Mon-Fri: 3:00 PM - 10:00 PM.</p>
-                        <p class="card-text flex-grow-1 text-dark">Sat-Sun: 8:00 AM - 3:00 PM.</p>
-                        <h5 class="card-title text-danger">$40/month</h5>
-                        <a href="@Url.Action("CheckoutMembership", "Checkout", new { membershipId = "40" })" class="btn btn-primary mt-auto" style="margin: 0 auto; display: block;">Choose</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mt-3">
-                <div class="card text-center d-flex flex-column h-100">
-                    <div class="card-header membership-card-header bg-primary text-white" style="font-size: 1.5em;">Premium</div>
-                    <div class="card-body d-flex flex-column">
-                        <p class="card-text flex-grow-1 text-dark">VIP access.</p>
-                        <p class="card-text flex-grow-1 text-dark">Mon-Fri: 3:00 PM - 10:00 PM.</p>
-                        <p class="card-text flex-grow-1 text-dark">Sat-Sun: 8:00 AM - 3:00 PM.</p>
-                        <h5 class="card-title text-danger">$60/month</h5>
-                        <a href="@Url.Action("CheckoutMembership", "Checkout", new { membershipId = "60" })" class="btn btn-primary mt-auto" style="margin: 0 auto; display: block;">Choose</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mt-3">
-                <div class="card text-center d-flex flex-column h-100">
-                    <div class="card-header membership-card-header bg-primary text-white" style="font-size: 1.5em;">Elite</div>
-                    <div class="card-body d-flex flex-column">
-                        <p class="card-text flex-grow-1 text-dark">Personal trainer and priority access.</p>
-                        <p class="card-text flex-grow-1 text-dark">Mon-Fri: 3:00 PM - 10:00 PM.</p>
-                        <p class="card-text flex-grow-1 text-dark">Sat-Sun: 8:00 AM - 3:00 PM.</p>
-                        <h5 class="card-title text-danger">$100/month</h5>
-                        <a href="@Url.Action("CheckoutMembership", "Checkout", new { membershipId = "100" })" class="btn btn-primary mt-auto" style="margin: 0 auto; display: block;">Choose</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mt-3">
-                <div class="card text-center d-flex flex-column h-100">
-                    <div class="card-header membership-card-header bg-primary text-white" style="font-size: 1.5em;">Friends</div>
-                    <div class="card-body d-flex flex-column">
-                        <p class="card-text flex-grow-1 text-dark">Access for 3 members.</p>
-                        <p class="card-text flex-grow-1 text-dark">Mon-Fri: 3:00 PM - 10:00 PM.</p>
-                        <p class="card-text flex-grow-1 text-dark">Sat-Sun: 8:00 AM - 3:00 PM.</p>
-                        <h5 class="card-title text-danger">$120/month</h5>
-                        <a href="@Url.Action("CheckoutMembership", "Checkout", new { membershipId = "120" })" class="btn btn-primary mt-auto" style="margin: 0 auto; display: block;">Choose</a>
-                    </div>
-                </div>
-            </div>
-          </div>
+            }
+        </div>
     </section>
+
 
     <section class="container my-5 text-black">
         <div class="row">

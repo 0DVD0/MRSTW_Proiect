@@ -7,13 +7,13 @@ namespace eUseControl.BusinessLogic.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class AddMembershipStatusToUserTable : IMigrationMetadata
+    public sealed partial class InitOrderdsTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddMembershipStatusToUserTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitOrderdsTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202504091306106_AddMembershipStatusToUserTable"; }
+            get { return "202504221221229_InitOrderdsTable"; }
         }
         
         string IMigrationMetadata.Source

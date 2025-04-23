@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
+using eUseControl.BusinessLogic.DBModel;
 using WebsiteGym.Web.Models;
+using System.Linq;
 
 namespace WebsiteGym.Web.Controllers
 {
@@ -32,9 +34,13 @@ namespace WebsiteGym.Web.Controllers
             return View();
         }
 
+        private readonly MembershipContext _context = new MembershipContext();
+
         public ActionResult Membership()
         {
-            return View();
+            var memberships = _context.Memberships.ToList();
+            return View(memberships); 
         }
+
     }
 }

@@ -5,12 +5,13 @@ using eUseControl.Domain.Entities.BaseEntities;
 
 namespace eUseControl.Domain.Entities
 {
+    [Table("Memberships")]
     public class MDbTable : BaseEntity
     {
         [Required]
         [Display(Name = "Membership Name")]
         [StringLength(50, MinimumLength = 5, ErrorMessage = "Membership Name is not valid")]
-        public string Name { get; set; }
+        public string MembershipName { get; set; }
 
         [Required]
         [Display(Name = "Price")]

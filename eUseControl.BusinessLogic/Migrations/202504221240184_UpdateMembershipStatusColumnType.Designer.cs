@@ -7,13 +7,13 @@ namespace eUseControl.BusinessLogic.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class InitMDbTable : IMigrationMetadata
+    public sealed partial class UpdateMembershipStatusColumnType : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitMDbTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateMembershipStatusColumnType));
         
         string IMigrationMetadata.Id
         {
-            get { return "202504071230186_InitMDbTable"; }
+            get { return "202504221240184_UpdateMembershipStatusColumnType"; }
         }
         
         string IMigrationMetadata.Source
