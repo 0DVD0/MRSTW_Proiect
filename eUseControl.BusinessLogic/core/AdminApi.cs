@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.ComTypes;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
+using eUseControl.Domain.Entities.Membership;
 
 
 namespace eUseControl.BusinessLogic.Core
@@ -15,90 +16,68 @@ namespace eUseControl.BusinessLogic.Core
     {
         private List<Coach> coachList = new List<Coach>();
 
-        public void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate)
-        {
-            if (endDate < startDate)
+        public void CreateMembership(NewMembershipDto membership)
+        { 
+            if (membership.price < 0)
             {
                 return;
             }
 
-            if (price < 0)
-            {
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(membership.membershipName))
             {
                 return;
             }
 
             using (var context = new MembershipContext())
             {
-                MDbTable membership = new MDbTable()
+                MDbTable newMembership = new MDbTable()
                 {
-                    MembershipName = name,
-                    Price = price,
+                    MembershipName = membership.membershipName,
+                    Price = membership.price,
+                    Details = membership.details
                 };
 
-                context.Memberships.Add(membership);
-                context.SaveChanges();
+                context.Memberships.Add(newMembership);
+                context.SaveChanges(); 
             }
         }
 
-        public void RemoveMembership(int membershipId)
+        public void RemoveMembership(NewMembershipDto membership)
         {
-            if (membershipId < 0)
+            if (membership.Id < 0)
             {
                 return;
             }
 
             using (var context = new MembershipContext())
             {
-                var membership = context.Memberships.FirstOrDefault(m => m.Id == membershipId);
+                var membershipToRemove = context.Memberships.FirstOrDefault(m => m.Id == membership.Id);
 
-                if (membership != null)
+                if (membershipToRemove != null)
                 {
-                    context.Memberships.Remove(membership);
+                    context.Memberships.Remove(membershipToRemove);
                     context.SaveChanges();
                 }
             }
         }
 
-        public void UpdateMembership(int membershipId, string name, decimal price, DateTime startDate, DateTime endDate)
+        public void EditMembership(NewMembershipDto membership)
         {
-            if (membershipId < 0)
+            if (membership.Id < 0)
             {
                 return;
             }
 
             using (var context = new MembershipContext())
             {
-                var membership = context.Memberships.FirstOrDefault(m => m.Id == membershipId);
+                var membershipToEdit = context.Memberships.FirstOrDefault(m => m.Id == membership.Id);
 
                 if (membership != null)
                 {
-                    membership.MembershipName = name;
-                    membership.Price = price;
+                    membershipToEdit.MembershipName = membership.membershipName;
+                    membershipToEdit.Price = membership.price;
+                    membershipToEdit.Details = membership.details;
 
-                    context.SaveChanges();
-                }
-            }
-        }
-
-        public void ApplyDiscount(int membershipId, decimal discountAmount, decimal newPrice)
-        {
-            if (membershipId < 0 || discountAmount < 0)
-            {
-                return;
-            }
-
-            using (var context = new MembershipContext())
-            {
-
-                var membership = context.Memberships.FirstOrDefault(m => m.Id == membershipId);
-                if (membership != null)
-                {
-                    membership.Price = membership.Price - discountAmount >= 0 ? membership.Price - discountAmount : 0;
                     context.SaveChanges();
                 }
             }

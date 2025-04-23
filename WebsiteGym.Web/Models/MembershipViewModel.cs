@@ -25,6 +25,9 @@ namespace WebsiteGym.Web.Models
         [Display(Name = "Details")]
         public string Details { get; set; }
 
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
         public List<MDbTable> Memberships { get; set; }
     }
 }

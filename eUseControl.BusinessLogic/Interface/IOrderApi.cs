@@ -10,5 +10,6 @@ namespace eUseControl.BusinessLogic.Interface
         List<ODbTable> GetAllOrders();
         bool CreateOrder(NewOrderDto order);
 
+        void ApplyDiscount(NewOrderDto order);
     }
 }

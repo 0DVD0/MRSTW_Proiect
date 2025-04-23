@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using eUseControl.BusinessLogic.DBModel;
+using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
 using WebsiteGym.Web.Models;
 
@@ -44,11 +45,20 @@ namespace WebsiteGym.Web.Controllers
                return RedirectToAction("ListOfUsers");
           }
 
+
+        private readonly IMembershipApi _membership;
+
+        public AdminController()
+        {
+            var bl = new BussinesLogic();
+            _membership = bl.GetMembershipApi();
+        }
+
         public ActionResult ManageMemberships()
         {
             using (var context = new MembershipContext())
             {
-                var memberships = context.Memberships.ToList();
+                var memberships = _membership.GetAllMemberships();
 
                 var model = new MembershipViewModel
                 {
@@ -71,32 +81,54 @@ namespace WebsiteGym.Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    using (var context = new MembershipContext())
-                    {
-                        var newMembership = new MDbTable
-                        {
-                            MembershipName = model.MembershipName,
-                            Price = model.Price,
-                            Details = model.Details
-                        };
-
-                        context.Memberships.Add(newMembership);
-                        context.SaveChanges();
-                    }
+                    _membership.CreateMembership(model.MembershipName, model.Price, model.Details);
 
                     return RedirectToAction("ManageMemberships");
                 }
             }
 
-            using (var context = new MembershipContext())
-            {
-                model.Memberships = context.Memberships.ToList(); 
-            }
+            var memberships = _membership.GetAllMemberships();
+            model.Memberships = memberships;
 
             return View("ManageMemberships", model);
         }
 
 
+        [HttpGet]
+        public ActionResult UpdateMembership(int id)
+        {
+            var membership = _membership.GetMembershipById(id); 
+            if (membership == null)
+                return HttpNotFound();
+
+            var viewModel = new MembershipViewModel
+            {
+                Id = membership.Id,
+                MembershipName = membership.MembershipName,
+                Price = membership.Price,
+                Details = membership.Details
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditMembership(MembershipViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _membership.UpdateMembership(model.Id, model.MembershipName, model.Price, model.StartDate, model.EndDate);
+
+                return RedirectToAction("ManageMemberships");
+            }
+
+            return View(model);
+        }
+
+        public ActionResult DeleteMembership(int id)
+        {
+            _membership.RemoveMembership(id);
+            return RedirectToAction("ManageMemberships");
+        }
 
     }
 }

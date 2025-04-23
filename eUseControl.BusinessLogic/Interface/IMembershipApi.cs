@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using eUseControl.Domain.Entities;
+using eUseControl.Domain.Entities.Order;
 using eUseControl.Domain.Entities.User;
+using eUseControl.Domain.Entities.Membership;
 
 namespace eUseControl.BusinessLogic.Interface
 {
     public interface IMembershipApi
     {
         List<MDbTable> GetAllMemberships();
-        void CreateMembership(string name, decimal price, DateTime startDate, DateTime endDate);
-        void RemoveMembership(int membershipId);
-        MDbTable GetMembershipById(int membershipId);
-        void ApplyDiscount(int membershipId, decimal discountAmount, decimal newPrice);
-        void UpdateMembership(int membershipId, string name, decimal price, DateTime startDate, DateTime endDate);
+        void CreateMembership(NewMembershipDto membership);
+        void RemoveMembership(NewMembershipDto membership);
+        MDbTable GetMembershipById(NewMembershipDto membership);
+        void EditMembership(NewMembershipDto memberships);
+        
     }
 }

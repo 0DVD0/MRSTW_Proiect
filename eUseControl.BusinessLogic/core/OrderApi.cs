@@ -23,6 +23,23 @@ namespace eUseControl.BusinessLogic.Core
             {
                 return context.Orders.ToList();
             }
-        } 
+        }
+        public void ApplyDiscount(NewOrderDto order, int discountAmount)
+        {
+            if (discountAmount < 0)
+            {
+                return;
+            }
+
+            if (discountAmount > order.totalPrice)
+            {
+                discountAmount = order.totalPrice;
+            }
+
+            order.totalPrice = order.totalPrice - discountAmount;
+
+            order.discountAmount = discountAmount;
+
+        }
     }
 }

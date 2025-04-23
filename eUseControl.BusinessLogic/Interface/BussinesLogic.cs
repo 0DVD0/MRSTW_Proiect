@@ -8,5 +8,10 @@ namespace eUseControl.BusinessLogic.Interface
         {
             return new OrderApi();
         }
+
+        public IMembershipApi GetMembershipApi()
+        {
+            return new AdminApi();
+        }
     }
 }
