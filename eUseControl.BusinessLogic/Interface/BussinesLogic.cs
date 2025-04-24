@@ -13,5 +13,10 @@ namespace eUseControl.BusinessLogic.Interface
         {
             return new AdminApi();
         }
+
+        public IDiscountCode GetDiscountApi()
+        {
+            return new AdminApi();
+        }
     }
 }

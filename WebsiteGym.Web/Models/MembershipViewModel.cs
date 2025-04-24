@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using eUseControl.Domain.Entities;
 using eUseControl.Domain.Entities.BaseEntities;
-using System.ComponentModel.DataAnnotations;
 
 namespace WebsiteGym.Web.Models
 {
@@ -19,15 +18,11 @@ namespace WebsiteGym.Web.Models
         [Required(ErrorMessage = "Price is required")]
         [Display(Name = "Price")]
         [Range(0, double.MaxValue)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         [Required(ErrorMessage = "Details are required")]
         [Display(Name = "Details")]
         public string Details { get; set; }
-
-        public DateTime StartDate { get; set; }
-
-        public DateTime EndDate { get; set; }
 
         public List<MDbTable> Memberships { get; set; }
     }

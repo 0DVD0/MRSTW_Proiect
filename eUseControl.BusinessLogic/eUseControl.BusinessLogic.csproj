@@ -60,6 +60,7 @@
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interface\BussinesLogic.cs" />
     <Compile Include="Interface\ICoachApi.cs" />
+    <Compile Include="Interface\IDiscountCode.cs" />
     <Compile Include="Interface\IMembershipApi.cs" />
     <Compile Include="Interface\IOrderApi.cs" />
     <Compile Include="Interface\ISession.cs" />
@@ -92,9 +93,9 @@
     <Compile Include="Migrations\202504221240184_UpdateMembershipStatusColumnType.Designer.cs">
       <DependentUpon>202504221240184_UpdateMembershipStatusColumnType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202504231627537_InitDiscountCodesTable.cs" />
-    <Compile Include="Migrations\202504231627537_InitDiscountCodesTable.Designer.cs">
-      <DependentUpon>202504231627537_InitDiscountCodesTable.cs</DependentUpon>
+    <Compile Include="Migrations\202504241258050_InitDiscountTable.cs" />
+    <Compile Include="Migrations\202504241258050_InitDiscountTable.Designer.cs">
+      <DependentUpon>202504241258050_InitDiscountTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,8 +140,8 @@
     <EmbeddedResource Include="Migrations\202504221240184_UpdateMembershipStatusColumnType.resx">
       <DependentUpon>202504221240184_UpdateMembershipStatusColumnType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504231627537_InitDiscountCodesTable.resx">
-      <DependentUpon>202504231627537_InitDiscountCodesTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202504241258050_InitDiscountTable.resx">
+      <DependentUpon>202504241258050_InitDiscountTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

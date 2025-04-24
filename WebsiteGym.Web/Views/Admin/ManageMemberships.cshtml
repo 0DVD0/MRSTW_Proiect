@@ -62,7 +62,6 @@
                         <td>@membership.Price</td>
                         <td>@membership.Details</td>
                         <td>
-                            <a href="@Url.Action("EditMembership", "Admin", new { id = membership.Id })" class="btn btn-primary btn-sm">Edit</a>
                             <a href="@Url.Action("DeleteMembership", "Admin", new { id = membership.Id })" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this membership?');">Delete</a>
                         </td>
                     </tr>

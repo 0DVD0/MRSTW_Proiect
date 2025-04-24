@@ -8,6 +8,7 @@ namespace eUseControl.BusinessLogic.Interface
     public interface IOrderApi
     {
         List<ODbTable> GetAllOrders();
+
         bool CreateOrder(NewOrderDto order);
 
         void ApplyDiscount(NewOrderDto order, string discountCode, decimal discountAmount);

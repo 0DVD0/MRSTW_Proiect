@@ -7,12 +7,13 @@ using System.Runtime.InteropServices.ComTypes;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
+using eUseControl.Domain.Entities.Discount;
 using eUseControl.Domain.Entities.Membership;
 
 
 namespace eUseControl.BusinessLogic.Core
 {
-    public class AdminApi : IMembershipApi
+    public class AdminApi : IMembershipApi, IDiscountCode
     {
         private List<Coach> coachList = new List<Coach>();
 
@@ -105,6 +106,91 @@ namespace eUseControl.BusinessLogic.Core
             }
         }
 
+        public void CreateDiscountCode(NewDiscountDto discount)
+        {
+            if (discount.DiscountPercentage < 0 || discount.DiscountPercentage > 100)
+            {
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(discount.DiscountCode))
+            {
+                return;
+            }
+
+            using (var context = new DiscountContext())
+            {
+                DiscountDbTable newDiscount = new DiscountDbTable()
+                {
+                    DiscountCode = discount.DiscountCode,
+                    DiscountPercentage = discount.DiscountPercentage
+                };
+
+                context.DiscountCodes.Add(newDiscount);
+                context.SaveChanges();
+            }
+        }
+
+        public void RemoveDiscountCode(NewDiscountDto discount)
+        {
+            if (discount.Id < 0)
+            {
+                return;
+            }
+
+            using (var context = new DiscountContext())
+            {
+                var discountToRemove = context.DiscountCodes.FirstOrDefault(d => d.Id == discount.Id);
+
+                if (discountToRemove != null)
+                {
+                    context.DiscountCodes.Remove(discountToRemove);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void EditDiscountCode(NewDiscountDto discount)
+        {
+            if (discount.Id < 0)
+            {
+                return;
+            }
+
+            using (var context = new DiscountContext())
+            {
+                var discountToEdit = context.DiscountCodes.FirstOrDefault(d => d.Id == discount.Id);
+
+                if (discountToEdit != null)
+                {
+                    discountToEdit.DiscountCode = discount.DiscountCode;
+                    discountToEdit.DiscountPercentage = discount.DiscountPercentage;
+
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public DiscountDbTable GetDiscountCodeById(NewDiscountDto discount)
+        {
+            if (discount.Id < 0)
+            {
+                return null;
+            }
+
+            using (var context = new DiscountContext())
+            {
+                return context.DiscountCodes.FirstOrDefault(d => d.Id == discount.Id);
+            }
+        }
+
+        public List<DiscountDbTable> GetAllDiscountCodes()
+        {
+            using (var context = new DiscountContext())
+            {
+                return context.DiscountCodes.ToList();
+            }
+        }
 
         public void CreateCoach(string name, string surname, DateTime birthdate)
         {

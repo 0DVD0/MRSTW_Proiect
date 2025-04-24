@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitDiscountCodesTable : DbMigration
+    public partial class InitDiscountTable : DbMigration
     {
         public override void Up()
         {

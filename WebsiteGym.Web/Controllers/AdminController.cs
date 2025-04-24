@@ -6,6 +6,7 @@ using System.Web.Security;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
+using eUseControl.Domain.Entities.Discount;
 using eUseControl.Domain.Entities.Membership;
 using WebsiteGym.Web.Models;
 
@@ -14,6 +15,22 @@ namespace WebsiteGym.Web.Controllers
 {
     public class AdminController : Controller
     {
+
+        private readonly IOrderApi _order;
+        private readonly IMembershipApi _membership;
+        private readonly IDiscountCode _discount;
+
+        public AdminController()
+        {
+            var bl = new BussinesLogic();
+
+            _order = bl.GetOrderApi();
+
+            _membership = bl.GetMembershipApi();
+
+            _discount = bl.GetDiscountApi();
+        }
+
         public ActionResult AdminDash()
         {
                using (var context = new UserContext())
@@ -55,52 +72,40 @@ namespace WebsiteGym.Web.Controllers
 
 
 
-        private readonly IOrderApi _order;
-
-        public AdminController()
-        {
-            var bl = new BussinesLogic();
-
-            _order = bl.GetOrderApi();
-
-            _membership = bl.GetMembershipApi();
-        }
+        
 
 
         public ActionResult ManageDiscountCodes()
         {
-            using (var context = new DiscountContext())
+
+            var model = new DiscountViewModel
             {
-                var discountList = context.DiscountCodes.ToList();
+                DiscountCodes = _discount.GetAllDiscountCodes()
+            };
 
-                var model = new DiscountViewModel
-                {
-                    DiscountCodes = discountList
-                };
+            return View(model);
 
-                return View(model);
-            }
-        }
-
-
-        [HttpGet]
-        public ActionResult AddDiscountCode()
-        {
-            return View();
         }
 
         [HttpPost]
-        public ActionResult AddDiscountCode(DiscountDbTable model)
+        public ActionResult ManageDiscountCodes(DiscountViewModel model)
         {
             if (ModelState.IsValid)
             {
-                using (var context = new DiscountContext())
+                var dto = new NewDiscountDto
                 {
-                    context.DiscountCodes.Add(model);
-                    context.SaveChanges();
-                }
-                return RedirectToAction("ManageDiscountCodes");
+                    DiscountCode = model.DiscountCode,
+                    DiscountPercentage = (int)model.DiscountPercentage
+                };
+
+                _discount.CreateDiscountCode(dto);
+
+                ModelState.Clear();
+                model.DiscountCode = string.Empty;
+                model.DiscountPercentage = null;
             }
+
+            model.DiscountCodes = _discount.GetAllDiscountCodes();
 
             return View(model);
         }
@@ -108,16 +113,13 @@ namespace WebsiteGym.Web.Controllers
         [HttpGet]
         public ActionResult EditDiscountCode(int id)
         {
-            using (var context = new DiscountContext())
+            var discountCode = _discount.GetDiscountCodeById(new NewDiscountDto { Id = id });
+            if (discountCode == null)
             {
-                var discountCode = context.DiscountCodes.FirstOrDefault(d => d.Id == id);
-                if (discountCode == null)
-                {
-                    return HttpNotFound();
-                }
-
-                return View(discountCode);
+                return HttpNotFound();
             }
+
+            return View("EditDiscountCode", discountCode);
         }
 
         [HttpPost]
@@ -125,34 +127,22 @@ namespace WebsiteGym.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new DiscountContext())
+                _discount.EditDiscountCode(new NewDiscountDto
                 {
-                    var discountCode = context.DiscountCodes.FirstOrDefault(d => d.Id == model.Id);
-                    if (discountCode != null)
-                    {
-                        discountCode.DiscountCode = model.DiscountCode;
-                        discountCode.DiscountPercentage = model.DiscountPercentage;
-                        context.SaveChanges();
-                    }
-                }
+                    Id = model.Id,
+                    DiscountCode = model.DiscountCode,
+                    DiscountPercentage = (int)model.DiscountPercentage,
+                });
 
                 return RedirectToAction("ManageDiscountCodes");
             }
 
-            return View(model);
+            return View("EditDiscountCode", model);
         }
 
         public ActionResult DeleteDiscountCode(int id)
         {
-            using (var context = new DiscountContext())
-            {
-                var discountCode = context.DiscountCodes.FirstOrDefault(d => d.Id == id);
-                if (discountCode != null)
-                {
-                    context.DiscountCodes.Remove(discountCode);
-                    context.SaveChanges();
-                }
-            }
+            _discount.RemoveDiscountCode(new NewDiscountDto { Id = id });
 
             return RedirectToAction("ManageDiscountCodes");
         }
@@ -170,7 +160,8 @@ namespace WebsiteGym.Web.Controllers
 
 
 
-        private readonly IMembershipApi _membership;
+
+
 
 
         public ActionResult ManageMemberships()
@@ -195,14 +186,15 @@ namespace WebsiteGym.Web.Controllers
             var dto = new NewMembershipDto
             {
                 membershipName = model.MembershipName,
-                price = model.Price,
+                price = (decimal)model.Price,
                 details = model.Details
             };
 
-            _membership.CreateMembership(dto);  
+            _membership.CreateMembership(dto);
 
+            ModelState.Clear();
             model.MembershipName = string.Empty;
-            model.Price = 0;
+            model.Price = null;
             model.Details = string.Empty;
 
             model.Memberships = _membership.GetAllMemberships();
@@ -241,7 +233,7 @@ namespace WebsiteGym.Web.Controllers
             {
                 Id = model.Id,
                 membershipName = model.MembershipName,
-                price = model.Price,
+                price = (decimal)model.Price,
                 details = model.Details
             };
 
