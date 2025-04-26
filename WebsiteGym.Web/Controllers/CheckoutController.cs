@@ -1,73 +1,97 @@
-﻿using System.Web.Mvc;
-using WebsiteGym.Web.Models;
-using eUseControl.BusinessLogic.Core;
-using eUseControl.Domain.Enums;
-using System;
-using eUseControl.BusinessLogic.Interface;
+﻿using eUseControl.BusinessLogic.Interface;
+using eUseControl.Domain.Entities.User;
 using eUseControl.Domain.Entities.Order;
+using eUseControl.Domain.Entities;
+using System;
+using System.Linq;
+using System.Web.Mvc;
+using WebsiteGym.Web.Models;
 
 namespace WebsiteGym.Web.Controllers
 {
     public class CheckoutController : Controller
     {
+        private readonly IUserServices _userServices;
         private readonly IOrderApi _order;
+        private readonly IMembershipApi _membership;
+        private readonly IDiscountCode _discountCodeService;
+
+        public CheckoutController(IUserServices userServices, IOrderApi order, IMembershipApi membership, IDiscountCode discountCodeService)
+        {
+            _userServices = userServices;
+            _order = order;
+            _membership = membership;
+            _discountCodeService = discountCodeService;
+        }
+
         public CheckoutController()
         {
             var bl = new BussinesLogic();
             _order = bl.GetOrderApi();
+            _membership = bl.GetMembershipApi();
+            _userServices = bl.GetUserApi();
+            _discountCodeService = bl.GetDiscountApi();
         }
 
-        // GET: Checkout/CheckoutMembership
-        public ActionResult CheckoutMembership(int? membershipId)
+        // GET: CheckoutMembership
+        public ActionResult CheckoutMembership()
         {
-            var model = new OrderViewModel();
-
-            if (membershipId.HasValue)
+            var model = new OrderViewModel
             {
-                model.MembershipName = membershipId.Value;
-            }
+                AvailableMemberships = _membership.GetAllMemberships(),
+                AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes()
+            };
 
             return View(model);
         }
 
-
+        // POST: CheckoutMembership
         [HttpPost]
         public ActionResult CheckoutMembership(OrderViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Invalid order data");
-                return View("CheckoutMembership", model);
+                return View(model);
             }
 
-            var orderData = new NewOrderDto()
+            if (!string.IsNullOrEmpty(model.DiscountCode))
             {
-                Id = model.OrderId,
-                membershipName = model.MembershipName.ToString(),
-                orderDate = model.OrderDate,
-                totalPrice = model.TotalPrice,
-                userName = model.UserName.ToString()
+                var discount = _discountCodeService.GetAllDiscountCodes()
+                                  .FirstOrDefault(d => d.DiscountCode.Equals(model.DiscountCode, StringComparison.OrdinalIgnoreCase));
+                if (discount != null)
+                {
+                    model.TotalPrice -= (model.TotalPrice * discount.DiscountPercentage / 100m);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid discount code.");
+                    return View(model);
+                }
+            }
 
+            var newOrder = new NewOrderDto
+            {
+                membershipName = model.MembershipName,
+                userName = model.UserName,
+                membershipDuration = model.MembershipDuration,
+                orderDate = DateTime.Now,
+                totalPrice = model.TotalPrice
             };
 
-            bool result = _order.CreateOrder(orderData);
+            bool created = _order.CreateOrder(newOrder);
 
-            if (result)
+            if (!created)
             {
-                return RedirectToAction("OrderSuccess"); //TODO: To add View cu Oder success sau sa redirectioneze pe pagina utilizatorului in care sa-i arate ceeeeeee abonamente are
+                ModelState.AddModelError("", "Could not create order.");
+                return View(model);
             }
-            else
-            {
-                ModelState.AddModelError("", "Failed to create order");
-                return View("CheckoutMembership", model);
-            }
+
+            return RedirectToAction("OrderSuccess");
         }
 
-        // GET: Checkout
         public ActionResult OrderSuccess()
         {
-            return View("OrderSuccess");
+            return View();
         }
-
     }
 }

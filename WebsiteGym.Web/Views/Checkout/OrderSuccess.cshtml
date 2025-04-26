@@ -1,0 +1,16 @@
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title = "Order Success";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="alert alert-success shadow-sm p-4">
+                <h2>Order placed successfully!</h2>
+                <p>Thank you for your purchase.</p>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary mt-3">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>

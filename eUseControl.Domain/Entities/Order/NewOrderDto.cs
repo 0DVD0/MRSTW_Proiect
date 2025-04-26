@@ -22,5 +22,8 @@ namespace eUseControl.Domain.Entities.Order
         public decimal totalPrice { get; set; }
 
         public decimal discountAmount { get; set; }
+
+        public int membershipDuration  { get; set; }
+        
     }
 }

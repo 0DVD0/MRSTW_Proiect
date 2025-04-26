@@ -7,13 +7,13 @@ namespace eUseControl.BusinessLogic.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class InitDiscountTable : IMigrationMetadata
+    public sealed partial class InitDiscountCodesTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDiscountTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDiscountCodesTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202504241258050_InitDiscountTable"; }
+            get { return "202504251603162_InitDiscountCodesTable"; }
         }
         
         string IMigrationMetadata.Source

@@ -4,6 +4,11 @@ namespace eUseControl.BusinessLogic.Interface
 {
     public class BussinesLogic
     {
+
+        public IUserServices GetUserApi()
+        {
+            return new UserServices();
+        }
         public IOrderApi GetOrderApi()
         {
             return new OrderApi();

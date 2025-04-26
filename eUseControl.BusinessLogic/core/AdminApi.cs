@@ -84,7 +84,6 @@ namespace eUseControl.BusinessLogic.Core
             }
         }
 
-
         public MDbTable GetMembershipById(NewMembershipDto membership)
         {
             if (membership.Id < 0)

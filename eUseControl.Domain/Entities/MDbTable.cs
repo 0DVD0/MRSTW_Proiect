@@ -15,7 +15,7 @@ namespace eUseControl.Domain.Entities
 
         [Required]
         [Display(Name = "Price")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         [Required]
         [Display(Name = "Details")]
