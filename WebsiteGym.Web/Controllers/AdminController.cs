@@ -36,7 +36,8 @@ namespace WebsiteGym.Web.Controllers
                using (var context = new UserContext())
                {
                     ViewBag.Users = context.Users.Count();
-               }
+                    ViewBag.ActiveMemberships = context.Users.Count(u => u.MembershipStatus == true);
+            }
                
                     return View();
         }
@@ -65,6 +66,19 @@ namespace WebsiteGym.Web.Controllers
           }
 
 
+        public ActionResult ListOfActiveMemberships()
+        {
+            using (var context = new UserContext())
+            {
+                var activeUsers = context.Users
+                    .Where(u => u.MembershipStatus == true && u.Role != eUseControl.Domain.Enums.UserRoles.Admin)
+                    .ToList();
+
+                ViewBag.ActiveUsers = activeUsers;
+            }
+
+            return View();
+        }
 
 
 
@@ -72,7 +86,8 @@ namespace WebsiteGym.Web.Controllers
 
 
 
-        
+
+
 
 
         public ActionResult ManageDiscountCodes()

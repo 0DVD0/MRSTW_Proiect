@@ -146,6 +146,7 @@
     <Compile Include="Models\UserLogData.cs" />
     <Compile Include="Models\UserRegData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Views\Admin\ListOfActiveMemberships.cshtml" />
     <None Include="Views\Admin\ManageDiscountCodes.cshtml" />
   </ItemGroup>
   <ItemGroup>
