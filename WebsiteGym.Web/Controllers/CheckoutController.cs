@@ -36,6 +36,11 @@ namespace WebsiteGym.Web.Controllers
         // GET: CheckoutMembership
         public ActionResult CheckoutMembership()
         {
+            if (Session["UserRole"]?.ToString() != "User")
+            {
+                return RedirectToAction("AuthPage", "Home");
+            }
+
             var model = new OrderViewModel
             {
                 AvailableMemberships = _membership.GetAllMemberships(),
