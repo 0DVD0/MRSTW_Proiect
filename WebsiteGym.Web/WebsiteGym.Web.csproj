@@ -139,6 +139,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActiveMembershipViewModel.cs" />
     <Compile Include="Models\AuthPageModel.cs" />
     <Compile Include="Models\DiscountViewModel.cs" />
     <Compile Include="Models\MembershipViewModel.cs" />

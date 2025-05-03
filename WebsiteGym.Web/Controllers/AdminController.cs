@@ -20,15 +20,19 @@ namespace WebsiteGym.Web.Controllers
         private readonly IMembershipApi _membership;
         private readonly IDiscountCode _discount;
 
+        private readonly UserContext _userContext;
+        private readonly MembershipContext _membershipContext;
+
         public AdminController()
         {
             var bl = new BussinesLogic();
 
             _order = bl.GetOrderApi();
-
             _membership = bl.GetMembershipApi();
-
             _discount = bl.GetDiscountApi();
+
+            _userContext = new UserContext(); 
+            _membershipContext = new MembershipContext();
         }
 
         public ActionResult AdminDash()
@@ -65,20 +69,26 @@ namespace WebsiteGym.Web.Controllers
                return RedirectToAction("ListOfUsers");
           }
 
+        // TODO: Users table trebuie sa aiba MembershipId, ca sa-l putem afisa in profilul sau
 
-        public ActionResult ListOfActiveMemberships()
-        {
-            using (var context = new UserContext())
-            {
-                var activeUsers = context.Users
-                    .Where(u => u.MembershipStatus == true && u.Role != eUseControl.Domain.Enums.UserRoles.Admin)
-                    .ToList();
+        //public ActionResult ListOfActiveMemberships()
+        //{
+        //    var activeMemberships = (from user in _userContext.Users
+        //                             join membership in _membershipContext.Memberships on user.MembershipId equals membership.Id
+        //                             where user.MembershipStatus == 1 
+        //                             select new ActiveMembershipViewModel
+        //                             {
+        //                                 MembershipId = membership.Id,
+        //                                 UserName = user.UserName,
+        //                                 MembershipName = membership.MembershipName,
+        //                                 Price = membership.Price,
+        //                                 Details = membership.Details
+        //                             }).ToList(); 
 
-                ViewBag.ActiveUsers = activeUsers;
-            }
+        //    return View(activeMemberships); 
+        //}
 
-            return View();
-        }
+
 
 
 

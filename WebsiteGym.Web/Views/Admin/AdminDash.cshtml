@@ -20,58 +20,58 @@
           <div class="admin-section">
                <h2 class="h4 mb-4">Overview</h2>
                <div class="row">
-                    <div class="col-md-3 col-sm-6 admin-card">
-                         <div class="stat-card bg-primary text-white">
-                              <div class="stat-icon">
-                                   <i class="fas fa-users" style=""></i>
-                              </div>
-                              <div class="stat-value">
-                                   <h2>
-                                        @ViewBag.Users
-                                   </h2>
-                              </div>
-                              <div class="stat-label">Total Users</div>
-                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 admin-card">
-                         <div class="stat-card bg-success text-white">
-                              <div class="stat-icon">
+                   <div class="col-md-3 col-sm-6 admin-card">
+                       <div class="stat-card bg-primary text-white">
+                           <div class="stat-icon">
+                               <i class="fas fa-users" style=""></i>
+                           </div>
+                           <div class="stat-value">
+                               <h2>
+                                   @ViewBag.Users
+                               </h2>
+                           </div>
+                           <div class="stat-label">Total Users</div>
+                       </div>
+                   </div>
+                   <div class="col-md-3 col-sm-6 admin-card">
+                       <a href="@Url.Action("ListOfActiveMemberships", "Admin")" style="text-decoration: none;">
+                           <div class="stat-card bg-success text-white">
+                               <div class="stat-icon">
                                    <i class="fas fa-id-card"></i>
-                              </div>
-                              <div class="stat-value">
-                                   <h2>
-                                        @ViewBag.ActiveMemberships
-                                   </h2>
-                              </div>
-                              <div class="stat-label">Active Memberships</div>
-                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 admin-card">
-                         <div class="stat-card bg-info text-white">
-                              <div class="stat-icon">
-                                   <i class="fas fa-dollar-sign"></i>
-                              </div>
-                              <div class="stat-value">
-                                   <h2>
-                                        @ViewBag.TotalRevenue
-                                   </h2>
-                              </div>
-                              <div class="stat-label">Total Revenue</div>
-                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 admin-card">
-                         <div class="stat-card bg-warning text-white">
-                              <div class="stat-icon">
-                                   <i class="fas fa-comments"></i>
-                              </div>
-                              <div class="stat-value">
-                                   <h2>
-                                        @ViewBag.Feedbacks
-                                   </h2>
-                              </div>
-                              <div class="stat-label">Pending Feedbacks</div>
-                         </div>
-                    </div>
+                               </div>
+                               <div class="stat-value">
+                                   <h2>@ViewBag.ActiveMemberships</h2>
+                               </div>
+                               <div class="stat-label">Active Memberships</div>
+                           </div>
+                       </a>
+                   </div>
+                   <div class="col-md-3 col-sm-6 admin-card">
+                       <div class="stat-card bg-info text-white">
+                           <div class="stat-icon">
+                               <i class="fas fa-dollar-sign"></i>
+                           </div>
+                           <div class="stat-value">
+                               <h2>
+                                   @ViewBag.TotalRevenue
+                               </h2>
+                           </div>
+                           <div class="stat-label">Total Revenue</div>
+                       </div>
+                   </div>
+                   <div class="col-md-3 col-sm-6 admin-card">
+                       <div class="stat-card bg-warning text-white">
+                           <div class="stat-icon">
+                               <i class="fas fa-comments"></i>
+                           </div>
+                           <div class="stat-value">
+                               <h2>
+                                   @ViewBag.Feedbacks
+                               </h2>
+                           </div>
+                           <div class="stat-label">Pending Feedbacks</div>
+                       </div>
+                   </div>
 
                </div>
           </div>
