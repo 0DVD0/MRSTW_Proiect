@@ -2,6 +2,7 @@
 using eUseControl.BusinessLogic.DBModel;
 using WebsiteGym.Web.Models;
 using System.Linq;
+using System.Diagnostics;
 
 namespace WebsiteGym.Web.Controllers
 {
@@ -14,7 +15,8 @@ namespace WebsiteGym.Web.Controllers
           }
           public ActionResult Index()
         {
-            return View();
+            var topMemberships = _context.Memberships.Take(3).ToList();
+            return View(topMemberships);
         }
 
         public ActionResult About()
@@ -40,6 +42,12 @@ namespace WebsiteGym.Web.Controllers
         {
             var memberships = _context.Memberships.ToList();
             return View(memberships); 
+        }
+
+        public ActionResult ShowTopMemberships()
+        {
+            var topMemberships = _context.Memberships.Take(3).ToList();
+            return View(topMemberships);  
         }
 
     }
