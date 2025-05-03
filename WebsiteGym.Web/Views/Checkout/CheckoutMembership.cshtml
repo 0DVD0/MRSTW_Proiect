@@ -42,7 +42,7 @@
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required" })
 
                             <label for="membership" class="form-label mt-3">Membership Plan</label>
-                            @Html.DropDownListFor(m => m.MembershipName, new SelectList(Model.AvailableMemberships, "MembershipName", "MembershipName"), "Select a membership", new { @class = "form-control", required = "required", id = "membership" })
+                            @Html.DropDownListFor(m => m.MembershipName, new SelectList(Model.AvailableMemberships, "MembershipName", "MembershipName", Model.MembershipName), "Select a membership", new { @class = "form-control", required = "required", id = "membership" })
 
                             <div class="form-group mt-3">
                                 <label for="duration" class="form-label">Membership Duration:</label>

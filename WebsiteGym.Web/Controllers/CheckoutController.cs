@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 using WebsiteGym.Web.Models;
+using System.Web.Security;
 
 namespace WebsiteGym.Web.Controllers
 {
@@ -34,16 +35,18 @@ namespace WebsiteGym.Web.Controllers
         }
 
         // GET: CheckoutMembership
-        public ActionResult CheckoutMembership()
+        public ActionResult CheckoutMembership(int membershipId)
         {
             if (Session["UserRole"]?.ToString() != "User")
             {
                 return RedirectToAction("AuthPage", "Home");
             }
+            var selectedMembership = _membership.GetAllMemberships().FirstOrDefault(m => m.Id == membershipId);
 
             var model = new OrderViewModel
             {
                 AvailableMemberships = _membership.GetAllMemberships(),
+                MembershipName = selectedMembership?.MembershipName,
                 AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes()
             };
 
