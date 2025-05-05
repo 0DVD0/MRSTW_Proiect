@@ -1,0 +1,363 @@
+﻿
+@{
+     ViewBag.Title = "Dashboard";
+
+     // Sample data - replace with actual data from your controller
+     var firstName = "John";
+     var hasActiveMembership = true;
+     var membershipName = "Premium";
+     var daysRemaining = 45;
+     var membershipStartDate = DateTime.Now.AddDays(-15);
+     var membershipEndDate = DateTime.Now.AddDays(45);
+     var membershipProgressPercentage = 25;
+     var classesAttended = 12;
+     var upcomingClasses = 3;
+     var goalProgress = 65;
+     var loyaltyPoints = 120;
+}
+
+<head>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<div class="container py-4">
+     <!-- Welcome Banner -->
+     <div class="card mb-4 bg-primary text-white">
+          <div class="card-body py-4">
+               <div class="row align-items-center">
+                    <div class="col-md-8">
+                         <h2 class="mb-1">Welcome back, @firstName!</h2>
+                         <p class="mb-0 lead">
+                              @if (hasActiveMembership)
+                              {
+                                   <span>Your @membershipName membership is active. @daysRemaining days remaining.</span>
+                              }
+                              else
+                              {
+                                   <span>You don't have an active membership. <a href="@Url.Action("Index", "Membership")" class="text-white"><u>Get started today!</u></a></span>
+                              }
+                         </p>
+                    </div>
+                    <div class="col-md-4 text-md-right mt-3 mt-md-0">
+                         <a href="@Url.Action("Index", "GymClass")" class="btn btn-light btn-lg">
+                              <i class="fas fa-dumbbell mr-2"></i> Book a Class
+                         </a>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <!-- Quick Stats -->
+     <div class="row mb-4">
+          <div class="col-md-3 col-sm-6 mb-3 mb-md-0">
+               <div class="card h-100 border-left-primary">
+                    <div class="card-body">
+                         <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Classes Attended
+                                   </div>
+                                   <div class="h5 mb-0 font-weight-bold text-gray-800">@classesAttended</div>
+                              </div>
+                              <div class="col-auto">
+                                   <i class="fas fa-calendar-check fa-2x text-gray-300"></i>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 mb-3 mb-md-0">
+               <div class="card h-100 border-left-success">
+                    <div class="card-body">
+                         <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                   <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Upcoming Classes
+                                   </div>
+                                   <div class="h5 mb-0 font-weight-bold text-gray-800">@upcomingClasses</div>
+                              </div>
+                              <div class="col-auto">
+                                   <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 mb-3 mb-md-0">
+               <div class="card h-100 border-left-info">
+                    <div class="card-body">
+                         <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                   <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                        Fitness Goal
+                                   </div>
+                                   <div class="row no-gutters align-items-center">
+                                        <div class="col-auto">
+                                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@goalProgress%</div>
+                                        </div>
+                                        <div class="col">
+                                             <div class="progress progress-sm mr-2">
+                                                  <div class="progress-bar bg-info" role="progressbar" style="width: @goalProgress%"
+                                                       aria-valuenow="@goalProgress" aria-valuemin="0" aria-valuemax="100"></div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="col-auto">
+                                   <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+               <div class="card h-100 border-left-warning">
+                    <div class="card-body">
+                         <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                   <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        Loyalty Points
+                                   </div>
+                                   <div class="h5 mb-0 font-weight-bold text-gray-800">@loyaltyPoints</div>
+                              </div>
+                              <div class="col-auto">
+                                   <i class="fas fa-star fa-2x text-gray-300"></i>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="row">
+          <!-- Upcoming Classes -->
+          <div class="col-lg-8 mb-4">
+               <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                         <h6 class="m-0 font-weight-bold text-primary">Upcoming Classes</h6>
+                         <a href="@Url.Action("Index", "GymClass")" class="btn btn-sm btn-primary">
+                              View All
+                         </a>
+                    </div>
+                    <div class="card-body">
+                         @if (upcomingClasses > 0)
+                         {
+                              <div class="table-responsive">
+                                   <table class="table table-hover">
+                                        <thead>
+                                             <tr>
+                                                  <th>Class</th>
+                                                  <th>Date</th>
+                                                  <th>Time</th>
+                                                  <th>Instructor</th>
+                                                  <th>Actions</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <!-- Sample class 1 -->
+                                             <tr>
+                                                  <td>Yoga</td>
+                                                  <td>@DateTime.Now.AddDays(1).ToString("MMM dd, yyyy")</td>
+                                                  <td>10:00 AM - 11:00 AM</td>
+                                                  <td>Sarah Johnson</td>
+                                                  <td>
+                                                       <a href="#" class="btn btn-sm btn-info">
+                                                            <i class="fas fa-info-circle"></i>
+                                                       </a>
+                                                       <a href="#" class="btn btn-sm btn-danger">
+                                                            <i class="fas fa-times"></i>
+                                                       </a>
+                                                  </td>
+                                             </tr>
+                                             <!-- Sample class 2 -->
+                                             <tr>
+                                                  <td>Spinning</td>
+                                                  <td>@DateTime.Now.AddDays(2).ToString("MMM dd, yyyy")</td>
+                                                  <td>6:00 PM - 7:00 PM</td>
+                                                  <td>Mike Thompson</td>
+                                                  <td>
+                                                       <a href="#" class="btn btn-sm btn-info">
+                                                            <i class="fas fa-info-circle"></i>
+                                                       </a>
+                                                       <a href="#" class="btn btn-sm btn-danger">
+                                                            <i class="fas fa-times"></i>
+                                                       </a>
+                                                  </td>
+                                             </tr>
+                                             <!-- Sample class 3 -->
+                                             <tr>
+                                                  <td>HIIT</td>
+                                                  <td>@DateTime.Now.AddDays(3).ToString("MMM dd, yyyy")</td>
+                                                  <td>7:30 PM - 8:30 PM</td>
+                                                  <td>Alex Davis</td>
+                                                  <td>
+                                                       <a href="#" class="btn btn-sm btn-info">
+                                                            <i class="fas fa-info-circle"></i>
+                                                       </a>
+                                                       <a href="#" class="btn btn-sm btn-danger">
+                                                            <i class="fas fa-times"></i>
+                                                       </a>
+                                                  </td>
+                                             </tr>
+                                        </tbody>
+                                   </table>
+                              </div>
+                         }
+                         else
+                         {
+                              <div class="text-center py-4">
+                                   <img src="~/Content/images/calendar-empty.svg" alt="No classes" style="width: 100px; height: 100px;" class="mb-3">
+                                   <h5>No upcoming classes</h5>
+                                   <p class="text-muted">You haven't booked any classes yet.</p>
+                                   <a href="@Url.Action("Index", "GymClass")" class="btn btn-primary">
+                                        <i class="fas fa-calendar-plus mr-1"></i> Book a Class
+                                   </a>
+                              </div>
+                         }
+                    </div>
+               </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="col-lg-4">
+               <!-- Membership Card -->
+               <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                         <h6 class="m-0 font-weight-bold text-primary">Membership</h6>
+                    </div>
+                    <div class="card-body">
+                         @if (hasActiveMembership)
+                         {
+                              <div class="text-center mb-3">
+                                   <div class="display-4 text-primary mb-1">@daysRemaining</div>
+                                   <div class="text-muted">days remaining</div>
+                              </div>
+                              <div class="progress mb-3" style="height: 10px;">
+                                   <div class="progress-bar bg-primary" role="progressbar" style="width: @membershipProgressPercentage%"
+                                        aria-valuenow="@membershipProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                              <div class="d-flex justify-content-between text-muted small mb-3">
+                                   <span>Started: @membershipStartDate.ToString("MMM dd")</span>
+                                   <span>Ends: @membershipEndDate.ToString("MMM dd")</span>
+                              </div>
+                              <div class="text-center">
+                                   <a href="@Url.Action("Index", "UserAccount")" class="btn btn-primary btn-block">
+                                        <i class="fas fa-sync-alt mr-1"></i> Renew Membership
+                                   </a>
+                              </div>
+                         }
+                         else
+                         {
+                              <div class="text-center py-4">
+                                   <img src="~/Content/images/membership-card.svg" alt="Membership" style="width: 100px; height: 100px;" class="mb-3">
+                                   <h5>No Active Membership</h5>
+                                   <p class="text-muted">Get access to all our facilities and classes.</p>
+                                   <a href="@Url.Action("Index", "Membership")" class="btn btn-primary btn-block">
+                                        <i class="fas fa-tag mr-1"></i> View Membership Plans
+                                   </a>
+                              </div>
+                         }
+                    </div>
+               </div>
+
+               <!-- Quick Links -->
+               <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                         <h6 class="m-0 font-weight-bold text-primary">Quick Links</h6>
+                    </div>
+                    <div class="card-body">
+                         <div class="row">
+                              <div class="col-6 mb-3">
+                                   <a href="@Url.Action("Index", "GymClass")" class="btn btn-light btn-block py-3">
+                                        <i class="fas fa-calendar-alt fa-2x d-block mb-2"></i>
+                                        Classes
+                                   </a>
+                              </div>
+                              <div class="col-6 mb-3">
+                                   <a href="@Url.Action("Index", "UserAccount")" class="btn btn-light btn-block py-3">
+                                        <i class="fas fa-user fa-2x d-block mb-2"></i>
+                                        Profile
+                                   </a>
+                              </div>
+                              <div class="col-6 mb-3">
+                                   <a href="@Url.Action("Index", "Membership")" class="btn btn-light btn-block py-3">
+                                        <i class="fas fa-id-card fa-2x d-block mb-2"></i>
+                                        Membership
+                                   </a>
+                              </div>
+                              <div class="col-6 mb-3">
+                                   <a href="@Url.Action("Create", "Feedback")" class="btn btn-light btn-block py-3">
+                                        <i class="fas fa-comment fa-2x d-block mb-2"></i>
+                                        Feedback
+                                   </a>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <!-- Announcements -->
+     <div class="card shadow mb-4">
+          <div class="card-header py-3">
+               <h6 class="m-0 font-weight-bold text-primary">Announcements</h6>
+          </div>
+          <div class="card-body">
+               <!-- Sample announcements -->
+               <div class="list-group">
+                    <div class="list-group-item list-group-item-action">
+                         <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">New Classes Added</h5>
+                              <small class="text-muted">@DateTime.Now.AddDays(-2).ToString("MMM dd, yyyy")</small>
+                         </div>
+                         <p class="mb-1">We've added new yoga and pilates classes to our schedule. Check them out and book your spot today!</p>
+                    </div>
+                    <div class="list-group-item list-group-item-action">
+                         <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Holiday Hours</h5>
+                              <small class="text-muted">@DateTime.Now.AddDays(-5).ToString("MMM dd, yyyy")</small>
+                         </div>
+                         <p class="mb-1">Please note that we will have modified hours during the upcoming holiday. The gym will be open from 8 AM to 6 PM.</p>
+                    </div>
+                    <div class="list-group-item list-group-item-action">
+                         <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">New Equipment Arrived</h5>
+                              <small class="text-muted">@DateTime.Now.AddDays(-10).ToString("MMM dd, yyyy")</small>
+                         </div>
+                         <p class="mb-1">We've upgraded our cardio section with new treadmills and elliptical machines. Come try them out!</p>
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>
+
+
+     <style>
+          .border-left-primary {
+               border-left: 0.25rem solid #4e73df !important;
+          }
+
+          .border-left-success {
+               border-left: 0.25rem solid #1cc88a !important;
+          }
+
+          .border-left-info {
+               border-left: 0.25rem solid #36b9cc !important;
+          }
+
+          .border-left-warning {
+               border-left: 0.25rem solid #f6c23e !important;
+          }
+
+          .text-gray-300 {
+               color: #dddfeb !important;
+          }
+
+          .text-gray-800 {
+               color: #5a5c69 !important;
+          }
+     </style>

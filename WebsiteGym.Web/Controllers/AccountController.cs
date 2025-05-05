@@ -9,6 +9,10 @@ namespace WebsiteGym.Web.Controllers
 {
      public class AccountController : Controller
      {
+          public ActionResult UserDashboard()
+          {
+               return View();
+          }
 
           [HttpPost]
           public ActionResult Register(AuthPageModel model)
