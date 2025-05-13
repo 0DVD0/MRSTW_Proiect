@@ -9,15 +9,11 @@ using eUseControl.Domain.Entities.BaseEntities;
 
 namespace WebsiteGym.Web.Models
 {
-    public class OrderViewModel : BaseEntity
+    public class OrderViewModel
     {
         [Required(ErrorMessage = "Please select a membership.")]
         [Display(Name = "Membership Name")]
         public string MembershipName { get; set; }
-
-        [Required(ErrorMessage = "Username is required.")]
-        [Display(Name = "User Name")]
-        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Please select membership duration.")]
         [Display(Name = "Membership Duration")]

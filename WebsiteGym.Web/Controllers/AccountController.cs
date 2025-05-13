@@ -34,7 +34,7 @@ namespace WebsiteGym.Web.Controllers
                               Email = user.Email,
                               MembershipStatus = user.MembershipStatus,
                               RegisterDateTime = user.ReggisterDateTime,
-                              MembershipExpiration = userMembership?.ExpirationDate,
+                              MembershipExpiration = userMembership?.MembershipExperationDate,
                               MembershipType = userMembership?.MembershipType,
 
                          };
