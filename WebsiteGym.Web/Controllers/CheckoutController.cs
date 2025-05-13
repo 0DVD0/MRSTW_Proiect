@@ -48,11 +48,48 @@ namespace WebsiteGym.Web.Controllers
             {
                 AvailableMemberships = _membership.GetAllMemberships(),
                 MembershipName = selectedMembership?.MembershipName,
-                AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes()
+                AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes(),
+                MembershipDuration = 0,
+                Subtotal = 0,
+                TotalPrice = 0
             };
 
             return View(model);
         }
+
+        [HttpPost]
+        public JsonResult CalculatePrice(string membershipName, int membershipDuration)
+        {
+            var membership = _membership.GetAllMemberships().FirstOrDefault(m => m.MembershipName == membershipName);
+
+            decimal price = (decimal)membership.Price * membershipDuration;
+
+            return Json(new { success = true, subtotal = price, totalPrice = price });
+        }
+
+        [HttpPost]
+        public JsonResult ApplyDiscount(string membershipName, int membershipDuration, string discountCode)
+        {
+            var membership = _membership.GetAllMemberships().FirstOrDefault(m => m.MembershipName == membershipName);
+
+            if (membership == null)
+            {
+                return Json(new { success = false, message = "Invalid membership." });
+            }
+
+            var discount = _discountCodeService.GetAllDiscountCodes().FirstOrDefault(d => d.DiscountCode.Equals(discountCode, StringComparison.OrdinalIgnoreCase));
+
+            if (discount == null) 
+            {
+                return Json(new { success = false, message = "Invalid discount code." });
+            }
+
+            decimal price = (decimal)membership.Price * membershipDuration;
+            price -= (price * discount.DiscountPercentage / 100m); 
+
+            return Json(new { success = true, subtotal = price, totalPrice = price });
+        }
+
 
         // POST: CheckoutMembership
         [HttpPost]
