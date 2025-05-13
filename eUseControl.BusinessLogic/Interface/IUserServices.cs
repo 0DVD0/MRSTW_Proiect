@@ -8,5 +8,6 @@ namespace eUseControl.BusinessLogic.Interface
         User LoginUser(User user);
         bool RemoveUser(string name, string email);
         User GetUserById(int id);
+        UserMembership GetUserMembershipById(int id);
      }
 }

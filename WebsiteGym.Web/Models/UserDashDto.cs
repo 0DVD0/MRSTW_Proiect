@@ -13,7 +13,16 @@ namespace WebsiteGym.Web.Models
           public bool MembershipStatus { get; set; }
           public DateTime RegisterDateTime { get; set; }
           public int? UserMembershipID { get; set; }
-          public UserMembership UserMembership { get; set; }
-
+          public DateTime? MembershipExpiration { get; set; }
+          public string MembershipType { get; set; }
+          public int? RemainingDays
+          {
+               get
+               {
+                    if (MembershipExpiration == null) return null;
+                    var days = (MembershipExpiration.Value - DateTime.Now).Days;
+                    return Math.Max(days, 0);
+               }
+          }
      }
 }

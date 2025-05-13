@@ -21,15 +21,21 @@ namespace WebsiteGym.Web.Controllers
                     int userId = (int)Session["UserId"];
                     var userService = new UserServices();
                     var user = userService.GetUserById(userId);
+                    UserMembership userMembership = null;
                     if (user != null)
                     {
+                         if (user.UserMembershipID != null && user.MembershipStatus)
+                         {
+                              userMembership = userService.GetUserMembershipById((int)user.UserMembershipID);
+                         }
                          var model = new UserDashDto
                          {
                               UserName = user.Name,
                               Email = user.Email,
                               MembershipStatus = user.MembershipStatus,
                               RegisterDateTime = user.ReggisterDateTime,
-                              UserMembershipID = user.UserMembershipID
+                              MembershipExpiration = userMembership?.ExpirationDate,
+                              MembershipType = userMembership?.MembershipType,
 
                          };
                          return View(model);
@@ -63,7 +69,7 @@ namespace WebsiteGym.Web.Controllers
                          Role = UserRoles.User,
                          ReggisterDateTime = DateTime.Now,
                          MembershipStatus = false,
-                         UserMembershipID = 0,
+                         UserMembershipID = null,
 
                     };
 
