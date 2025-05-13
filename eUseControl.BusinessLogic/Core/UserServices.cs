@@ -15,6 +15,13 @@ namespace eUseControl.BusinessLogic.Core
 {
     public class UserServices: IUserServices
     {
+          public User GetUserById(int id)
+          {
+               using (var context = new UserContext())
+               {
+                    return context.Users.FirstOrDefault(u => u.Id == id);
+               }
+          }
 
           public bool RegisterUser(User user)
           {
