@@ -49,9 +49,6 @@ namespace WebsiteGym.Web.Controllers
                 AvailableMemberships = _membership.GetAllMemberships(),
                 MembershipName = selectedMembership?.MembershipName,
                 AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes(),
-                MembershipDuration = 0,
-                Subtotal = 0,
-                TotalPrice = 0
             };
 
             return View(model);
@@ -95,6 +92,38 @@ namespace WebsiteGym.Web.Controllers
         [HttpPost]
         public ActionResult CheckoutMembership(OrderViewModel model)
         {
+         var membership = _membership.GetAllMemberships().FirstOrDefault(m => m.MembershipName == model.MembershipName);
+
+               if (membership == null)
+               {
+                    ModelState.AddModelError("", "Invalid membership.");
+                    model.AvailableMemberships = _membership.GetAllMemberships();
+                    model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
+                    return View(model);
+               }
+
+               decimal total = membership.Price * model.MembershipDuration;
+
+               if (!string.IsNullOrEmpty(model.DiscountCode))
+               {
+                    var discount = _discountCodeService.GetAllDiscountCodes()
+                                      .FirstOrDefault(d => d.DiscountCode.Equals(model.DiscountCode, StringComparison.OrdinalIgnoreCase));
+
+                    if (discount != null)
+                    {
+                         total -= total * discount.DiscountPercentage / 100m;
+                    }
+                    else
+                    {
+                         ModelState.AddModelError("", "Invalid discount code.");
+                         model.AvailableMemberships = _membership.GetAllMemberships();
+                         model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
+                         return View(model);
+                    }
+               }
+
+               model.TotalPrice = (decimal)total;
+
             if (!ModelState.IsValid)
             {
                     foreach (var entry in ModelState)
@@ -110,24 +139,25 @@ namespace WebsiteGym.Web.Controllers
                     return View(model);
             }
 
-            if (!string.IsNullOrEmpty(model.DiscountCode))
-            {
-                var discount = _discountCodeService.GetAllDiscountCodes()
-                                  .FirstOrDefault(d => d.DiscountCode.Equals(model.DiscountCode, StringComparison.OrdinalIgnoreCase));
-                if (discount != null)
-                {
-                    model.TotalPrice -= (model.TotalPrice * discount.DiscountPercentage / 100m);
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid discount code.");
-                    model.AvailableMemberships = _membership.GetAllMemberships();
-                    model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
-                    return View(model);
-                }
-            }
+               //if (!string.IsNullOrEmpty(model.DiscountCode))
+               //{
+               //    var discount = _discountCodeService.GetAllDiscountCodes()
+               //                      .FirstOrDefault(d => d.DiscountCode.Equals(model.DiscountCode, StringComparison.OrdinalIgnoreCase));
+               //    if (discount != null)
+               //    {
+               //        model.TotalPrice -= (model.TotalPrice * discount.DiscountPercentage / 100m);
+               //    }
+               //    else
+               //    {
+               //       ModelState.AddModelError("", "Invalid discount code.");
+               //       model.AvailableMemberships = _membership.GetAllMemberships();
+               //       model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
+               //       return View(model);
+               //    }
+               //  }
 
-            var newOrder = new ODbTable
+              
+               var newOrder = new ODbTable
             {
                 MembershipName = model.MembershipName,
                 UserName = Session["UserName"]?.ToString(),
@@ -148,7 +178,7 @@ namespace WebsiteGym.Web.Controllers
              }
                else
              {
-                    var userId = (int)Session["UserId"];
+                    int? userId = (int?)Session["UserId"];
                     var newUserMembership = new UserMembership
                     {
                          MembershipType = model.MembershipName,
@@ -158,10 +188,9 @@ namespace WebsiteGym.Web.Controllers
 
                     var newMembershipId = _userServices.SaveUserMembership(newUserMembership);
 
-                    var User = _userServices.GetUserById(userId);
-                    if (User != null && newMembershipId != null)
+                    if (userId != null && newMembershipId != null)
                     {
-                         _userServices.UpdateUserMembership(newMembershipId, User);
+                         _userServices.UpdateUserMembership(newMembershipId, userId);
                     }
                     else
                     {

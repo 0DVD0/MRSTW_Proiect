@@ -25,7 +25,6 @@ namespace WebsiteGym.Web.Models
         [Display(Name = "Subtotal")]
         public decimal Subtotal { get; set; }
 
-        [Required]
         [Display(Name = "Total Price")]
         public decimal TotalPrice { get; set; }
 

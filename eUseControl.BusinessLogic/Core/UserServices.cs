@@ -100,15 +100,20 @@ namespace eUseControl.BusinessLogic.Core
                }
           }
 
-          public bool UpdateUserMembership(int? userMembershipId, User foundUser)
+          public bool UpdateUserMembership(int? userMembershipId, int? userId)
           {
                using (var context = new UserContext())
                {
-                         foundUser.UserMembershipID = userMembershipId;
-                         foundUser.MembershipStatus = true;
-                         context.SaveChanges();
-                         return true;
-                         
+                    var user = context.Users.FirstOrDefault(u => u.Id == userId);
+                    if (user == null) 
+                         return false;
+
+                    user.UserMembershipID = userMembershipId;
+                    user.MembershipStatus = true;
+
+                    context.SaveChanges();
+                    return true;
+
                }
           }
      }

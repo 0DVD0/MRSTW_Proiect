@@ -11,6 +11,6 @@ namespace eUseControl.BusinessLogic.Interface
         UserMembership GetUserMembershipById(int id);
         
         int? SaveUserMembership(UserMembership userMembership);
-        bool UpdateUserMembership(int? userMembershipId, User userId);
+        bool UpdateUserMembership(int? userMembershipId, int? userId);
      }
 }

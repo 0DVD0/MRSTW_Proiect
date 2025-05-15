@@ -37,22 +37,37 @@ namespace WebsiteGym.Web.Controllers
 
         public ActionResult AdminDash()
         {
-               using (var context = new UserContext())
+               if (Session["UserRole"]?.ToString() == "Admin") { 
+                    using (var context = new UserContext())
                {
                     ViewBag.Users = context.Users.Count();
                     ViewBag.ActiveMemberships = context.Users.Count(u => u.MembershipStatus == true);
-            }
+               }
                
-                    return View();
+                    return View(); 
+               }
+               else
+               {
+                    return RedirectToAction("Index", "Home");
+               }
+              
         }
           public ActionResult ListOfUsers()
           {
-               using (var context = new UserContext())
+               if (Session["UserRole"].ToString() != "Admin")
                {
-                    var users = context.Users.ToList();
-                    ViewBag.Users = users;
-               }
+                    using (var context = new UserContext())
+                    {
+                         var users = context.Users.ToList();
+                         ViewBag.Users = users;
+                    }
                return View();
+               } 
+               else 
+               {  
+                    return RedirectToAction("Index", "Home");
+               }
+                   
           }
 
           public ActionResult DeleteUser(int id)
