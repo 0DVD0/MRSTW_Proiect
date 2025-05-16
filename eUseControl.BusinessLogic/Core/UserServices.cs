@@ -108,6 +108,15 @@ namespace eUseControl.BusinessLogic.Core
                     if (user == null) 
                          return false;
 
+                    if (user.UserMembershipID != null)
+                    {
+                         var userMembership = context.UserMemberships.FirstOrDefault(u => u.Id == user.UserMembershipID);
+                         if (userMembership != null)
+                         {
+                              context.UserMemberships.Remove(userMembership);
+                              context.SaveChanges();
+                         }
+                    }
                     user.UserMembershipID = userMembershipId;
                     user.MembershipStatus = true;
 
