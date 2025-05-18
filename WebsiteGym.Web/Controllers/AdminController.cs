@@ -264,11 +264,11 @@ namespace WebsiteGym.Web.Controllers
         }
 
         [HttpPost]
-        public void EditMembership(NewMembershipDto membership)
+        public ActionResult EditMembership(NewMembershipDto membership)
         {
-            if (membership.Id < 0)
+            if (membership.Id <= 0)
             {
-                return;
+                return RedirectToAction("ManageMemberships");
             }
 
             using (var context = new MembershipContext())
@@ -284,7 +284,10 @@ namespace WebsiteGym.Web.Controllers
                     context.SaveChanges();
                 }
             }
+
+            return RedirectToAction("ManageMemberships");
         }
+
 
 
         public ActionResult DeleteMembership(int id)

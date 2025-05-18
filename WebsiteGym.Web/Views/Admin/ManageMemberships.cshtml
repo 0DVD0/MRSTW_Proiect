@@ -65,7 +65,7 @@
                             <button type="button" class="btn btn-warning btn-sm edit-btn"
                                     data-id="@membership.Id"
                                     data-name="@membership.MembershipName"
-                                    data-price="@membership.Price"
+                                    data-price="@membership.Price.ToString().Replace(",", ".")"
                                     data-details="@membership.Details"
                                     data-bs-toggle="modal" data-bs-target="#editModal">
                                 Edit
@@ -95,7 +95,7 @@
             <div class="modal-body">
                 @using (Html.BeginForm("EditMembership", "Admin", FormMethod.Post, new { id = "editMembershipForm" }))
                 {
-                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Id, new { id = "editId" })
 
                     <div class="mb-3">
                         @Html.LabelFor(m => m.MembershipName, new { @class = "form-label fw-semibold" })
@@ -137,6 +137,7 @@
             var details = $(this).data("details");
 
             $("#editMembershipForm").attr("action", "/Admin/EditMembership/" + id);
+            $("#editId").val(id);
             $("#editMembershipName").val(name);
             $("#editPrice").val(price);
             $("#editDetails").val(details);
