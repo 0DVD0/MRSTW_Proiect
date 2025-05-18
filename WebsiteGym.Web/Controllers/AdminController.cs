@@ -159,11 +159,19 @@ namespace WebsiteGym.Web.Controllers
                 return HttpNotFound();
             }
 
-            return View("EditDiscountCode", discountCode);
+            var model = new DiscountViewModel
+            {
+                Id = discountCode.Id,
+                DiscountCode = discountCode.DiscountCode,
+                DiscountPercentage = discountCode.DiscountPercentage,
+                DiscountCodes = _discount.GetAllDiscountCodes()
+            };
+
+            return View("ManageDiscountCodes", model);
         }
 
         [HttpPost]
-        public ActionResult EditDiscountCode(DiscountDbTable model)
+        public ActionResult EditDiscountCode(DiscountViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -177,7 +185,8 @@ namespace WebsiteGym.Web.Controllers
                 return RedirectToAction("ManageDiscountCodes");
             }
 
-            return View("EditDiscountCode", model);
+            model.DiscountCodes = _discount.GetAllDiscountCodes();
+            return View("ManageDiscountCodes", model);
         }
 
         public ActionResult DeleteDiscountCode(int id)
