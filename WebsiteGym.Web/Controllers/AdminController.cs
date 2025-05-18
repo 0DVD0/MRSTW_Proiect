@@ -54,7 +54,7 @@ namespace WebsiteGym.Web.Controllers
         }
           public ActionResult ListOfUsers()
           {
-               if (Session["UserRole"].ToString() != "Admin")
+               if (Session["UserRole"].ToString() == "Admin")
                {
                     using (var context = new UserContext())
                     {

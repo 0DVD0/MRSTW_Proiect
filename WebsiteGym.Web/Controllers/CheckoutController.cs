@@ -183,7 +183,7 @@ namespace WebsiteGym.Web.Controllers
                     {
                          MembershipType = model.MembershipName,
                          MembershipExperationDate = DateTime.Now.AddMonths(model.MembershipDuration),
-
+                         MembershipPurchaseDate = DateTime.Now,
                     };
 
                     var newMembershipId = _userServices.SaveUserMembership(newUserMembership);

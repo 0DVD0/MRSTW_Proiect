@@ -106,6 +106,10 @@
     <Compile Include="Migrations\202505132247030_AddChanges.Designer.cs">
       <DependentUpon>202505132247030_AddChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505161152318_AddMembershipPurchaseDateToUserMembership.cs" />
+    <Compile Include="Migrations\202505161152318_AddMembershipPurchaseDateToUserMembership.Designer.cs">
+      <DependentUpon>202505161152318_AddMembershipPurchaseDateToUserMembership.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -157,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505132247030_AddChanges.resx">
       <DependentUpon>202505132247030_AddChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505161152318_AddMembershipPurchaseDateToUserMembership.resx">
+      <DependentUpon>202505161152318_AddMembershipPurchaseDateToUserMembership.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

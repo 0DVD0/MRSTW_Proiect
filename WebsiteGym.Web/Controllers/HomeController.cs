@@ -11,7 +11,15 @@ namespace WebsiteGym.Web.Controllers
           [HttpGet]
           public ActionResult AuthPage()
           {
-               return View("AuthPage", new AuthPageModel());
+               if (Session != null && Session["UserId"] != null)
+               {
+                    return RedirectToAction("UserDashboard", "Account");
+               }
+               else
+               {
+                   return View();
+               }
+               
           }
           public ActionResult Index()
         {

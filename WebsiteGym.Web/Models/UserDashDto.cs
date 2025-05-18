@@ -15,6 +15,7 @@ namespace WebsiteGym.Web.Models
           public int? UserMembershipID { get; set; }
           public DateTime? MembershipExpiration { get; set; }
           public string MembershipType { get; set; }
+          public DateTime? MembershipPurchaseDate { get; set; }
           public int? RemainingDays
           {
                get
@@ -24,5 +25,24 @@ namespace WebsiteGym.Web.Models
                     return Math.Max(days, 0);
                }
           }
+
+          public int MembershipProgressPercent
+          {
+               get
+               {
+                    if (MembershipPurchaseDate == null || MembershipExpiration == null) return 0;
+
+                    double totalDays = (MembershipExpiration.Value - MembershipPurchaseDate.Value).TotalDays;
+                    double usedDays = (DateTime.Now - MembershipPurchaseDate.Value).TotalDays;
+
+                    if (totalDays <= 0) return 0;
+
+                    int progress = (int)(100 - (usedDays / totalDays * 100));
+                    progress = Math.Max(0, Math.Min(100, progress));
+                    return progress;
+
+               }
+          }
+
      }
 }

@@ -36,7 +36,7 @@ namespace WebsiteGym.Web.Controllers
                               RegisterDateTime = user.ReggisterDateTime,
                               MembershipExpiration = userMembership?.MembershipExperationDate,
                               MembershipType = userMembership?.MembershipType,
-
+                              MembershipPurchaseDate = userMembership?.MembershipPurchaseDate,
                          };
                          return View(model);
                     }
@@ -90,6 +90,7 @@ namespace WebsiteGym.Web.Controllers
           [HttpPost]
         public ActionResult Login(AuthPageModel model)
         {
+
                if (!ModelState.IsValid) {
                     ModelState.AddModelError("", "Invalid data");
                     return View("~/Views/Home/AuthPage.cshtml", model);

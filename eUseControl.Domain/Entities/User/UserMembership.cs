@@ -15,5 +15,7 @@ namespace eUseControl.Domain.Entities.User
           public string MembershipType { get; set; }
           [Required]
           public DateTime MembershipExperationDate { get; set; }
+          [Required]
+          public DateTime MembershipPurchaseDate { get; set; }
      }
 }
