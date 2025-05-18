@@ -23,98 +23,96 @@
                               <h3 class="text-center">Order Checkout</h3>
                          </div>
                          <div class="card-body checkoutMembershipCardBody">
-                              @using (Html.BeginForm("CheckoutMembership", "Checkout", FormMethod.Post))
-                              {
-                                   <input type="hidden" id="TotalPrice" name="TotalPrice" value="@Model.TotalPrice.ToString("N2", CultureInfo.CurrentCulture)" />
-                                   @Html.HiddenFor(m => m.DiscountCode)
+                             @using (Html.BeginForm("CheckoutMembership", "Checkout", FormMethod.Post))
+                             {
+                                 <input type="hidden" id="TotalPrice" name="TotalPrice" value="@Model.TotalPrice.ToString("0.00", CultureInfo.InvariantCulture)" />
+
+                                 @Html.AntiForgeryToken()
+
+                                 <h5 class="text-dark">Billing Details</h5>
+                                 <div class="row">
+                                     <div class="col-md-6">
+                                         <label for="firstName" class="form-label">First Name</label>
+                                         @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "required" })
+                                     </div>
+                                     <div class="col-md-6">
+                                         <label for="lastName" class="form-label">Last Name</label>
+                                         @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "required" })
+                                     </div>
+                                 </div>
+
+                                 <label for="email" class="form-label mt-3">Email Address</label>
+                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required" })
+
+                                 <label for="membership" class="form-label mt-3">Membership Plan</label>
+                                 @Html.DropDownListFor(m => m.MembershipName, new SelectList(Model.AvailableMemberships, "MembershipName", "MembershipName", Model.MembershipName), "Select a membership", new { @class = "form-control", required = "required", id = "membership" })
+
+                                 <div class="form-group mt-3">
+                                     <label for="duration" class="form-label">Membership Duration:</label>
+                                     @Html.DropDownListFor(m => m.MembershipDuration, new SelectList(
+                                         new List<SelectListItem>
+                                         {
+                                             new SelectListItem { Text = "1 Month", Value = "1" },
+                                             new SelectListItem { Text = "3 Months", Value = "3" },
+                                             new SelectListItem { Text = "6 Months", Value = "6" }
+                                         }, "Value", "Text"),
+                                         "Select a membership duration",
+                                         new { @class = "form-control", required = "required", id = "duration" })
+                                 </div>
+
+                                 <h5 class="text-dark mt-4">Payment Method</h5>
+                                 <div class="row">
+                                     <div class="col-md-8">
+                                         <label for="cardNumber" class="form-label">Card Number</label>
+                                         @Html.TextBoxFor(m => m.CardNumber, new
+                                          {
+                                              @class = "form-control",
+                                              placeholder = "1234 5678 9012 3456",
+                                              required = "required",
+                                              maxlength = "19",
+                                              id = "CardNumber"
+                                          })
+                                     </div>
+                                     <div class="col-md-4">
+                                         <label for="cvv" class="form-label">CVV</label>
+                                         @Html.TextBoxFor(m => m.CVV, new
+                                         {
+                                             @class = "form-control",
+                                             placeholder = "123",
+                                             required = "required",
+                                             maxlength = "3",
+                                             inputmode = "numeric",
+                                             oninput = "this.value = this.value.replace(/[^0-9]/g, '').slice(0,3)"
+                                         })
+                                     </div>
+                                 </div>
+                                 <div class="row mt-3">
+                                     <div class="col-md-6">
+                                         <label for="expDate" class="form-label">Expiration Date (MM/YY)</label>
+                                         @Html.TextBoxFor(m => m.ExpDate, new
+                                         {
+                                             @class = "form-control",
+                                             placeholder = "MM/YY",
+                                             required = "required",
+                                             maxlength = "5",
+                                             id = "ExpDate"
+                                         })
+                                     </div>
+                                 </div>
+
+                                 <div class="form-check mt-3">
+                                     <input type="checkbox" class="form-check-input" id="terms" required>
+                                     <label for="terms" class="form-check-label">
+                                         I agree to the <a href="@Url.Action("TermsAndConditions", "Checkout")" target="_blank">terms and conditions</a>
+                                     </label>
+                                 </div>
+
+                                 <div class="text-center mt-4">
+                                     <button type="submit" class="btn btn-primary w-100">Place Order</button>
+                                 </div>
 
 
-                                   @Html.AntiForgeryToken()
-
-                                   <h5 class="text-dark">Billing Details</h5>
-                                   <div class="row">
-                                        <div class="col-md-6">
-                                             <label for="firstName" class="form-label">First Name</label>
-                                             @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "required" })
-                                        </div>
-                                        <div class="col-md-6">
-                                             <label for="lastName" class="form-label">Last Name</label>
-                                             @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "required" })
-                                        </div>
-                                   </div>
-
-                                   <label for="email" class="form-label mt-3">Email Address</label>
-                                   @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required" })
-
-                                   <label for="membership" class="form-label mt-3">Membership Plan</label>
-                                   @Html.DropDownListFor(m => m.MembershipName, new SelectList(Model.AvailableMemberships, "MembershipName", "MembershipName", Model.MembershipName), "Select a membership", new { @class = "form-control", required = "required", id = "membership" })
-
-                                   <div class="form-group mt-3">
-                                        <label for="duration" class="form-label">Membership Duration:</label>
-                                        @Html.DropDownListFor(m => m.MembershipDuration, new SelectList(
-                                            new List<SelectListItem>
-                                            {
-                                                new SelectListItem { Text = "1 Month", Value = "1" },
-                                                new SelectListItem { Text = "3 Months", Value = "3" },
-                                                new SelectListItem { Text = "6 Months", Value = "6" }
-                                            }, "Value", "Text"),
-                                            "Select a membership duration",
-                                            new { @class = "form-control", required = "required", id = "duration" })
-                                   </div>
-
-                                   <h5 class="text-dark mt-4">Payment Method</h5>
-                                   <div class="row">
-                                        <div class="col-md-8">
-                                             <label for="cardNumber" class="form-label">Card Number</label>
-                                             @Html.TextBoxFor(m => m.CardNumber, new
-                                              {
-                                                  @class = "form-control",
-                                                  placeholder = "1234 5678 9012 3456",
-                                                  required = "required",
-                                                  maxlength = "19",
-                                                  id = "CardNumber"
-                                              })
-                                        </div>
-                                        <div class="col-md-4">
-                                             <label for="cvv" class="form-label">CVV</label>
-                                             @Html.TextBoxFor(m => m.CVV, new
-                                             {
-                                                 @class = "form-control",
-                                                 placeholder = "123",
-                                                 required = "required",
-                                                 maxlength = "3",
-                                                 inputmode = "numeric",
-                                                 oninput = "this.value = this.value.replace(/[^0-9]/g, '').slice(0,3)"
-                                             })
-                                        </div>
-                                   </div>
-                                   <div class="row mt-3">
-                                        <div class="col-md-6">
-                                             <label for="expDate" class="form-label">Expiration Date (MM/YY)</label>
-                                             @Html.TextBoxFor(m => m.ExpDate, new
-                                             {
-                                                 @class = "form-control",
-                                                 placeholder = "MM/YY",
-                                                 required = "required",
-                                                 maxlength = "5",
-                                                 id = "ExpDate"
-                                             })
-                                        </div>
-                                   </div>
-
-                                   <div class="form-check mt-3">
-                                        <input type="checkbox" class="form-check-input" id="terms" required>
-                                        <label for="terms" class="form-check-label">
-                                             I agree to the <a href="@Url.Action("TermsAndConditions", "Checkout")" target="_blank">terms and conditions</a>
-                                        </label>
-                                   </div>
-
-                                   <div class="text-center mt-4">
-                                        <button type="submit" class="btn btn-primary w-100">Place Order</button>
-                                   </div>
-
-
-                              }
+                             }
                          </div>
                     </div>
                </div>
@@ -185,10 +183,7 @@
                     if (response.success) {
                         $('#subtotal').text(response.subtotal.toFixed(2) + ' $');
                          $('#finalPrice').text(response.totalPrice.toFixed(2) + ' $');
-                         $('#TotalPrice').val(response.totalPrice.toLocaleString('ro-RO', {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2
-                         }));
+                        $('#TotalPrice').val(response.totalPrice.toFixed(2));
                     } else {
                         alert(response.message);
                     }

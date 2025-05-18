@@ -159,11 +159,19 @@ namespace WebsiteGym.Web.Controllers
                 return HttpNotFound();
             }
 
-            return View("EditDiscountCode", discountCode);
+            var model = new DiscountViewModel
+            {
+                Id = discountCode.Id,
+                DiscountCode = discountCode.DiscountCode,
+                DiscountPercentage = discountCode.DiscountPercentage,
+                DiscountCodes = _discount.GetAllDiscountCodes()
+            };
+
+            return View("ManageDiscountCodes", model);
         }
 
         [HttpPost]
-        public ActionResult EditDiscountCode(DiscountDbTable model)
+        public ActionResult EditDiscountCode(DiscountViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -177,7 +185,8 @@ namespace WebsiteGym.Web.Controllers
                 return RedirectToAction("ManageDiscountCodes");
             }
 
-            return View("EditDiscountCode", model);
+            model.DiscountCodes = _discount.GetAllDiscountCodes();
+            return View("ManageDiscountCodes", model);
         }
 
         public ActionResult DeleteDiscountCode(int id)
@@ -264,11 +273,11 @@ namespace WebsiteGym.Web.Controllers
         }
 
         [HttpPost]
-        public void EditMembership(NewMembershipDto membership)
+        public ActionResult EditMembership(NewMembershipDto membership)
         {
-            if (membership.Id < 0)
+            if (membership.Id <= 0)
             {
-                return;
+                return RedirectToAction("ManageMemberships");
             }
 
             using (var context = new MembershipContext())
@@ -284,7 +293,10 @@ namespace WebsiteGym.Web.Controllers
                     context.SaveChanges();
                 }
             }
+
+            return RedirectToAction("ManageMemberships");
         }
+
 
 
         public ActionResult DeleteMembership(int id)
