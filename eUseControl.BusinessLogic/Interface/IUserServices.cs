@@ -13,5 +13,7 @@ namespace eUseControl.BusinessLogic.Interface
         int? SaveUserMembership(UserMembership userMembership);
         bool UpdateUserMembership(int? userMembershipId, int? userId);
         bool UpdateUserPassword(User user, string newPassword);
+        byte[] GenerateQrCode(string qrText);
+
      }
 }

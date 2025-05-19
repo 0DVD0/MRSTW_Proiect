@@ -37,6 +37,7 @@ namespace WebsiteGym.Web.Controllers
                               MembershipExpiration = userMembership?.MembershipExperationDate,
                               MembershipType = userMembership?.MembershipType,
                               MembershipPurchaseDate = userMembership?.MembershipPurchaseDate,
+                              QrCodeImage = userMembership?.QrCodeImage,
                          };
                          return View(model);
                     }

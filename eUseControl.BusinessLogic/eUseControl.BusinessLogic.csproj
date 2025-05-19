@@ -114,6 +114,10 @@
     <Compile Include="Migrations\202505181251201_UpdateExpirationDateType.Designer.cs">
       <DependentUpon>202505181251201_UpdateExpirationDateType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505191944192_AddQrCodeImageCollumn.cs" />
+    <Compile Include="Migrations\202505191944192_AddQrCodeImageCollumn.Designer.cs">
+      <DependentUpon>202505191944192_AddQrCodeImageCollumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -171,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505181251201_UpdateExpirationDateType.resx">
       <DependentUpon>202505181251201_UpdateExpirationDateType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505191944192_AddQrCodeImageCollumn.resx">
+      <DependentUpon>202505191944192_AddQrCodeImageCollumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

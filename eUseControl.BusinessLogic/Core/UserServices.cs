@@ -155,5 +155,11 @@ namespace eUseControl.BusinessLogic.Core
                     }
                }
           }
+
+          public byte[] GenerateQrCode(string qrText)
+          {
+               var helper = new CheckoutHelper();
+               return helper.GenerateQrCode(qrText);
+          }
      }
 }
