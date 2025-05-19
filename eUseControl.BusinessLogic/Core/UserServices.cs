@@ -13,8 +13,8 @@ using eUseControl.Domain.Entities.Order;
 
 namespace eUseControl.BusinessLogic.Core
 {
-    public class UserServices: IUserServices
-    {
+     public class UserServices : IUserServices
+     {
           public UserMembership GetUserMembershipById(int id)
           {
                using (var context = new UserContext())
@@ -31,27 +31,37 @@ namespace eUseControl.BusinessLogic.Core
                }
           }
 
+          public User GetUserByEmail(string email)
+          {
+               using (var context = new UserContext())
+               {
+                    return context.Users.FirstOrDefault(u => u.Email == email);
+               }
+
+          }
+
           public bool RegisterUser(User user)
           {
                var helper = new UserHelper();
                using (var context = new UserContext())
                {
-                  if ((context.Users.Any(u => u.Email == user.Email) || (context.Users.Any(u => u.Name == user.Name)))){
-                    return false;
-                  }
+                    if ((context.Users.Any(u => u.Email == user.Email) || (context.Users.Any(u => u.Name == user.Name))))
+                    {
+                         return false;
+                    }
 
-                  user.Password = helper.PasswordHash(user.Password);
-                  context.Users.Add(user);
-                  context.SaveChanges();
-                  return true;
+                    user.Password = helper.PasswordHash(user.Password);
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                    return true;
                }
-              
+
           }
 
           public User LoginUser(User user)
           {
                var helper = new UserHelper();
-               var hashedPassword= helper.PasswordHash(user.Password);
+               var hashedPassword = helper.PasswordHash(user.Password);
                using (var context = new UserContext())
                {
                     var UserExists = context.Users.FirstOrDefault(u => u.Name == user.Name && u.Password == hashedPassword);
@@ -71,20 +81,20 @@ namespace eUseControl.BusinessLogic.Core
                return true;
           }
 
-        public bool CreateNewOrderAction(ODbTable order)
-        {
-            if (order.TotalPrice < 0)
-            {
-                return false;
-            }
+          public bool CreateNewOrderAction(ODbTable order)
+          {
+               if (order.TotalPrice < 0)
+               {
+                    return false;
+               }
 
-            using (var context = new OrderContext())
-            {
-                context.Orders.Add(order);
-                context.SaveChanges();
-            }
-            return true;
-        }
+               using (var context = new OrderContext())
+               {
+                    context.Orders.Add(order);
+                    context.SaveChanges();
+               }
+               return true;
+          }
 
           public int? SaveUserMembership(UserMembership userMembership)
           {
@@ -105,7 +115,7 @@ namespace eUseControl.BusinessLogic.Core
                using (var context = new UserContext())
                {
                     var user = context.Users.FirstOrDefault(u => u.Id == userId);
-                    if (user == null) 
+                    if (user == null)
                          return false;
 
                     if (user.UserMembershipID != null)
@@ -123,6 +133,26 @@ namespace eUseControl.BusinessLogic.Core
                     context.SaveChanges();
                     return true;
 
+               }
+          }
+
+          public bool UpdateUserPassword(User user, string newPassword)
+          {
+               var helper = new UserHelper();
+               using (var context = new UserContext())
+               {
+                    var hashedPassword = helper.PasswordHash(newPassword);
+                    var userToUpdate = context.Users.FirstOrDefault(u => u.Id == user.Id);
+                    if (userToUpdate != null)
+                    {
+                         userToUpdate.Password = hashedPassword;
+                         context.SaveChanges();
+                         return true;
+                    }
+                    else
+                    {
+                         return false;
+                    }
                }
           }
      }

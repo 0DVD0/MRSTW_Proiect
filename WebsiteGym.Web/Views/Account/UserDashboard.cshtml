@@ -66,15 +66,11 @@
                     </div>
                     <div class="card-body">
                          <div class="list-group">
-                              <a href="@Url.Action("Index", "UserAccount")" class="list-group-item list-group-item-action d-flex align-items-center">
-                                   <i class="fas fa-user-circle text-primary mr-3"></i>
-                                   <span>My Account</span>
-                              </a>
-                              <a href="@Url.Action("Home", "Membership")" class="list-group-item list-group-item-action d-flex align-items-center">
+                              <a href="@Url.Action("Membership", "Home")" class="list-group-item list-group-item-action d-flex align-items-center">
                                    <i class="fas fa-id-card text-primary mr-3"></i>
                                    <span>Membership Plans</span>
                               </a>
-                              <a href="@Url.Action("ChangePassword", "Account")" class="list-group-item list-group-item-action d-flex align-items-center">
+                              <a href="@Url.Action("ForgotPassword", "Account")" class="list-group-item list-group-item-action d-flex align-items-center">
                                    <i class="fas fa-key text-primary mr-3"></i>
                                    <span>Change Password</span>
                               </a>
@@ -166,7 +162,6 @@
                          else
                          {
                               <div class="text-center py-5">
-                                   <img src="~/Content/images/membership-card.svg" alt="Membership" style="width: 120px; height: 120px;" class="mb-4">
                                    <h4>No Active Membership</h4>
                                    <p class="text-muted mb-4">You currently don't have an active membership. Choose a plan to get started.</p>
                                    <a href="@Url.Action("Membership", "Home")" class="btn btn-primary btn-lg">

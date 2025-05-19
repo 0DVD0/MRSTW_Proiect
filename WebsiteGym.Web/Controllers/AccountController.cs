@@ -53,7 +53,7 @@ namespace WebsiteGym.Web.Controllers
           }
           [HttpPost]
           public ActionResult Register(AuthPageModel model)
-          { 
+          {
                if (!ModelState.IsValid)
                {
                     ModelState.AddModelError("", "Invalid data");
@@ -88,10 +88,11 @@ namespace WebsiteGym.Web.Controllers
                }
           }
           [HttpPost]
-        public ActionResult Login(AuthPageModel model)
-        {
+          public ActionResult Login(AuthPageModel model)
+          {
 
-               if (!ModelState.IsValid) {
+               if (!ModelState.IsValid)
+               {
                     ModelState.AddModelError("", "Invalid data");
                     return View("~/Views/Home/AuthPage.cshtml", model);
                }
@@ -109,7 +110,7 @@ namespace WebsiteGym.Web.Controllers
                          Session["UserId"] = foundUser.Id;
                          Session["UserName"] = foundUser.Name;
                          Session["UserRole"] = foundUser.Role;
-                         
+
                          return RedirectToAction("Index", "Home");
                     }
                     else
@@ -118,15 +119,70 @@ namespace WebsiteGym.Web.Controllers
                          return View("~/Views/Home/AuthPage.cshtml", model);
                     }
                }
-        }
+          }
 
           public ActionResult Logout()
           {
-               Session.Clear();    
-               Session.Abandon();   
+               Session.Clear();
+               Session.Abandon();
 
                return RedirectToAction("Index", "Home");
           }
 
+          public ActionResult ForgotPassword()
+          {
+               return View();
+          }
+
+          [HttpPost]
+          public ActionResult ForgotPassword(string email)
+          {
+               var userService = new UserServices();
+               var user = userService.GetUserByEmail(email);
+               if (user != null)
+               {
+                    return RedirectToAction("ResetPassword", new { email });
+               }
+               else
+               {
+                    ModelState.AddModelError("", "Email not found");
+                    return View();
+               }
+          }
+          public ActionResult ResetPassword(string email)
+          {
+               ViewBag.Email = email;
+               return View();
+          }
+
+          [HttpPost]
+          public ActionResult ResetPassword(string email, string newPassword)
+          {
+               var userService = new UserServices();
+               var user = userService.GetUserByEmail(email);
+               if (user != null)
+               {
+                    var passwordReseted = userService.UpdateUserPassword(user, newPassword);
+                    if (passwordReseted)
+                    {
+                         if (Session == null)
+                         {
+                              return RedirectToAction("Login");
+                         } else { 
+                              return RedirectToAction("UserDashboard");
+                         }
+
+                    } else {
+                         ModelState.AddModelError("", "Password reset failed");
+                         return View();
+                    }
+
+               }
+               else
+               {
+                    ModelState.AddModelError("", "Email not found");
+                    return View();
+               }
+          }
      }
 }
