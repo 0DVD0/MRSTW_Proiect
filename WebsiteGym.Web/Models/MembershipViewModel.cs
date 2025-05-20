@@ -8,8 +8,10 @@ using eUseControl.Domain.Entities.BaseEntities;
 
 namespace WebsiteGym.Web.Models
 {
-    public class MembershipViewModel : BaseEntity
+    public class MembershipViewModel
     {
+        public int MembershipId { get; set; }
+
         [Required(ErrorMessage = "Membership Name is required")]
         [Display(Name = "Membership Name")]
         [StringLength(50, MinimumLength = 5, ErrorMessage = "Membership Name is not valid")]

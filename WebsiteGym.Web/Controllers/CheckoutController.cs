@@ -153,7 +153,7 @@ namespace WebsiteGym.Web.Controllers
 
             if (!created)
             {
-                ModelState.AddModelError("", "Could not create order.");
+                    ModelState.AddModelError("", "Could not create order.");
                     model.AvailableMemberships = _membership.GetAllMemberships();
                     model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
                     return View(model);

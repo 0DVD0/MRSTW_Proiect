@@ -12,8 +12,10 @@ namespace eUseControl.BusinessLogic.Interface
         List<MDbTable> GetAllMemberships();
         void CreateMembership(NewMembershipDto membership);
         void RemoveMembership(NewMembershipDto membership);
-        MDbTable GetMembershipById(NewMembershipDto membership);
-        void EditMembership(NewMembershipDto membership);
-        
-    }
+        MDbTable GetMembershipById(int Id);
+        bool EditMembership(NewMembershipDto membership);
+        List<MDbTable> GetTop3Memberships();
+
+
+     }
 }
