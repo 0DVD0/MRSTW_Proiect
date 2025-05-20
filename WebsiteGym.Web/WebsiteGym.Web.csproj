@@ -134,6 +134,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -142,12 +143,14 @@
     <Compile Include="Models\ActiveMembershipViewModel.cs" />
     <Compile Include="Models\AuthPageModel.cs" />
     <Compile Include="Models\DiscountViewModel.cs" />
+    <Compile Include="Models\FeedbackModel.cs" />
     <Compile Include="Models\MembershipViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\UserDashDto.cs" />
     <Compile Include="Models\UserLogData.cs" />
     <Compile Include="Models\UserRegData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Views\Home\ThankYou.cshtml" />
     <Content Include="Views\Admin\ListOfActiveMemberships.cshtml" />
     <Content Include="Views\Account\UserDashboard.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
@@ -222,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Feedback\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

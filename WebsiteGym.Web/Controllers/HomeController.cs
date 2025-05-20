@@ -58,5 +58,9 @@ namespace WebsiteGym.Web.Controllers
             return View(topMemberships);  
         }
 
+        public ActionResult ThankYou()
+        {
+            return View();
+        }
     }
 }

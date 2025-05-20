@@ -57,6 +57,7 @@
     <Compile Include="Entities\BaseEntities\BaseEntity.cs" />
     <Compile Include="Entities\DiscountDbTable.cs" />
     <Compile Include="Entities\Discount\NewDiscountDto.cs" />
+    <Compile Include="Entities\FeedbackDbTable.cs" />
     <Compile Include="Entities\MDbTable.cs" />
     <Compile Include="Entities\Membership\NewMembershipDto.cs" />
     <Compile Include="Entities\ODbTable.cs" />

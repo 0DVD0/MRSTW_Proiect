@@ -56,6 +56,7 @@
     <Compile Include="Core\UserServices.cs" />
     <Compile Include="DBModel\CoachContext.cs" />
     <Compile Include="DBModel\DiscountContext.cs" />
+    <Compile Include="DBModel\FeedbackContext.cs" />
     <Compile Include="DBModel\MembershipContext.cs" />
     <Compile Include="DBModel\OrderContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
@@ -114,6 +115,10 @@
     <Compile Include="Migrations\202505181251201_UpdateExpirationDateType.Designer.cs">
       <DependentUpon>202505181251201_UpdateExpirationDateType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505201628246_InitFeedbacksTable.cs" />
+    <Compile Include="Migrations\202505201628246_InitFeedbacksTable.Designer.cs">
+      <DependentUpon>202505201628246_InitFeedbacksTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -171,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505181251201_UpdateExpirationDateType.resx">
       <DependentUpon>202505181251201_UpdateExpirationDateType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505201628246_InitFeedbacksTable.resx">
+      <DependentUpon>202505201628246_InitFeedbacksTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
