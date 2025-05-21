@@ -7,7 +7,7 @@ using eUseControl.Domain.Entities.BaseEntities;
 
 namespace eUseControl.Domain.Entities
 {
-    public class FeedbackDbTable : BaseEntity
+    public class FeedbackDbTable
     {
        public string UserName { get; set; }
        public string Email {  get; set; }

@@ -7,7 +7,7 @@ using eUseControl.Domain.Entities.BaseEntities;
 
 namespace eUseControl.Domain.Entities.Discount
 {
-    public class NewDiscountDto : BaseEntity
+    public class NewDiscountDto
     {
         public string DiscountCode { get; set; }
         public int DiscountPercentage { get; set; }
