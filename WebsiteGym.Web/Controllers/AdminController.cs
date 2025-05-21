@@ -80,7 +80,7 @@ namespace WebsiteGym.Web.Controllers
                     }
                     else
                     {
-                         // Failed to delete user
+                       
                          TempData["ErrorMessage"] = "Failed to delete user.";
                          return RedirectToAction("ListOfUsers");
                     }
@@ -263,19 +263,12 @@ namespace WebsiteGym.Web.Controllers
                     Details = existing.Details
                };
 
-               Debug.WriteLine("=== Received MembershipViewModel ===");
-               Debug.WriteLine($"Id: {model.MembershipId}");
-               Debug.WriteLine($"Name: {model.MembershipName}");
-               Debug.WriteLine($"Price: {model.Price}");
-               Debug.WriteLine($"Details: {model.Details}");
                return View(model);
           }
 
           [HttpPost]
           public ActionResult EditMembership(MembershipViewModel membership)
           {
-
-
                Debug.WriteLine("=== Received MembershipViewModel ===");
                Debug.WriteLine($"Id: {membership.MembershipId}");
                Debug.WriteLine($"Name: {membership.MembershipName}");
