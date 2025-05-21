@@ -216,6 +216,10 @@ namespace WebsiteGym.Web.Controllers
           [HttpPost]
           public ActionResult ManageMemberships(MembershipViewModel model)
           {
+               if (Session["UserRole"].ToString() != "Admin")
+               {
+                    return RedirectToAction("Index", "Home");
+               } else { 
                if (!ModelState.IsValid)
                {
                     model.Memberships = _membership.GetAllMemberships();
@@ -239,6 +243,7 @@ namespace WebsiteGym.Web.Controllers
                model.Memberships = _membership.GetAllMemberships();
 
                return View(model);
+               }
           }
 
 
