@@ -199,14 +199,20 @@ namespace WebsiteGym.Web.Controllers
 
           public ActionResult ManageMemberships()
           {
-               var model = new MembershipViewModel
+               if (Session["UserRole"].ToString() == "Admin")
                {
-                    Memberships = _membership.GetAllMemberships()
-               };
+                    var model = new MembershipViewModel
+                    {
+                         Memberships = _membership.GetAllMemberships()
+                    };
 
-               return View(model);
+                    return View(model);
+               }
+               else
+               {
+                    return RedirectToAction("Index", "Home");
+               }
           }
-
           [HttpPost]
           public ActionResult ManageMemberships(MembershipViewModel model)
           {
