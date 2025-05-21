@@ -62,11 +62,11 @@ namespace eUseControl.BusinessLogic.Core
             }
         }
 
-        public void EditMembership(NewMembershipDto membership)
+        public bool EditMembership(NewMembershipDto membership)
         {
             if (membership.Id < 0)
             {
-                return;
+                return false;
             }
 
             using (var context = new MembershipContext())
@@ -80,20 +80,24 @@ namespace eUseControl.BusinessLogic.Core
                     membershipToEdit.Details = membership.details;
 
                     context.SaveChanges();
-                }
+                    return true;
+                 } else 
+                 { 
+                         return false; 
+                 }
             }
         }
 
-        public MDbTable GetMembershipById(NewMembershipDto membership)
+        public MDbTable GetMembershipById(int Id)
         {
-            if (membership.Id < 0)
+            if (Id < 0)
             {
                 return null;
             }
 
             using (var context = new MembershipContext())
             {
-                return context.Memberships.FirstOrDefault(m => m.Id == membership.Id);
+                return context.Memberships.FirstOrDefault(m => m.Id == Id);
             }
         }
 
@@ -275,5 +279,14 @@ namespace eUseControl.BusinessLogic.Core
         {
             return coachList;
         }
+
+          public List<MDbTable> GetTop3Memberships()
+          {
+               using (var context = new MembershipContext())
+               {
+                    return context.Memberships.Take(3).ToList();
+               }
+          }
+
     }
 }

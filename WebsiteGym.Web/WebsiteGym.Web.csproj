@@ -155,6 +155,7 @@
     <Content Include="Views\Account\UserDashboard.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\EditUserProfile.cshtml" />
     <None Include="Views\Admin\ManageDiscountCodes.cshtml" />
   </ItemGroup>
   <ItemGroup>

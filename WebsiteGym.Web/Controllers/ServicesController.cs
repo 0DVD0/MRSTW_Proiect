@@ -10,17 +10,17 @@ namespace WebsiteGym.Web.Controllers
     {
         public ActionResult PersonalTraining()
         {
-            return View("PersonalTraining");
+            return View();
         }
 
         public ActionResult GroupPrograms()
         {
-            return View("GroupPrograms");
+            return View();
         }
 
         public ActionResult NutritionCoaching()
         {
-            return View("NutritionCoaching");
+            return View();
         }
     }
 }

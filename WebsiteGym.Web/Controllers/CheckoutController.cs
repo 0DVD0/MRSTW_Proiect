@@ -138,24 +138,6 @@ namespace WebsiteGym.Web.Controllers
                     model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
                     return View(model);
             }
-
-               //if (!string.IsNullOrEmpty(model.DiscountCode))
-               //{
-               //    var discount = _discountCodeService.GetAllDiscountCodes()
-               //                      .FirstOrDefault(d => d.DiscountCode.Equals(model.DiscountCode, StringComparison.OrdinalIgnoreCase));
-               //    if (discount != null)
-               //    {
-               //        model.TotalPrice -= (model.TotalPrice * discount.DiscountPercentage / 100m);
-               //    }
-               //    else
-               //    {
-               //       ModelState.AddModelError("", "Invalid discount code.");
-               //       model.AvailableMemberships = _membership.GetAllMemberships();
-               //       model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
-               //       return View(model);
-               //    }
-               //  }
-
               
                var newOrder = new ODbTable
             {
@@ -171,7 +153,7 @@ namespace WebsiteGym.Web.Controllers
 
             if (!created)
             {
-                ModelState.AddModelError("", "Could not create order.");
+                    ModelState.AddModelError("", "Could not create order.");
                     model.AvailableMemberships = _membership.GetAllMemberships();
                     model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
                     return View(model);
@@ -185,6 +167,9 @@ namespace WebsiteGym.Web.Controllers
                          MembershipExperationDate = DateTime.Now.AddMonths(model.MembershipDuration),
                          MembershipPurchaseDate = DateTime.Now,
                     };
+                    string qrText = $"User:{userId}|Membership:{model.MembershipName}|Expires:{DateTime.Now.AddMonths(model.MembershipDuration):yyyy-MM-dd}";
+                    byte[] qrCode = _userServices.GenerateQrCode(qrText);
+                    newUserMembership.QrCodeImage = qrCode;
 
                     var newMembershipId = _userServices.SaveUserMembership(newUserMembership);
 

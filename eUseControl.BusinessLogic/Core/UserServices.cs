@@ -155,5 +155,71 @@ namespace eUseControl.BusinessLogic.Core
                     }
                }
           }
+
+          public byte[] GenerateQrCode(string qrText)
+          {
+               var helper = new CheckoutHelper();
+               return helper.GenerateQrCode(qrText);
+          }
+
+          public bool RemoveUserMembership(int id)
+          {
+               using (var context = new UserContext())
+               {
+                    var userMembership = context.UserMemberships.FirstOrDefault(u => u.Id == id);
+                    if (userMembership != null)
+                    {
+                         context.UserMemberships.Remove(userMembership);
+                         context.SaveChanges();
+                         return true;
+                    }
+                    else
+                    {
+                         return false;
+                    }
+               }
+          }
+
+          public int GetTotalUsers()
+          {
+               using (var context = new UserContext())
+               {
+                    return context.Users.Count();
+               }
+          }
+
+          public int GetTotalActiveMemberships()
+          {
+               using (var context = new UserContext())
+               {
+                    return context.Users.Count(u => u.MembershipStatus == true);
+               }
+          }
+
+          public List<User> GetAllUsers()
+          {
+               using (var context = new UserContext())
+               {
+                    return context.Users.ToList();
+               }
+          }
+
+          public bool RemoveUserById(int id)
+          {
+               using (var context = new UserContext())
+               {
+                    var user = context.Users.FirstOrDefault(u => u.Id == id);
+                    if (user != null)
+                    {
+                         context.Users.Remove(user);
+                         context.SaveChanges();
+                         return true;
+                    }
+                    else
+                    {
+                         return false;
+                    }
+               }
+          }
      }
 }

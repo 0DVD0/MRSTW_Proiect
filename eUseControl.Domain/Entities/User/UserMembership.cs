@@ -17,5 +17,7 @@ namespace eUseControl.Domain.Entities.User
           public DateTime MembershipExperationDate { get; set; }
           [Required]
           public DateTime MembershipPurchaseDate { get; set; }
+
+          public byte[] QrCodeImage { get; set; }
      }
 }

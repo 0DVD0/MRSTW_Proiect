@@ -10,6 +10,14 @@ namespace WebsiteGym.Web.Controllers
 {
      public class AccountController : Controller
      {
+          private readonly IUserServices _userServices;
+
+          public AccountController()
+          {
+               var bl = new BussinesLogic();
+               _userServices = bl.GetUserApi();
+          }
+
           public ActionResult UserDashboard()
           {
                if (Session["UserRole"]?.ToString() == "Admin")
@@ -19,14 +27,21 @@ namespace WebsiteGym.Web.Controllers
                else if (Session["UserRole"]?.ToString() == "User")
                {
                     int userId = (int)Session["UserId"];
-                    var userService = new UserServices();
-                    var user = userService.GetUserById(userId);
+     
+                    var user = _userServices.GetUserById(userId);
                     UserMembership userMembership = null;
                     if (user != null)
                     {
                          if (user.UserMembershipID != null && user.MembershipStatus)
                          {
-                              userMembership = userService.GetUserMembershipById((int)user.UserMembershipID);
+                              userMembership = _userServices.GetUserMembershipById((int)user.UserMembershipID);
+                              if (userMembership != null && userMembership.MembershipExperationDate.Date <= DateTime.Now)
+                              {
+                                   _userServices.RemoveUserMembership(userMembership.Id);
+                                   user.UserMembershipID = null;
+                                   user.MembershipStatus = false;
+                                   userMembership = null;
+                              }
                          }
                          var model = new UserDashDto
                          {
@@ -37,6 +52,7 @@ namespace WebsiteGym.Web.Controllers
                               MembershipExpiration = userMembership?.MembershipExperationDate,
                               MembershipType = userMembership?.MembershipType,
                               MembershipPurchaseDate = userMembership?.MembershipPurchaseDate,
+                              QrCodeImage = userMembership?.QrCodeImage,
                          };
                          return View(model);
                     }
@@ -73,8 +89,7 @@ namespace WebsiteGym.Web.Controllers
 
                     };
 
-                    var userService = new UserServices();
-                    bool result = userService.RegisterUser(user);
+                    bool result = _userServices.RegisterUser(user);
 
                     if (result)
                     {
@@ -103,8 +118,7 @@ namespace WebsiteGym.Web.Controllers
                          Name = model.Login.UserName,
                          Password = model.Login.Password,
                     };
-                    var userService = new UserServices();
-                    var foundUser = userService.LoginUser(user);
+                    var foundUser = _userServices.LoginUser(user);
                     if (foundUser != null)
                     {
                          Session["UserId"] = foundUser.Id;
@@ -137,8 +151,7 @@ namespace WebsiteGym.Web.Controllers
           [HttpPost]
           public ActionResult ForgotPassword(string email)
           {
-               var userService = new UserServices();
-               var user = userService.GetUserByEmail(email);
+              var user = _userServices.GetUserByEmail(email);
                if (user != null)
                {
                     return RedirectToAction("ResetPassword", new { email });
@@ -158,11 +171,10 @@ namespace WebsiteGym.Web.Controllers
           [HttpPost]
           public ActionResult ResetPassword(string email, string newPassword)
           {
-               var userService = new UserServices();
-               var user = userService.GetUserByEmail(email);
+              var user = _userServices.GetUserByEmail(email);
                if (user != null)
                {
-                    var passwordReseted = userService.UpdateUserPassword(user, newPassword);
+                    var passwordReseted = _userServices.UpdateUserPassword(user, newPassword);
                     if (passwordReseted)
                     {
                          if (Session == null)
@@ -183,6 +195,22 @@ namespace WebsiteGym.Web.Controllers
                     ModelState.AddModelError("", "Email not found");
                     return View();
                }
+          }
+
+          public ActionResult EditUserProfile()
+          {
+               if (Session == null) {
+
+                    return RedirectToAction("AuthPage", "Home");
+
+               } else if (Session["UserRole"].ToString() == "Admin"){
+                    return RedirectToAction("AdminDashboard", "Admin");
+               } else {  
+                    
+                    return View();
+               }
+
+                   
           }
      }
 }

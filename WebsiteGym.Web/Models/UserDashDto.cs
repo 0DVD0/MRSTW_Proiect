@@ -16,6 +16,7 @@ namespace WebsiteGym.Web.Models
           public DateTime? MembershipExpiration { get; set; }
           public string MembershipType { get; set; }
           public DateTime? MembershipPurchaseDate { get; set; }
+          public byte[] QrCodeImage { get; set; } 
           public int? RemainingDays
           {
                get

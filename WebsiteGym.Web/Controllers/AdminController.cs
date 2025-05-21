@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -8,302 +9,306 @@ using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
 using eUseControl.Domain.Entities.Discount;
 using eUseControl.Domain.Entities.Membership;
+using Microsoft.Ajax.Utilities;
 using WebsiteGym.Web.Models;
 
 
 namespace WebsiteGym.Web.Controllers
 {
-    public class AdminController : Controller
-    {
+     public class AdminController : Controller
+     {
 
-        private readonly IOrderApi _order;
-        private readonly IMembershipApi _membership;
-        private readonly IDiscountCode _discount;
+          private readonly IOrderApi _order;
+          private readonly IMembershipApi _membership;
+          private readonly IDiscountCode _discount;
+          private readonly IUserServices _userServices;
 
-        private readonly UserContext _userContext;
-        private readonly MembershipContext _membershipContext;
+          public AdminController()
+          {
+               var bl = new BussinesLogic();
 
-        public AdminController()
-        {
-            var bl = new BussinesLogic();
+               _order = bl.GetOrderApi();
+               _membership = bl.GetMembershipApi();
+               _discount = bl.GetDiscountApi();
+               _userServices = bl.GetUserApi();
 
-            _order = bl.GetOrderApi();
-            _membership = bl.GetMembershipApi();
-            _discount = bl.GetDiscountApi();
+          }
 
-            _userContext = new UserContext(); 
-            _membershipContext = new MembershipContext();
-        }
-
-        public ActionResult AdminDash()
-        {
-               if (Session["UserRole"]?.ToString() == "Admin") { 
-                    using (var context = new UserContext())
+          public ActionResult AdminDash()
+          {
+               if (Session["UserRole"]?.ToString() == "Admin")
                {
-                    ViewBag.Users = context.Users.Count();
-                    ViewBag.ActiveMemberships = context.Users.Count(u => u.MembershipStatus == true);
-               }
-               
-                    return View(); 
+
+                    var userNumber = _userServices.GetTotalUsers();
+                    ViewBag.UsersNumber = userNumber;
+                    ViewBag.ActiveMemberships = _userServices.GetTotalActiveMemberships();
+
+                    return View();
                }
                else
                {
                     return RedirectToAction("Index", "Home");
                }
-              
-        }
+
+          }
+
           public ActionResult ListOfUsers()
           {
                if (Session["UserRole"].ToString() == "Admin")
                {
-                    using (var context = new UserContext())
-                    {
-                         var users = context.Users.ToList();
-                         ViewBag.Users = users;
-                    }
-               return View();
-               } 
-               else 
-               {  
+                    var users = _userServices.GetAllUsers();
+                    ViewBag.Users = users;
+
+                    return View();
+               }
+               else
+               {
                     return RedirectToAction("Index", "Home");
                }
-                   
+
           }
 
           public ActionResult DeleteUser(int id)
           {
-               using (var context = new UserContext())
+               var user = _userServices.GetUserById(id);
+               if (user != null)
                {
-                    var user = context.Users.FirstOrDefault(u => u.Id == id);
-                    if (user != null)
+                    var success = _userServices.RemoveUserById(id);
+                    if (success)
                     {
-                         context.Users.Remove(user);
-                         context.SaveChanges();
+                         return RedirectToAction("ListOfUsers");
+                    }
+                    else
+                    {
+                         // Failed to delete user
+                         TempData["ErrorMessage"] = "Failed to delete user.";
+                         return RedirectToAction("ListOfUsers");
                     }
                }
-               return RedirectToAction("ListOfUsers");
+               else
+               {
+                    TempData["ErrorMessage"] = "User not found.";
+                    return RedirectToAction("ListOfUsers");
+               }
+
+
           }
 
-        // TODO: Users table trebuie sa aiba MembershipId, ca sa-l putem afisa in profilul sau
+          // TODO: Users table trebuie sa aiba MembershipId, ca sa-l putem afisa in profilul sau
+
+          //public ActionResult ListOfActiveMemberships()
+          //{
+          //    var activeMemberships = (from user in _userContext.Users
+          //                             join membership in _membershipContext.Memberships on user.MembershipId equals membership.Id
+          //                             where user.MembershipStatus == 1
+          //                             select new ActiveMembershipViewModel
+          //                             {
+          //                                 MembershipId = membership.Id,
+          //                                 UserName = user.UserName,
+          //                                 MembershipName = membership.MembershipName,
+          //                                 Price = membership.Price,
+          //                                 Details = membership.Details
+          //                             }).ToList();
+
+          //    return View(activeMemberships);
+          //}
+
+
+          public ActionResult ManageDiscountCodes()
+          {
+
+               var model = new DiscountViewModel
+               {
+                    DiscountCodes = _discount.GetAllDiscountCodes()
+               };
+
+               return View(model);
+
+          }
+
+          [HttpPost]
+          public ActionResult ManageDiscountCodes(DiscountViewModel model)
+          {
+               if (ModelState.IsValid)
+               {
+                    var dto = new NewDiscountDto
+                    {
+                         DiscountCode = model.DiscountCode,
+                         DiscountPercentage = (int)model.DiscountPercentage
+                    };
+
+                    _discount.CreateDiscountCode(dto);
+
+                    ModelState.Clear();
+                    model.DiscountCode = string.Empty;
+                    model.DiscountPercentage = null;
+               }
+
+               model.DiscountCodes = _discount.GetAllDiscountCodes();
+
+               return View(model);
+          }
+
+          [HttpGet]
+          public ActionResult EditDiscountCode(int id)
+          {
+               var discountCode = _discount.GetDiscountCodeById(new NewDiscountDto { Id = id });
+               if (discountCode == null)
+               {
+                    return HttpNotFound();
+               }
+
+               var model = new DiscountViewModel
+               {
+                    Id = discountCode.Id,
+                    DiscountCode = discountCode.DiscountCode,
+                    DiscountPercentage = discountCode.DiscountPercentage,
+                    DiscountCodes = _discount.GetAllDiscountCodes()
+               };
+
+               return View("ManageDiscountCodes", model);
+          }
+
+          [HttpPost]
+          public ActionResult EditDiscountCode(DiscountViewModel model)
+          {
+               if (ModelState.IsValid)
+               {
+                    _discount.EditDiscountCode(new NewDiscountDto
+                    {
+                         Id = model.Id,
+                         DiscountCode = model.DiscountCode,
+                         DiscountPercentage = (int)model.DiscountPercentage,
+                    });
+
+                    return RedirectToAction("ManageDiscountCodes");
+               }
+
+               model.DiscountCodes = _discount.GetAllDiscountCodes();
+               return View("ManageDiscountCodes", model);
+          }
+
+          public ActionResult DeleteDiscountCode(int id)
+          {
+               _discount.RemoveDiscountCode(new NewDiscountDto { Id = id });
+
+               return RedirectToAction("ManageDiscountCodes");
+          }
+
 
-        //public ActionResult ListOfActiveMemberships()
-        //{
-        //    var activeMemberships = (from user in _userContext.Users
-        //                             join membership in _membershipContext.Memberships on user.MembershipId equals membership.Id
-        //                             where user.MembershipStatus == 1
-        //                             select new ActiveMembershipViewModel
-        //                             {
-        //                                 MembershipId = membership.Id,
-        //                                 UserName = user.UserName,
-        //                                 MembershipName = membership.MembershipName,
-        //                                 Price = membership.Price,
-        //                                 Details = membership.Details
-        //                             }).ToList();
 
-        //    return View(activeMemberships);
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public ActionResult ManageDiscountCodes()
-        {
-
-            var model = new DiscountViewModel
-            {
-                DiscountCodes = _discount.GetAllDiscountCodes()
-            };
-
-            return View(model);
-
-        }
-
-        [HttpPost]
-        public ActionResult ManageDiscountCodes(DiscountViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var dto = new NewDiscountDto
-                {
-                    DiscountCode = model.DiscountCode,
-                    DiscountPercentage = (int)model.DiscountPercentage
-                };
-
-                _discount.CreateDiscountCode(dto);
-
-                ModelState.Clear();
-                model.DiscountCode = string.Empty;
-                model.DiscountPercentage = null;
-            }
-
-            model.DiscountCodes = _discount.GetAllDiscountCodes();
-
-            return View(model);
-        }
-
-        [HttpGet]
-        public ActionResult EditDiscountCode(int id)
-        {
-            var discountCode = _discount.GetDiscountCodeById(new NewDiscountDto { Id = id });
-            if (discountCode == null)
-            {
-                return HttpNotFound();
-            }
-
-            var model = new DiscountViewModel
-            {
-                Id = discountCode.Id,
-                DiscountCode = discountCode.DiscountCode,
-                DiscountPercentage = discountCode.DiscountPercentage,
-                DiscountCodes = _discount.GetAllDiscountCodes()
-            };
-
-            return View("ManageDiscountCodes", model);
-        }
-
-        [HttpPost]
-        public ActionResult EditDiscountCode(DiscountViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                _discount.EditDiscountCode(new NewDiscountDto
-                {
-                    Id = model.Id,
-                    DiscountCode = model.DiscountCode,
-                    DiscountPercentage = (int)model.DiscountPercentage,
-                });
-
-                return RedirectToAction("ManageDiscountCodes");
-            }
-
-            model.DiscountCodes = _discount.GetAllDiscountCodes();
-            return View("ManageDiscountCodes", model);
-        }
-
-        public ActionResult DeleteDiscountCode(int id)
-        {
-            _discount.RemoveDiscountCode(new NewDiscountDto { Id = id });
-
-            return RedirectToAction("ManageDiscountCodes");
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public ActionResult ManageMemberships()
-        {
-            var model = new MembershipViewModel
-            {
-                Memberships = _membership.GetAllMemberships()
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult ManageMemberships(MembershipViewModel model)
-        {
-            if (!ModelState.IsValid)
-            { 
-                model.Memberships = _membership.GetAllMemberships(); 
-                return View(model);
-            }
-
-            var dto = new NewMembershipDto
-            {
-                membershipName = model.MembershipName,
-                price = (decimal)model.Price,
-                details = model.Details
-            };
-
-            _membership.CreateMembership(dto);
-
-            ModelState.Clear();
-            model.MembershipName = string.Empty;
-            model.Price = null;
-            model.Details = string.Empty;
-
-            model.Memberships = _membership.GetAllMemberships();
-
-            return View(model);
-        }
-
-
-        [HttpGet]
-        public ActionResult EditMembership(int id)
-        {
-            var dto = new NewMembershipDto { Id = id };
-            var existing = _membership.GetMembershipById(dto);
-
-            if (existing == null)
-                return HttpNotFound();
-
-            var model = new MembershipViewModel
-            {
-                Id = existing.Id,
-                MembershipName = existing.MembershipName,
-                Price = existing.Price,
-                Details = existing.Details
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult EditMembership(NewMembershipDto membership)
-        {
-            if (membership.Id <= 0)
-            {
-                return RedirectToAction("ManageMemberships");
-            }
-
-            using (var context = new MembershipContext())
-            {
-                var membershipToEdit = context.Memberships.FirstOrDefault(m => m.Id == membership.Id);
-
-                if (membershipToEdit != null)
-                {
-                    membershipToEdit.MembershipName = membership.membershipName;
-                    membershipToEdit.Price = membership.price;
-                    membershipToEdit.Details = membership.details;
-
-                    context.SaveChanges();
-                }
-            }
-
-            return RedirectToAction("ManageMemberships");
-        }
-
-
-
-        public ActionResult DeleteMembership(int id)
-        {
-            _membership.RemoveMembership(new NewMembershipDto { Id = id }); 
-            return RedirectToAction("ManageMemberships");
-        }
-
-    }
+          public ActionResult ManageMemberships()
+          {
+               var model = new MembershipViewModel
+               {
+                    Memberships = _membership.GetAllMemberships()
+               };
+
+               return View(model);
+          }
+
+          [HttpPost]
+          public ActionResult ManageMemberships(MembershipViewModel model)
+          {
+               if (!ModelState.IsValid)
+               {
+                    model.Memberships = _membership.GetAllMemberships();
+                    return View(model);
+               }
+
+               var dto = new NewMembershipDto
+               {
+                    membershipName = model.MembershipName,
+                    price = (decimal)model.Price,
+                    details = model.Details
+               };
+
+               _membership.CreateMembership(dto);
+
+               ModelState.Clear();
+               model.MembershipName = string.Empty;
+               model.Price = null;
+               model.Details = string.Empty;
+
+               model.Memberships = _membership.GetAllMemberships();
+
+               return View(model);
+          }
+
+
+          [HttpGet]
+          public ActionResult EditMembership(int id)
+          {
+               var existing = _membership.GetMembershipById(id);
+
+               if (existing == null)
+                    return HttpNotFound();
+
+               var model = new MembershipViewModel
+               {
+                    MembershipId = existing.Id,
+                    MembershipName = existing.MembershipName,
+                    Price = existing.Price,
+                    Details = existing.Details
+               };
+
+               Debug.WriteLine("=== Received MembershipViewModel ===");
+               Debug.WriteLine($"Id: {model.MembershipId}");
+               Debug.WriteLine($"Name: {model.MembershipName}");
+               Debug.WriteLine($"Price: {model.Price}");
+               Debug.WriteLine($"Details: {model.Details}");
+               return View(model);
+          }
+
+          [HttpPost]
+          public ActionResult EditMembership(MembershipViewModel membership)
+          {
+
+
+               Debug.WriteLine("=== Received MembershipViewModel ===");
+               Debug.WriteLine($"Id: {membership.MembershipId}");
+               Debug.WriteLine($"Name: {membership.MembershipName}");
+               Debug.WriteLine($"Price: {membership.Price}");
+               Debug.WriteLine($"Details: {membership.Details}");
+
+               var dto = new NewMembershipDto
+               {
+                    Id = membership.MembershipId,
+                    membershipName = membership.MembershipName,
+                    price = membership.Price ?? 0, // Safe fallback
+                    details = membership.Details
+               };
+
+
+               var membershipFound = _membership.GetMembershipById(dto.Id);
+               if (membershipFound == null)
+               {
+                    ModelState.AddModelError("", "Membership not found.");
+                    return RedirectToAction("ManageMemberships");
+               }
+               else
+               {
+                    var Edited = _membership.EditMembership(dto);
+                    if (Edited)
+                    {
+                         return RedirectToAction("ManageMemberships");
+                    }
+                    else
+                    {
+                         ModelState.AddModelError("", "Failed to edit membership.");
+                         return RedirectToAction("ManageMemberships");
+                    }
+               }
+
+          }
+
+
+
+          public ActionResult DeleteMembership(int id)
+          {
+               _membership.RemoveMembership(new NewMembershipDto { Id = id });
+               return RedirectToAction("ManageMemberships");
+          }
+
+     }
 }

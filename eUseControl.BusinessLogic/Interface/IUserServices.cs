@@ -1,4 +1,6 @@
 ﻿using eUseControl.Domain.Entities.User;
+using System.CodeDom;
+using System.Collections.Generic;
 
 namespace eUseControl.BusinessLogic.Interface
 {
@@ -13,5 +15,11 @@ namespace eUseControl.BusinessLogic.Interface
         int? SaveUserMembership(UserMembership userMembership);
         bool UpdateUserMembership(int? userMembershipId, int? userId);
         bool UpdateUserPassword(User user, string newPassword);
+        byte[] GenerateQrCode(string qrText);
+        bool RemoveUserMembership(int id);
+        int GetTotalUsers();
+        int GetTotalActiveMemberships();
+        List<User> GetAllUsers();
+        bool RemoveUserById(int id);
      }
 }
