@@ -188,7 +188,7 @@ namespace eUseControl.BusinessLogic.Core
                }
           }
 
-          public int GetTotalActiveMemberships()
+          public int GetTotalNumberOfActiveMemberships()
           {
                using (var context = new UserContext())
                {
@@ -243,5 +243,14 @@ namespace eUseControl.BusinessLogic.Core
                     }
                }
           }
+
+        public List<UserMembership> GetUsersMemberships()
+        {
+            using (var context = new UserContext())
+            {
+                return context.UserMemberships.ToList();
+            }
+           
+        }
      }
 }

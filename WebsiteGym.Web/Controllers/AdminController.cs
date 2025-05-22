@@ -41,7 +41,7 @@ namespace WebsiteGym.Web.Controllers
 
                     var userNumber = _userServices.GetTotalUsers();
                     ViewBag.UsersNumber = userNumber;
-                    ViewBag.ActiveMemberships = _userServices.GetTotalActiveMemberships();
+                    ViewBag.ActiveMemberships = _userServices.GetTotalNumberOfActiveMemberships();
 
                     return View();
                }
@@ -54,7 +54,7 @@ namespace WebsiteGym.Web.Controllers
 
           public ActionResult ListOfUsers()
           {
-               if (Session["UserRole"].ToString() == "Admin")
+               if (Session["UserRole"]?.ToString() == "Admin")
                {
                     var users = _userServices.GetAllUsers();
                     ViewBag.Users = users;
@@ -67,6 +67,21 @@ namespace WebsiteGym.Web.Controllers
                }
 
           }
+
+          public ActionResult ListOfActiveMemberships()
+        {
+            if (Session["UserRole"]?.ToString() == "Admin")
+            {
+                var memberships = _userServices.GetUsersMemberships();
+                ViewBag.UserMemberships = memberships;
+
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
 
           public ActionResult DeleteUser(int id)
           {
@@ -199,7 +214,7 @@ namespace WebsiteGym.Web.Controllers
 
           public ActionResult ManageMemberships()
           {
-               if (Session["UserRole"].ToString() == "Admin")
+               if (Session["UserRole"]?.ToString() == "Admin")
                {
                     var model = new MembershipViewModel
                     {
@@ -216,7 +231,7 @@ namespace WebsiteGym.Web.Controllers
           [HttpPost]
           public ActionResult ManageMemberships(MembershipViewModel model)
           {
-               if (Session["UserRole"].ToString() != "Admin")
+               if (Session["UserRole"]?.ToString() != "Admin")
                {
                     return RedirectToAction("Index", "Home");
                } else { 

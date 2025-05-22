@@ -18,9 +18,10 @@ namespace eUseControl.BusinessLogic.Interface
         byte[] GenerateQrCode(string qrText);
         bool RemoveUserMembership(int id);
         int GetTotalUsers();
-        int GetTotalActiveMemberships();
+        int GetTotalNumberOfActiveMemberships();
         List<User> GetAllUsers();
         bool RemoveUserById(int id);
         bool UpdateUser(User user);
+        List<UserMembership> GetUsersMemberships();
      }
 }

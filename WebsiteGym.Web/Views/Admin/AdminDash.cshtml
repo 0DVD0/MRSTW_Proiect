@@ -34,18 +34,17 @@
                        </div>
                    </div>
                    <div class="col-md-3 col-sm-6 admin-card">
-                       <a href="@Url.Action("ListOfActiveMemberships", "Admin")" style="text-decoration: none;">
-                           <div class="stat-card bg-success text-white">
-                               <div class="stat-icon">
-                                   <i class="fas fa-id-card"></i>
-                               </div>
-                               <div class="stat-value">
-                                   <h2>@ViewBag.ActiveMemberships</h2>
-                               </div>
-                               <div class="stat-label">Active Memberships</div>
+                       <div class="stat-card bg-success text-white" style="text-decoration: none; cursor: default;">
+                           <div class="stat-icon">
+                               <i class="fas fa-id-card"></i>
                            </div>
-                       </a>
+                           <div class="stat-value">
+                               <h2>@ViewBag.ActiveMemberships</h2>
+                           </div>
+                           <div class="stat-label">Active Memberships</div>
+                       </div>
                    </div>
+
                    <div class="col-md-3 col-sm-6 admin-card">
                        <div class="stat-card bg-info text-white">
                            <div class="stat-icon">
@@ -81,39 +80,40 @@
                <h2 class="h4 mb-4">Website Management</h2>
                <div class="row">
                     <div class="col-md-4">
-                         <a href="@Url.Action("ManageServices", "Admin")" class="btn btn-primary website-mgmt-btn w-100">
-                              <i class="fas fa-dumbbell"></i> Manage Gym Services
+                         <a href="@Url.Action("ManageTrainers", "Admin")" class="btn btn-primary website-mgmt-btn w-100">
+                              <i class="fas fa-dumbbell"></i>  Manage Trainers
                          </a>
                     </div>
                     <div class="col-md-4">
-                         <a href="@Url.Action("ManageDiscountCodes", "Admin")" class="btn btn-success website-mgmt-btn w-100">
-                              <i class="fas fa-tags"></i> Manage Discount Codes
-                         </a>
+                        <a href="@Url.Action("ManageMemberships", "Admin")" class="btn btn-success website-mgmt-btn w-100">
+                            <i class="fas fa-tags"></i> Manage Membership Plans
+                        </a>
                     </div>
                     <div class="col-md-4">
-                         <a href="@Url.Action("ManageClasses", "Admin")" class="btn btn-info website-mgmt-btn w-100 text-white">
-                              <i class="fas fa-calendar-alt"></i> Manage Gym Classes
+                         <a href="@Url.Action("ManageDiscountCodes", "Admin")" class="btn btn-info website-mgmt-btn w-100 text-white">
+                              <i class="fas fa-calendar-alt"></i> Manage Discount Codes
                          </a>
                     </div>
                </div>
                <div class="row">
                     <div class="col-md-4">
-                         <a href="@Url.Action("ManageTrainers", "Admin")" class="btn btn-warning website-mgmt-btn w-100">
-                              <i class="fas fa-user-tie"></i> Manage Trainers
+                         <a href="@Url.Action("ListOfFeedbacks", "Admin")" class="btn btn-warning website-mgmt-btn w-100">
+                              <i class="fas fa-user-tie"></i> List of Feedbacks
                          </a>
                     </div>
                     <div class="col-md-4">
-                         <a href="@Url.Action("ManageContent", "Admin")" class="btn btn-danger website-mgmt-btn w-100">
-                              <i class="fas fa-edit"></i> Update Website Content
+                         <a href="@Url.Action("ListOfActiveMemberships", "Admin")" class="btn btn-danger website-mgmt-btn w-100">
+                              <i class="fas fa-edit"></i> List of Active Memberships
                          </a>
                     </div>
                     <div class="col-md-4">
-                         <a href="@Url.Action("Settings", "Admin")" class="btn btn-secondary website-mgmt-btn w-100">
-                              <i class="fas fa-cog"></i> Website Settings
+                         <a href="@Url.Action("ListOfUsers", "Admin")" class="btn btn-secondary website-mgmt-btn w-100">
+                              <i class="fas fa-cog"></i> List of Active Users
                          </a>
                     </div>
                </div>
           </div>
+
           <!-- Quick Actions -->
           <div class="admin-section">
                <h2 class="h4 mb-4">Quick Actions</h2>
@@ -126,17 +126,6 @@
                                    </div>
                                    <h3 class="h5">Manage Users</h3>
                                    <p class="text-muted">View and edit user accounts</p>
-                              </div>
-                         </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 admin-card">
-                         <a href="@Url.Action("ManageMemberships", "Admin")" class="text-decoration-none">
-                              <div class="action-card bg-light">
-                                   <div class="action-icon text-success">
-                                        <i class="fas fa-id-card"></i>
-                                   </div>
-                                   <h3 class="h5">Membership Plans</h3>
-                                   <p class="text-muted">Manage memberships</p>
                               </div>
                          </a>
                     </div>
