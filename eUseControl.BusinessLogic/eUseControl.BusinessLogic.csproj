@@ -129,6 +129,10 @@
     <Compile Include="Migrations\202505212043007_AddChangesToUser.Designer.cs">
       <DependentUpon>202505212043007_AddChangesToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505222049003_AddSpecialityToCoaches.cs" />
+    <Compile Include="Migrations\202505222049003_AddSpecialityToCoaches.designer.cs">
+      <DependentUpon>202505222049003_AddSpecialityToCoaches.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -195,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505212043007_AddChangesToUser.resx">
       <DependentUpon>202505212043007_AddChangesToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505222049003_AddSpecialityToCoaches.resx">
+      <DependentUpon>202505222049003_AddSpecialityToCoaches.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

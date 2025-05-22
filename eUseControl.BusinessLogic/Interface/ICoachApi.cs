@@ -9,7 +9,7 @@ namespace eUseControl.BusinessLogic.Interface
 {
     public interface ICoachApi
     {
-        void CreateCoach(string name, string surname, DateTime birthdate);
+        void CreateCoach(string name, string surname, DateTime birthdate, string speciality);
         void RemoveCoach(int coachId);
         Coach GetCoachById(int coachId);
         void UpdateCoach(int coachId, string name, string surname, DateTime birthdate);

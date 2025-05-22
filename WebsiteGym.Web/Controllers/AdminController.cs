@@ -23,6 +23,7 @@ namespace WebsiteGym.Web.Controllers
           private readonly IDiscountCode _discount;
           private readonly IUserServices _userServices;
           private readonly IFeedback _feedback;
+          private readonly ICoachApi _coach;
           public AdminController()
           {
                var bl = new BussinesLogic();
@@ -32,6 +33,7 @@ namespace WebsiteGym.Web.Controllers
                _discount = bl.GetDiscountApi();
                _userServices = bl.GetUserApi();
                _feedback = bl.GetFeedbackApi();
+               _coach = bl.GetCoachApi();
 
           }
 
@@ -329,5 +331,53 @@ namespace WebsiteGym.Web.Controllers
                return RedirectToAction("ManageMemberships");
           }
 
-     }
+
+          public ActionResult ManageCoaches()
+          {
+            if (Session["UserRole"]?.ToString() == "Admin")
+            {
+                var model = new CoachViewModel
+                {
+                    Coaches = _coach.GetAll()
+                };
+
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+          }
+
+
+        [HttpPost]
+        public ActionResult ManageCoaches(CoachViewModel model)
+        {
+
+            Debug.WriteLine("=== Received CoachViewModel ===");
+            Debug.WriteLine($"Name: {model.Name}");
+            Debug.WriteLine($"Surname: {model.Surname}");
+            Debug.WriteLine($"Birthdate: {model.Birthdate}");
+            Debug.WriteLine($"Speciality: {model.Speciality}");
+
+            if (Session["UserRole"]?.ToString() != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                if (!ModelState.IsValid)
+                {
+                    model.Coaches = _coach.GetAll();
+                    return View(model);
+                }
+
+                _coach.CreateCoach(model.Name, model.Surname, model.Birthdate, model.Speciality);
+
+                return RedirectToAction("ManageCoaches");
+
+            }
+        }
+
+    }
 }

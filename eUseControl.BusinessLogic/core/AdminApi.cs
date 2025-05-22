@@ -13,7 +13,7 @@ using eUseControl.Domain.Entities.Membership;
 
 namespace eUseControl.BusinessLogic.Core
 {
-    public class AdminApi : IMembershipApi, IDiscountCode
+    public class AdminApi : IMembershipApi, IDiscountCode, ICoachApi
     {
         private List<Coach> coachList = new List<Coach>();
 
@@ -195,7 +195,7 @@ namespace eUseControl.BusinessLogic.Core
             }
         }
 
-        public void CreateCoach(string name, string surname, DateTime birthdate)
+        public void CreateCoach(string name, string surname, DateTime birthdate, string speciality)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -216,10 +216,23 @@ namespace eUseControl.BusinessLogic.Core
             {
                 Name = name,
                 Surname = surname,
-                Birthdate = birthdate
+                Birthdate = birthdate,
+                Speciality = speciality
             };
 
-            coachList.Add(coach);
+            using (var context = new CoachContext())
+            {
+                Coach newCoach = new Coach()
+                {
+                    Name = coach.Name,
+                    Surname = coach.Surname,
+                    Birthdate = coach.Birthdate,
+                    Speciality = coach.Speciality
+                };
+
+                context.Coaches.Add(newCoach);
+                context.SaveChanges();
+            }
         }
 
         public void RemoveCoach(int coachId)
@@ -277,7 +290,10 @@ namespace eUseControl.BusinessLogic.Core
 
         public List<Coach> GetAll()
         {
-            return coachList;
+            using (var context = new CoachContext())
+            {
+                return context.Coaches.ToList();
+            }
         }
 
           public List<MDbTable> GetTop3Memberships()

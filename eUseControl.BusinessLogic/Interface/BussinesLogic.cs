@@ -28,5 +28,10 @@ namespace eUseControl.BusinessLogic.Interface
           {
                return new FeedbackAPI();
           }
+
+        public ICoachApi GetCoachApi()
+        {
+            return new AdminApi();
+        }
     }
 }
