@@ -9,6 +9,7 @@ namespace eUseControl.Domain.Entities.Discount
 {
     public class NewDiscountDto
     {
+          public int Id { get; set; }
         public string DiscountCode { get; set; }
         public int DiscountPercentage { get; set; }
     }

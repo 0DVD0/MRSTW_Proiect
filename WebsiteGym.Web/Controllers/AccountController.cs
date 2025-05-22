@@ -6,6 +6,8 @@ using eUseControl.Domain.Entities.User;
 using eUseControl.Domain.Enums;
 using System;
 using System.Runtime.Remoting.Messaging;
+using System.IO;
+using System.Web;
 namespace WebsiteGym.Web.Controllers
 {
      public class AccountController : Controller
@@ -53,6 +55,9 @@ namespace WebsiteGym.Web.Controllers
                               MembershipType = userMembership?.MembershipType,
                               MembershipPurchaseDate = userMembership?.MembershipPurchaseDate,
                               QrCodeImage = userMembership?.QrCodeImage,
+                              ProfilePicture = user.ProfilePicture,
+                              FullName = user.FullName,
+                              PhoneNumber = user.PhoneNumber,
                          };
                          return View(model);
                     }
@@ -197,20 +202,85 @@ namespace WebsiteGym.Web.Controllers
                }
           }
 
+          [HttpGet]
           public ActionResult EditUserProfile()
           {
                if (Session == null) {
 
                     return RedirectToAction("AuthPage", "Home");
 
-               } else if (Session["UserRole"].ToString() == "Admin"){
+               } else if (Session["UserRole"]?.ToString() == "Admin"){
+
                     return RedirectToAction("AdminDashboard", "Admin");
+
                } else {  
-                    
-                    return View();
+                    var user = _userServices.GetUserById((int)Session["UserId"]);
+                    if (user != null)
+                    {
+                         var model = new EditUserProfileDTO
+                         {
+                              Id = user.Id,
+                              UserName = user.Name,
+                              PhoneNumber = user.PhoneNumber,
+                              Email = user.Email,
+                              FullName = user.FullName,
+                         };
+                         return View(model);
+                    }
+                    else
+                    {
+                         ModelState.AddModelError("", "User not found");
+                         return RedirectToAction("AuthPage", "Home");
+                    }
                }
 
                    
+          }
+
+          [HttpPost]
+          public ActionResult EditUserProfile(EditUserProfileDTO model, HttpPostedFileBase ProfilePicture)
+          {
+               if (Session == null)
+               {
+                    return RedirectToAction("AuthPage", "Home");
+               }
+               else if (Session["UserRole"].ToString() == "Admin")
+               {
+                    return RedirectToAction("AdminDashboard", "Admin");
+               }
+               else
+               {
+                    var user = _userServices.GetUserById((int)Session["UserId"]);
+                    if (user != null)
+                    {
+                         user.Name = model.UserName;
+                         user.PhoneNumber = model.PhoneNumber;
+                         user.Email = model.Email;
+                         user.FullName = model.FullName;
+                         if (ProfilePicture != null && ProfilePicture.ContentLength > 0)
+                         {
+                              using (var binaryReader = new BinaryReader(ProfilePicture.InputStream))
+                              {
+                                   user.ProfilePicture = binaryReader.ReadBytes(ProfilePicture.ContentLength);
+                              }
+                         }
+                              bool result = _userServices.UpdateUser(user);
+                         if (result)
+                         {
+                              return RedirectToAction("UserDashboard");
+                         }
+                         else
+                         {
+                              ModelState.AddModelError("", "Failed to update profile");
+                              return View(model);
+                         }
+                    }
+                    else
+                    {
+                         ModelState.AddModelError("", "User not found");
+                         return RedirectToAction("AuthPage", "Home");
+                    }
+               }
           }
      }
 }

@@ -13,7 +13,7 @@ namespace eUseControl.BusinessLogic.Interface
         void CreateDiscountCode(NewDiscountDto discount);
         void RemoveDiscountCode(NewDiscountDto discount);
         void EditDiscountCode(NewDiscountDto discount);
-        DiscountDbTable GetDiscountCodeById(NewDiscountDto discount);
+        DiscountDbTable GetDiscountCodeById(int id);
         List<DiscountDbTable> GetAllDiscountCodes();
     }
 

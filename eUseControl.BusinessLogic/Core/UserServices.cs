@@ -221,5 +221,27 @@ namespace eUseControl.BusinessLogic.Core
                     }
                }
           }
+
+          public bool UpdateUser(User user)
+          {
+               using (var context = new UserContext())
+               {
+                    var userToUpdate = context.Users.FirstOrDefault(u => u.Id == user.Id);
+                    if (userToUpdate != null)
+                    {
+                         userToUpdate.Name = user.Name;
+                         userToUpdate.Email = user.Email;
+                         userToUpdate.FullName = user.FullName;
+                         userToUpdate.PhoneNumber = user.PhoneNumber;
+                         userToUpdate.ProfilePicture = user.ProfilePicture;
+                         context.SaveChanges();
+                         return true;
+                    }
+                    else
+                    {
+                         return false;
+                    }
+               }
+          }
      }
 }

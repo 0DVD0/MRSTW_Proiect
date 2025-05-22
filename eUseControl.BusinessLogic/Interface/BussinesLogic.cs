@@ -23,5 +23,10 @@ namespace eUseControl.BusinessLogic.Interface
         {
             return new AdminApi();
         }
+
+          public IFeedback GetFeedbackApi()
+          {
+               return new FeedbackAPI();
+          }
     }
 }

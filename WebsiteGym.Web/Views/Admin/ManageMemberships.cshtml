@@ -65,7 +65,7 @@
                                    <button type="button" class="btn btn-primary btn-sm edit-btn"
                                            data-id="@membership.Id"
                                            data-name="@membership.MembershipName"
-                                           data-price="@membership.Price.ToString().Replace(",", ".")"
+                                           data-price="@membership.Price"
                                            data-details="@membership.Details"
                                            data-bs-toggle="modal" data-bs-target="#editModal">
                                         Edit
@@ -133,13 +133,15 @@
           $(".edit-btn").click(function () {
                var id = $(this).data("id");
                var name = $(this).data("name");
-               var price = $(this).data("price");
+               var price = parseFloat($(this).data("price")) || 0;
                var details = $(this).data("details");
 
                $("#editMembershipForm").attr("action", "/Admin/EditMembership/" + id);
                $("#editId").val(id);
                $("#editMembershipName").val(name);
-               $("#editPrice").val(price);
+               if (price !== undefined && price !== null) {
+                    $("#editPrice").val(price.toString());
+               }
                $("#editDetails").val(details);
           });
      });

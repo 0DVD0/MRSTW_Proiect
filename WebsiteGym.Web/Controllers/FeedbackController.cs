@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using eUseControl.BusinessLogic.Interface;
 using System.Web.Mvc;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.Domain.Entities;
@@ -9,49 +10,52 @@ using WebsiteGym.Web.Models;
 
 namespace WebsiteGym.Web.Controllers
 {
-    public class FeedbackController : Controller
-    {
+     public class FeedbackController : Controller
+     {
 
-        private readonly FeedbackContext _feedback;
-        public FeedbackController()
-        {
-            _feedback = new FeedbackContext();
-        }
+          private readonly IFeedback _feedbackApi;
 
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
+          public FeedbackController()
+          {
+               var _bl = new BussinesLogic();
+               _feedbackApi = _bl.GetFeedbackApi();
+          }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateFeedback(FeedbackModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var entity = new FeedbackDbTable
+          public ActionResult Contact()
+          {
+               return View();
+          }
+
+          [HttpPost]
+          [ValidateAntiForgeryToken]
+          public ActionResult CreateFeedback(FeedbackModel model)
+          {
+               if (ModelState.IsValid) {
+                    FeedbackDbTable feedback = new FeedbackDbTable()
                     {
-                        UserName = model.UserName,
-                        Email = model.Email,
-                        FeedbackMessage = model.FeedbackMessage,
+                         UserName = model.UserName,
+                         Email = model.Email,
+                         FeedbackMessage = model.FeedbackMessage
                     };
 
-                    _feedback.Feedbacks.Add(entity);
-                    _feedback.SaveChanges();
-                    System.Diagnostics.Debug.WriteLine("alksamdlkadfnmleeeeeeeeeeee");
+                    var created = _feedbackApi.CreateFeedback(feedback);
+                    if (created)
+                    {
+                         return RedirectToAction("ThankYou");
+                    }
+                    else
+                    {
+                         ModelState.AddModelError("", "Failed to submit feedback.");
+                         return View(model);
+                    }
 
-                    return RedirectToAction("ThankYou", "Home");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "Error occured");
-                }
-            }
-            return View(model);
-        }
+               } else { 
+
+                    ModelState.AddModelError("", "Invalid feedback data.");
+               return View(model);
+               }
+          }
+     
 
         public ActionResult ThankYou()
         {

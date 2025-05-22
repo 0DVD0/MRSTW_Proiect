@@ -21,5 +21,6 @@ namespace eUseControl.BusinessLogic.Interface
         int GetTotalActiveMemberships();
         List<User> GetAllUsers();
         bool RemoveUserById(int id);
+        bool UpdateUser(User user);
      }
 }

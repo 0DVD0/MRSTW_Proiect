@@ -45,14 +45,14 @@ namespace eUseControl.BusinessLogic.Core
 
         public void RemoveMembership(NewMembershipDto membership)
         {
-            if (membership.Id < 0)
+            if (membership.membershipId < 0)
             {
                 return;
             }
 
             using (var context = new MembershipContext())
             {
-                var membershipToRemove = context.Memberships.FirstOrDefault(m => m.Id == membership.Id);
+                var membershipToRemove = context.Memberships.FirstOrDefault(m => m.Id == membership.membershipId);
 
                 if (membershipToRemove != null)
                 {
@@ -64,14 +64,14 @@ namespace eUseControl.BusinessLogic.Core
 
         public bool EditMembership(NewMembershipDto membership)
         {
-            if (membership.Id < 0)
+            if (membership.membershipId < 0)
             {
                 return false;
             }
 
             using (var context = new MembershipContext())
             {
-                var membershipToEdit = context.Memberships.FirstOrDefault(m => m.Id == membership.Id);
+                var membershipToEdit = context.Memberships.FirstOrDefault(m => m.Id == membership.membershipId);
 
                 if (membershipToEdit != null)
                 {
@@ -174,16 +174,16 @@ namespace eUseControl.BusinessLogic.Core
             }
         }
 
-        public DiscountDbTable GetDiscountCodeById(NewDiscountDto discount)
+        public DiscountDbTable GetDiscountCodeById(int Id)
         {
-            if (discount.Id < 0)
+            if (Id < 0)
             {
                 return null;
             }
 
             using (var context = new DiscountContext())
             {
-                return context.DiscountCodes.FirstOrDefault(d => d.Id == discount.Id);
+                return context.DiscountCodes.FirstOrDefault(d => d.Id == Id);
             }
         }
 

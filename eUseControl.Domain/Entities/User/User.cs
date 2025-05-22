@@ -29,6 +29,9 @@ namespace eUseControl.Domain.Entities.User
           public bool MembershipStatus { get; set; } = false;
           public DateTime ReggisterDateTime { get; set; }   
           public UserRoles Role { get; set; }
+          public string FullName { get; set; }
+          public string PhoneNumber { get; set; }
+          public byte[] ProfilePicture { get; set; }
      }
 
 }

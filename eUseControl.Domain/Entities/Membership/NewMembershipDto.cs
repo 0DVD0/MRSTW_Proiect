@@ -9,7 +9,8 @@ namespace eUseControl.Domain.Entities.Membership
 {
      public class NewMembershipDto
     {
-        public string membershipName { get; set; }
+          public int membershipId { get; set; }
+          public string membershipName { get; set; }
 
         public decimal price { get; set; }
 

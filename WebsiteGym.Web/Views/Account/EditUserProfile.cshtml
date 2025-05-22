@@ -1,19 +1,6 @@
-﻿@{
-     ViewBag.Title = "Edit User Information";
-     Layout = "~/Views/Shared/_Layout.cshtml";
-
-     // Sample user data - replace with actual data from your controller
-     var userId = 1;
-     var firstName = "John";
-     var lastName = "Doe";
-     var email = "john.doe@example.com";
-     var phoneNumber = "(555) 123-4567";
-     var address = "123 Main St";
-     var city = "Anytown";
-     var state = "CA";
-     var zipCode = "12345";
-     var dateOfBirth = new DateTime(1985, 6, 15);
-}
+﻿
+@using WebsiteGym.Web.Models;
+@model EditUserProfileDTO
 
 <head>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,26 +9,6 @@
 
 <div class="container py-5">
      <div class="row">
-          <div class="col-md-3">
-               <div class="card mb-4">
-                    <div class="card-body text-center">
-                         <div class="mb-3">
-                              <img src="https://via.placeholder.com/150" class="rounded-circle img-fluid" alt="Profile Picture">
-                         </div>
-                         <h5 class="card-title">@firstName @lastName</h5>
-                         <p class="text-muted">@email</p>
-                    </div>
-               </div>
-
-               <div class="list-group mb-4">
-                    <a href="@Url.Action("UserDashboard", "Account")" class="list-group-item list-group-item-action">
-                         <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
-                    </a>
-                    <a href="@Url.Action("Membership", "Home")" class="list-group-item list-group-item-action">
-                         <i class="fas fa-id-card mr-2"></i> Membership
-                    </a>
-               </div>
-          </div>
 
           <div class="col-md-9">
                <div class="card shadow">
@@ -53,134 +20,66 @@
                               <i class="fas fa-info-circle mr-2"></i> Each field can be updated individually by clicking the "Update" button next to it.
                          </div>
 
-                         <!-- First Name -->
-                         <div class="card mb-4">
-                              <div class="card-header">
-                                   <h5 class="mb-0">User Name</h5>
-                              </div>
-                              <div class="card-body">
-                                   <form action="@Url.Action("UpdateFirstName", "Account")" method="post" class="update-form">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="userId" value="@userId" />
+                         <form action="@Url.Action("EditUserProfile", "Account")" method="post" enctype="multipart/form-data">
+                              @Html.AntiForgeryToken()
+                              @Html.HiddenFor(m => m.Id)
 
-                                        <div class="form-row align-items-center">
-                                             <div class="col-md-8 mb-2 mb-md-0">
-                                                  <input type="text" class="form-control" name="firstName" value="@firstName" required>
-                                             </div>
-                                             <div class="col-md-4">
-                                                  <button type="submit" class="btn btn-primary btn-block">
-                                                       <i class="fas fa-save mr-2"></i> Update User Name
-                                                  </button>
-                                             </div>
-                                        </div>
-                                   </form>
+                              <div class="alert alert-info">
+                                   <i class="fas fa-info-circle mr-2"></i> You can update all fields below and click "Save Changes".
                               </div>
-                         </div>
 
-                         <!-- Last Name -->
-                         <div class="card mb-4">
-                              <div class="card-header">
-                                   <h5 class="mb-0">Full Name</h5>
+                              <!-- User Name -->
+                              <div class="card mb-4">
+                                   <div class="card-header"><h5 class="mb-0">User Name</h5></div>
+                                   <div class="card-body">
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", required = "required" })
+                                   </div>
                               </div>
-                              <div class="card-body">
-                                   <form action="@Url.Action("UpdateLastName", "Account")" method="post" class="update-form">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="userId" value="@userId" />
 
-                                        <div class="form-row align-items-center">
-                                             <div class="col-md-8 mb-2 mb-md-0">
-                                                  <input type="text" class="form-control" name="lastName" value="@lastName" required>
-                                             </div>
-                                             <div class="col-md-4">
-                                                  <button type="submit" class="btn btn-primary btn-block">
-                                                       <i class="fas fa-save mr-2"></i> Update Full Name
-                                                  </button>
-                                             </div>
-                                        </div>
-                                   </form>
+                              <!-- Full Name -->
+                              <div class="card mb-4">
+                                   <div class="card-header"><h5 class="mb-0">Full Name</h5></div>
+                                   <div class="card-body">
+                                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control"})
+                                   </div>
                               </div>
-                         </div>
 
-                         <!-- Email -->
-                         <div class="card mb-4">
-                              <div class="card-header">
-                                   <h5 class="mb-0">Email Address</h5>
+                              <!-- Email -->
+                              <div class="card mb-4">
+                                   <div class="card-header"><h5 class="mb-0">Email Address</h5></div>
+                                   <div class="card-body">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = "required" })
+                                   </div>
                               </div>
-                              <div class="card-body">
-                                   <form action="@Url.Action("UpdateEmail", "Account")" method="post" class="update-form">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="userId" value="@userId" />
 
-                                        <div class="form-row align-items-center">
-                                             <div class="col-md-8 mb-2 mb-md-0">
-                                                  <input type="email" class="form-control" name="email" value="@email" required>
-                                             </div>
-                                             <div class="col-md-4">
-                                                  <button type="submit" class="btn btn-primary btn-block">
-                                                       <i class="fas fa-save mr-2"></i> Update Email
-                                                  </button>
-                                             </div>
-                                        </div>
-                                        <small class="form-text text-muted mt-2">
-                                             <i class="fas fa-exclamation-triangle text-warning mr-1"></i>
-                                             Changing your email will require verification of the new address.
-                                        </small>
-                                   </form>
+                              <!-- Phone Number -->
+                              <div class="card mb-4">
+                                   <div class="card-header"><h5 class="mb-0">Phone Number</h5></div>
+                                   <div class="card-body">
+                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", type = "tel" })
+                                   </div>
                               </div>
-                         </div>
 
-                         <!-- Phone Number -->
-                         <div class="card mb-4">
-                              <div class="card-header">
-                                   <h5 class="mb-0">Phone Number</h5>
-                              </div>
-                              <div class="card-body">
-                                   <form action="@Url.Action("UpdatePhoneNumber", "UserAccount")" method="post" class="update-form">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="userId" value="@userId" />
-
-                                        <div class="form-row align-items-center">
-                                             <div class="col-md-8 mb-2 mb-md-0">
-                                                  <input type="tel" class="form-control" name="phoneNumber" value="@phoneNumber">
-                                             </div>
-                                             <div class="col-md-4">
-                                                  <button type="submit" class="btn btn-primary btn-block">
-                                                       <i class="fas fa-save mr-2"></i> Update Phone
-                                                  </button>
-                                             </div>
-                                        </div>
-                                   </form>
-                              </div>
-                         </div>
-
-                         <!-- Profile Picture -->
-                         <div class="card mb-4">
-                              <div class="card-header">
-                                   <h5 class="mb-0">Profile Picture</h5>
-                              </div>
-                              <div class="card-body">
-                                   <form action="@Url.Action("UpdateProfilePicture", "UserAccount")" method="post" enctype="multipart/form-data" class="update-form">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="userId" value="@userId" />
-
+                              <!-- Profile Picture -->
+                              <div class="card mb-4">
+                                   <div class="card-header"><h5 class="mb-0">Profile Picture</h5></div>
+                                   <div class="card-body">
                                         <div class="form-group">
                                              <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="profilePicture" name="profilePicture" accept="image/*">
-                                                  <label class="custom-file-label" for="profilePicture">Choose file</label>
+                                                  <input type="file" class="custom-file-input" id="ProfilePicture" name="ProfilePicture" accept="image/*">
+                                                  <label class="custom-file-label" for="ProfilePicture">Choose file</label>
                                              </div>
-                                             <small class="form-text text-muted">
-                                                  Accepted formats: JPG, PNG, GIF. Max size: 5MB.
-                                             </small>
+                                             <small class="form-text text-muted">Accepted formats: JPG, PNG, GIF. Max size: 5MB.</small>
                                         </div>
-
-                                        <div class="text-right">
-                                             <button type="submit" class="btn btn-primary">
-                                                  <i class="fas fa-upload mr-2"></i> Upload New Picture
-                                             </button>
-                                        </div>
-                                   </form>
+                                   </div>
                               </div>
-                         </div>
+
+                              <div class="text-right">
+                                   <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-save mr-2"></i> Save Changes
+                                   </button>
+                              </div>
+                         </form>
                     </div>
                </div>
           </div>
@@ -189,55 +88,13 @@
 
 @section Scripts {
      <script>
-        $(document).ready(function() {
-            // Update file input label with selected filename
-            $('.custom-file-input').on('change', function() {
-                var fileName = $(this).val().split('\\').pop();
-                $(this).next('.custom-file-label').html(fileName);
-            });
+          $(document).ready(function () {
+               // Update file input label with selected filename
+               $('.custom-file-input').on('change', function () {
+                    var fileName = $(this).val().split('\\').pop();
+                    $(this).next('.custom-file-label').html(fileName);
+               });
 
-            // Handle form submissions with AJAX
-            $('.update-form').on('submit', function(e) {
-                e.preventDefault();
-                var form = $(this);
-                var url = form.attr('action');
-                var formData = new FormData(this);
-
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        // Show success message
-                        var fieldName = form.closest('.card').find('.card-header h5').text();
-                        showNotification('Success', fieldName + ' updated successfully!', 'success');
-                    },
-                    error: function(error) {
-                        // Show error message
-                        showNotification('Error', 'Failed to update information. Please try again.', 'danger');
-                    }
-                });
-            });
-
-            // Function to show notifications
-            function showNotification(title, message, type) {
-                var notification = $('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
-                                    '<strong>' + title + ':</strong> ' + message +
-                                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                                    '<span aria-hidden="true">&times;</span>' +
-                                    '</button>' +
-                                    '</div>');
-
-                // Insert notification at the top of the card body
-                $('.card-body').first().prepend(notification);
-
-                // Auto-dismiss after 5 seconds
-                setTimeout(function() {
-                    notification.alert('close');
-                }, 5000);
-            }
-        });
+          });
      </script>
 }

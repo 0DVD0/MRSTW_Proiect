@@ -17,14 +17,6 @@ namespace WebsiteGym.Web.Controllers
         private readonly IMembershipApi _membership;
         private readonly IDiscountCode _discountCodeService;
 
-        public CheckoutController(IUserServices userServices, IOrderApi order, IMembershipApi membership, IDiscountCode discountCodeService)
-        {
-            _userServices = userServices;
-            _order = order;
-            _membership = membership;
-            _discountCodeService = discountCodeService;
-        }
-
         public CheckoutController()
         {
             var bl = new BussinesLogic();

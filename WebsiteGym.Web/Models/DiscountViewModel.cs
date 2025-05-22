@@ -8,8 +8,9 @@ using eUseControl.Domain.Entities.BaseEntities;
 
 namespace WebsiteGym.Web.Models
 {
-    public class DiscountViewModel : BaseEntity
+    public class DiscountViewModel
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = "Discount Code is required.")]
         [Display(Name = "Discount Code")]
         public string DiscountCode { get; set; }

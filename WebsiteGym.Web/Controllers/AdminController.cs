@@ -152,7 +152,7 @@ namespace WebsiteGym.Web.Controllers
           [HttpGet]
           public ActionResult EditDiscountCode(int id)
           {
-               var discountCode = _discount.GetDiscountCodeById(new NewDiscountDto { Id = id });
+               var discountCode = _discount.GetDiscountCodeById(id);
                if (discountCode == null)
                {
                     return HttpNotFound();
@@ -277,14 +277,14 @@ namespace WebsiteGym.Web.Controllers
 
                var dto = new NewMembershipDto
                {
-                    Id = membership.MembershipId,
+                    membershipId = membership.MembershipId,
                     membershipName = membership.MembershipName,
                     price = membership.Price ?? 0, // Safe fallback
                     details = membership.Details
                };
 
 
-               var membershipFound = _membership.GetMembershipById(dto.Id);
+               var membershipFound = _membership.GetMembershipById(dto.membershipId);
                if (membershipFound == null)
                {
                     ModelState.AddModelError("", "Membership not found.");
@@ -310,7 +310,7 @@ namespace WebsiteGym.Web.Controllers
 
           public ActionResult DeleteMembership(int id)
           {
-               _membership.RemoveMembership(new NewMembershipDto { Id = id });
+               _membership.RemoveMembership(new NewMembershipDto { membershipId = id });
                return RedirectToAction("ManageMemberships");
           }
 
