@@ -153,6 +153,7 @@
     <Compile Include="Models\UserRegData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Views\Admin\ManageCoaches.cshtml" />
+    <Content Include="Views\Admin\ListOfFeedbacks.cshtml" />
     <None Include="Views\Feedback\ThankYou.cshtml" />
     <Content Include="Views\Admin\ListOfActiveMemberships.cshtml" />
     <Content Include="Views\Account\UserDashboard.cshtml" />

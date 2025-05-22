@@ -331,17 +331,14 @@ namespace WebsiteGym.Web.Controllers
                return RedirectToAction("ManageMemberships");
           }
 
-
+          [HttpGet]
           public ActionResult ManageCoaches()
           {
             if (Session["UserRole"]?.ToString() == "Admin")
             {
-                var model = new CoachViewModel
-                {
-                    Coaches = _coach.GetAll()
-                };
+                    ViewBag.Coaches = _coach.GetAll();
 
-                return View(model);
+                return View();
             }
             else
             {
@@ -379,5 +376,24 @@ namespace WebsiteGym.Web.Controllers
             }
         }
 
-    }
+          public ActionResult DeleteCoach(int id)
+          {
+               _coach.RemoveCoach(id);
+               return RedirectToAction("ManageCoaches");
+          }
+
+          public ActionResult ListOfFeedbacks()
+          {
+               if (Session["UserRole"]?.ToString() == "Admin")
+               {
+                    var feedbacks = _feedback.GetAllFeedbacks();
+                    ViewBag.Feedbacks = feedbacks;
+                    return View();
+               }
+               else
+               {
+                    return RedirectToAction("Index", "Home");
+               }
+          }
+     }
 }

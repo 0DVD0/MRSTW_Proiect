@@ -46,7 +46,7 @@
         </div>
     }
 
-    @if (Model != null && Model.Coaches != null && Model.Coaches.Any())
+    @if (ViewBag != null && ViewBag.Coaches != null)
     {
         <h2 class="text-center fw-bold text-black mt-5 mb-4">List of Coaches</h2>
 
@@ -57,10 +57,11 @@
                     <th class="fw-bold">Surname</th>
                     <th class="fw-bold">Birthdate</th>
                     <th class="fw-bold">Speciality</th>
+                     <th class="fw-bold">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var coach in Model.Coaches)
+                @foreach (var coach in ViewBag.Coaches)
                 {
                 <tr>
                     <td>@coach.Name</td>
