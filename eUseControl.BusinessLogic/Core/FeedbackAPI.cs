@@ -77,5 +77,13 @@ namespace eUseControl.BusinessLogic.Core
                     return true;
                }
           }
+
+          public int GetTotalNumberOfFeedbacks()
+          {
+               using (var context = new FeedbackContext())
+               {
+                    return context.Feedbacks.Count();
+               }
+          }
      }
 }

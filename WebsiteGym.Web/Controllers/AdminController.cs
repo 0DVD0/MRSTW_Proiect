@@ -22,7 +22,7 @@ namespace WebsiteGym.Web.Controllers
           private readonly IMembershipApi _membership;
           private readonly IDiscountCode _discount;
           private readonly IUserServices _userServices;
-
+          private readonly IFeedback _feedback;
           public AdminController()
           {
                var bl = new BussinesLogic();
@@ -31,6 +31,7 @@ namespace WebsiteGym.Web.Controllers
                _membership = bl.GetMembershipApi();
                _discount = bl.GetDiscountApi();
                _userServices = bl.GetUserApi();
+               _feedback = bl.GetFeedbackApi();
 
           }
 
@@ -38,11 +39,10 @@ namespace WebsiteGym.Web.Controllers
           {
                if (Session["UserRole"]?.ToString() == "Admin")
                {
-
-                    var userNumber = _userServices.GetTotalUsers();
-                    ViewBag.UsersNumber = userNumber;
+                    ViewBag.UsersNumber = _userServices.GetTotalUsers();
                     ViewBag.ActiveMemberships = _userServices.GetTotalNumberOfActiveMemberships();
-
+                    ViewBag.TotalIncome = _order.GetTotalIncome();
+                    ViewBag.TotalFeedbacks = _feedback.GetTotalNumberOfFeedbacks();
                     return View();
                }
                else

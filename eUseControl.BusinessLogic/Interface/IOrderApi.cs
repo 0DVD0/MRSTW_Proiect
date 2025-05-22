@@ -8,7 +8,7 @@ namespace eUseControl.BusinessLogic.Interface
     public interface IOrderApi
     {
         List<ODbTable> GetAllOrders();
-
+        decimal GetTotalIncome();
         bool CreateOrder(ODbTable order);
     }
 }

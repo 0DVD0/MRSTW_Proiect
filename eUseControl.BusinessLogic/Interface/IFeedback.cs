@@ -13,6 +13,7 @@ namespace eUseControl.BusinessLogic.Interface
           bool CreateFeedback(FeedbackDbTable feedback);
           bool RemoveFeedback(FeedbackDbTable feedback);
           bool EditFeedback(FeedbackDbTable feedback);
+          int GetTotalNumberOfFeedbacks();
 
      }
 }

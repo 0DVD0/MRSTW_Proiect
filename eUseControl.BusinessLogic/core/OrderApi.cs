@@ -10,7 +10,6 @@ namespace eUseControl.BusinessLogic.Core
 {
     public class OrderApi : UserServices, IOrderApi
     {
-        private readonly List<ODbTable> orders = new List<ODbTable>();
 
         public bool CreateOrder(ODbTable order)
         {
@@ -25,8 +24,15 @@ namespace eUseControl.BusinessLogic.Core
             }
         }
 
-       
-    }
+          public decimal GetTotalIncome()
+          {
+               using (var context = new OrderContext())
+               {
+                    return context.Orders.Sum(o => o.TotalPrice);
+               }
+          }
+
+     }
 
 }
    
