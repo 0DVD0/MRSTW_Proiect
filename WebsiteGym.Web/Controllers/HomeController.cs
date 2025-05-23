@@ -52,8 +52,10 @@ namespace WebsiteGym.Web.Controllers
 
         public ActionResult Membership()
         {
-            var memberships = _membership.GetAllMemberships();
-               return View(memberships); 
+            var memberships = _membership.GetAllMemberships()
+                                 .OrderBy(m => m.Price) 
+                                 .ToList();
+            return View(memberships);
         }
 
 

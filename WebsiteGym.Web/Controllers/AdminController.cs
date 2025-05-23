@@ -107,29 +107,7 @@ namespace WebsiteGym.Web.Controllers
                     TempData["ErrorMessage"] = "User not found.";
                     return RedirectToAction("ListOfUsers");
                }
-
-
           }
-
-          // TODO: Users table trebuie sa aiba MembershipId, ca sa-l putem afisa in profilul sau
-
-          //public ActionResult ListOfActiveMemberships()
-          //{
-          //    var activeMemberships = (from user in _userContext.Users
-          //                             join membership in _membershipContext.Memberships on user.MembershipId equals membership.Id
-          //                             where user.MembershipStatus == 1
-          //                             select new ActiveMembershipViewModel
-          //                             {
-          //                                 MembershipId = membership.Id,
-          //                                 UserName = user.UserName,
-          //                                 MembershipName = membership.MembershipName,
-          //                                 Price = membership.Price,
-          //                                 Details = membership.Details
-          //                             }).ToList();
-
-          //    return View(activeMemberships);
-          //}
-
 
           public ActionResult ManageDiscountCodes()
           {
@@ -212,8 +190,6 @@ namespace WebsiteGym.Web.Controllers
                return RedirectToAction("ManageDiscountCodes");
           }
 
-
-
           public ActionResult ManageMemberships()
           {
                if (Session["UserRole"]?.ToString() == "Admin")
@@ -230,6 +206,7 @@ namespace WebsiteGym.Web.Controllers
                     return RedirectToAction("Index", "Home");
                }
           }
+
           [HttpPost]
           public ActionResult ManageMemberships(MembershipViewModel model)
           {
@@ -262,7 +239,6 @@ namespace WebsiteGym.Web.Controllers
                return View(model);
                }
           }
-
 
           [HttpGet]
           public ActionResult EditMembership(int id)
@@ -323,8 +299,6 @@ namespace WebsiteGym.Web.Controllers
 
           }
 
-
-
           public ActionResult DeleteMembership(int id)
           {
                _membership.RemoveMembership(new NewMembershipDto { membershipId = id });
@@ -345,7 +319,6 @@ namespace WebsiteGym.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
           }
-
 
         [HttpPost]
         public ActionResult ManageCoaches(CoachViewModel model)
