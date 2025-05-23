@@ -244,7 +244,7 @@ namespace WebsiteGym.Web.Controllers
                {
                     return RedirectToAction("AuthPage", "Home");
                }
-               else if (Session["UserRole"].ToString() == "Admin")
+               else if (Session["UserRole"]?.ToString() == "Admin")
                {
                     return RedirectToAction("AdminDashboard", "Admin");
                }
@@ -280,6 +280,18 @@ namespace WebsiteGym.Web.Controllers
                          ModelState.AddModelError("", "User not found");
                          return RedirectToAction("AuthPage", "Home");
                     }
+               }
+          }
+
+          public ActionResult PaymentHistory()
+          {
+               if (Session["UserRole"]?.ToString() != null) { 
+                    var UserOrders = _userServices.GetUserPaymentHistory((int)Session["UserId"]);
+                    ViewBag.UserOrders = UserOrders;
+               return View();
+               } else
+               {
+                    return RedirectToAction("AuthPage", "Home");
                }
           }
      }

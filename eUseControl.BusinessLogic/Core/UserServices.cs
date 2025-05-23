@@ -10,6 +10,7 @@ using eUseControl.Helper.AssistingLogic;
 using Microsoft.Win32;
 using eUseControl.Domain.Entities;
 using eUseControl.Domain.Entities.Order;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace eUseControl.BusinessLogic.Core
 {
@@ -244,13 +245,34 @@ namespace eUseControl.BusinessLogic.Core
                }
           }
 
-        public List<UserMembership> GetUsersMemberships()
-        {
-            using (var context = new UserContext())
-            {
-                return context.UserMemberships.ToList();
-            }
-           
-        }
+          public List<UserMembership> GetUsersMemberships()
+          {
+               using (var context = new UserContext())
+               {
+                    return context.UserMemberships.ToList();
+               }
+
+          }
+
+          public List<ODbTable> GetUserPaymentHistory(int id)
+          {
+               var userFound = GetUserById(id);
+               if (userFound != null)
+               {
+                    using (var context = new OrderContext())
+                    {
+                         return context.Orders
+                                .Where(o => o.UserId == id)
+                                .OrderByDescending(o => o.OrderDate) 
+                                .ToList();  
+                         
+                         
+                    }
+                  
+               }  
+
+               return null;
+             
+          }
      }
 }

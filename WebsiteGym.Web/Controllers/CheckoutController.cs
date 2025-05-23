@@ -94,7 +94,7 @@ namespace WebsiteGym.Web.Controllers
                     return View(model);
                }
 
-               decimal total = membership.Price * model.MembershipDuration;
+               decimal total = ((decimal)membership.Price) * model.MembershipDuration;
 
                if (!string.IsNullOrEmpty(model.DiscountCode))
                {
@@ -114,7 +114,7 @@ namespace WebsiteGym.Web.Controllers
                     }
                }
 
-               model.TotalPrice = (decimal)total;
+               model.TotalPrice = total;
 
             if (!ModelState.IsValid)
             {
@@ -133,10 +133,11 @@ namespace WebsiteGym.Web.Controllers
               
                var newOrder = new ODbTable
             {
+                UserId = (int)Session["UserId"],
                 MembershipName = model.MembershipName,
                 UserName = Session["UserName"]?.ToString(),
-                 OrderDate = DateTime.Now,
-                TotalPrice = model.TotalPrice
+                OrderDate = DateTime.Now,
+                TotalPrice = (decimal)model.TotalPrice
             };
 
 

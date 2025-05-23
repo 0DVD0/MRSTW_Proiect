@@ -1,4 +1,5 @@
-﻿using eUseControl.Domain.Entities.User;
+﻿using eUseControl.Domain.Entities;
+using eUseControl.Domain.Entities.User;
 using System.CodeDom;
 using System.Collections.Generic;
 
@@ -23,5 +24,6 @@ namespace eUseControl.BusinessLogic.Interface
         bool RemoveUserById(int id);
         bool UpdateUser(User user);
         List<UserMembership> GetUsersMemberships();
+        List<ODbTable> GetUserPaymentHistory(int id);
      }
 }

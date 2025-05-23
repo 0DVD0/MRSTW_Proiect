@@ -98,17 +98,17 @@
                <div class="row">
                     <div class="col-md-4">
                          <a href="@Url.Action("ListOfFeedbacks", "Admin")" class="btn btn-warning website-mgmt-btn w-100">
-                              <i class="fas fa-user-tie"></i> List of Feedbacks
+                              <i class="fas fa-comments"></i> List of Feedbacks
                          </a>
                     </div>
                     <div class="col-md-4">
                          <a href="@Url.Action("ListOfActiveMemberships", "Admin")" class="btn btn-danger website-mgmt-btn w-100">
-                              <i class="fas fa-edit"></i> List of Active Memberships
+                              <i class="fas fa-id-card"></i> Active Memberships
                          </a>
                     </div>
                     <div class="col-md-4">
-                         <a href="@Url.Action("ListOfUsers", "Admin")" class="btn btn-secondary website-mgmt-btn w-100">
-                              <i class="fas fa-cog"></i> List of Active Users
+                         <a href="@Url.Action("ListOfOrders", "Admin")" class="btn btn-secondary website-mgmt-btn w-100">
+                              <i class="fas fa-receipt"></i> Orders List
                          </a>
                     </div>
                </div>
@@ -117,7 +117,7 @@
           <!-- Quick Actions -->
           <div class="admin-section">
                <h2 class="h4 mb-4">Quick Actions</h2>
-               <div class="row">
+               <div class="row" style="position:center">
                     <div class="col-md-3 col-sm-6 admin-card">
                          <a href="@Url.Action("ListOfUsers", "Admin")" class="text-decoration-none">
                               <div class="action-card bg-light">
@@ -137,6 +137,17 @@
                                    </div>
                                    <h3 class="h5">Feedbacks</h3>
                                    <p class="text-muted">Review user feedbacks</p>
+                              </div>
+                         </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 admin-card">
+                         <a href="@Url.Action("ManageMemberships", "Admin")" class="text-decoration-none">
+                              <div class="action-card bg-light">
+                                   <div class="action-icon text-success">
+                                        <i class="fas fa-tags"></i>
+                                   </div>
+                                   <h3 class="h5">Memberships</h3>
+                                   <p class="text-muted">Manage site memberships</p>
                               </div>
                          </a>
                     </div>

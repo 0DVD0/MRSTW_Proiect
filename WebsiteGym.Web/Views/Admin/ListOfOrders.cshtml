@@ -9,29 +9,31 @@
 <body>
      <div>
 
-          <h3 class="text-center fw-bold text-black mb-4">List Of Feedbacks</h3>
+          <h3 class="text-center fw-bold text-black mb-4">List Of Orders</h3>
           <form>
                <table class="table table-responsive table-hover">
                     <thead>
                          <tr class="table-active">
                               <th>ID</th>
                               <th>UserName</th>
-                              <th>E-Mail</th>
-                              <th>Feedback</th>
+                              <th>Membership Name</th>
+                              <th>Total Price</th>
+                              <th>Order Date</th>
                          </tr>
                     </thead>
                     <tbody>
-                         @if (ViewBag.Feedbacks != null)
+                         @if (ViewBag.Orders != null)
                          {
-                              foreach (var feedback in ViewBag.Feedbacks)
+                              foreach (var order in ViewBag.Orders)
                               {
-                                        <tr>
-                                             <td>@feedback.Id</td>
-                                             <td>@feedback.UserName</td>
-                                             <td>@feedback.Email</td>
-                                             <td>@feedback.FeedbackMessage</td>
-                                        </tr>
-                                   
+                                   <tr>
+                                        <td>@order.Id</td>
+                                        <td>@order.UserName</td>
+                                        <td>@order.MembershipName</td>
+                                        <td>@order.TotalPrice</td>
+                                        <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                                   </tr>
+
                               }
 
                          }

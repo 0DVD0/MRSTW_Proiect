@@ -6,8 +6,12 @@ using eUseControl.Domain.Entities.BaseEntities;
 
 namespace eUseControl.Domain.Entities
 {
-    public class ODbTable : BaseEntity
+     [Table("Orders")]
+     public class ODbTable : BaseEntity
     {
+        [Required]
+        [Display(Name = "User Id")]
+        public int UserId { get; set; }
 
         [Required]
         [Display(Name = "User name")]
@@ -25,7 +29,8 @@ namespace eUseControl.Domain.Entities
         [Display(Name = "Total Price")]
         public decimal TotalPrice { get; set; }
 
-      
+        
+        
     }
 }
 

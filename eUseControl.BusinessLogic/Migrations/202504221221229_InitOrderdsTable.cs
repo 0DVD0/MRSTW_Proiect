@@ -15,7 +15,7 @@
                     UserName = c.String(nullable: false, maxLength: 50),
                     MembershipName = c.String(nullable: false, maxLength: 50),
                     OrderDate = c.DateTime(nullable: false),
-                    TotalPrice = c.Double(nullable: false),
+                    TotalPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                 })
                 .PrimaryKey(t => t.Id);
         }

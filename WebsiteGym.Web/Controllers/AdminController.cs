@@ -395,5 +395,19 @@ namespace WebsiteGym.Web.Controllers
                     return RedirectToAction("Index", "Home");
                }
           }
+
+          public ActionResult ListOfOrders()
+          {
+               if (Session["UserRole"]?.ToString() == "Admin")
+               {
+                    var orders = _order.GetAllOrders();
+                    ViewBag.Orders = orders;
+                    return View();
+               }
+               else
+               {
+                    return RedirectToAction("Index", "Home");
+               }
+          }
      }
 }
