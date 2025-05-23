@@ -141,6 +141,10 @@
     <Compile Include="Migrations\202505230920224_RenameFeedBakcTable.Designer.cs">
       <DependentUpon>202505230920224_RenameFeedBakcTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505231801054_DeleteExpDateFromUserMembershipTable.cs" />
+    <Compile Include="Migrations\202505231801054_DeleteExpDateFromUserMembershipTable.Designer.cs">
+      <DependentUpon>202505231801054_DeleteExpDateFromUserMembershipTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -216,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505230920224_RenameFeedBakcTable.resx">
       <DependentUpon>202505230920224_RenameFeedBakcTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505231801054_DeleteExpDateFromUserMembershipTable.resx">
+      <DependentUpon>202505231801054_DeleteExpDateFromUserMembershipTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
