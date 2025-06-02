@@ -24,6 +24,7 @@ namespace WebsiteGym.Web.Controllers
           private readonly IUserServices _userServices;
           private readonly IFeedback _feedback;
           private readonly ICoachApi _coach;
+          private readonly IEvent _eventApi;
           public AdminController()
           {
                var bl = new BussinesLogic();
@@ -34,7 +35,7 @@ namespace WebsiteGym.Web.Controllers
                _userServices = bl.GetUserApi();
                _feedback = bl.GetFeedbackApi();
                _coach = bl.GetCoachApi();
-
+               _eventApi = bl.GetEventApi();
           }
 
           public ActionResult AdminDash()
@@ -45,6 +46,7 @@ namespace WebsiteGym.Web.Controllers
                     ViewBag.ActiveMemberships = _userServices.GetTotalNumberOfActiveMemberships();
                     ViewBag.TotalIncome = _order.GetTotalIncome();
                     ViewBag.TotalFeedbacks = _feedback.GetTotalNumberOfFeedbacks();
+                    ViewBag.TotalEvents = _eventApi.GetAllEvents();
                     return View();
                }
                else

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using eUseControl.BusinessLogic.Interface;
+using eUseControl.Domain.Entities.EventTable;
 using System.Web.Mvc;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.Domain.Entities;
@@ -14,11 +15,12 @@ namespace WebsiteGym.Web.Controllers
      {
 
           private readonly IFeedback _feedbackApi;
-
+          private readonly IEvent _eventApi;
           public FeedbackController()
           {
                var _bl = new BussinesLogic();
                _feedbackApi = _bl.GetFeedbackApi();
+               _eventApi = _bl.GetEventApi();
           }
 
           public ActionResult Contact()
@@ -31,6 +33,14 @@ namespace WebsiteGym.Web.Controllers
           public ActionResult CreateFeedback(FeedbackModel model)
           {
                if (ModelState.IsValid) {
+                    var feedbackEvent = new EventTable
+                    {
+                         UserName = model.UserName,
+                         Action = "Feedback Submitted",
+                         EventTime = DateTime.Now
+                    };
+                    _eventApi.CreateEvent(feedbackEvent);
+
                     FeedbackDbTable feedback = new FeedbackDbTable()
                     {
                          UserName = model.UserName,

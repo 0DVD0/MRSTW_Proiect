@@ -180,32 +180,24 @@
                                         </tr>
                                    </thead>
                                    <tbody>
-                                        <!-- This would be populated with actual data in a real implementation -->
-                                        <tr>
-                                             <td>John Doe</td>
-                                             <td>Purchased Monthly Membership</td>
-                                             <td>@DateTime.Now.AddDays(-1).ToString("MM/dd/yyyy")</td>
-                                        </tr>
-                                        <tr>
-                                             <td>Jane Smith</td>
-                                             <td>Submitted Feedback</td>
-                                             <td>@DateTime.Now.AddDays(-2).ToString("MM/dd/yyyy")</td>
-                                        </tr>
-                                        <tr>
-                                             <td>Mike Johnson</td>
-                                             <td>Registered New Account</td>
-                                             <td>@DateTime.Now.AddDays(-3).ToString("MM/dd/yyyy")</td>
-                                        </tr>
-                                        <tr>
-                                             <td>Sarah Williams</td>
-                                             <td>Booked Yoga Class</td>
-                                             <td>@DateTime.Now.AddDays(-3).ToString("MM/dd/yyyy")</td>
-                                        </tr>
-                                        <tr>
-                                             <td>Robert Brown</td>
-                                             <td>Purchased Annual Membership</td>
-                                             <td>@DateTime.Now.AddDays(-4).ToString("MM/dd/yyyy")</td>
-                                        </tr>
+                                       
+                                        @if (ViewBag.TotalEvents != null && ViewBag != null)
+                                        {
+                                             foreach (var evt in ViewBag.TotalEvents)
+                                             {
+                                                  <tr>
+                                                       <td>@evt.UserName</td>
+                                                       <td>@evt.Action</td>
+                                                       <td>@evt.EventTime.ToString("dd/MM/yyyy")</td>
+                                                  </tr>
+                                             }
+                                        }
+                                        else
+                                        {
+                                             <tr>
+                                                  <td colspan="3" class="text-center text-muted">No recent activity found.</td>
+                                             </tr>
+                                        }
                                    </tbody>
                               </table>
                          </div>

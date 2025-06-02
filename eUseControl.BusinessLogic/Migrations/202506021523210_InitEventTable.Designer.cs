@@ -7,13 +7,13 @@ namespace eUseControl.BusinessLogic.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class DeleteExpDateFromUserMembershipTable : IMigrationMetadata
+    public sealed partial class InitEventTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DeleteExpDateFromUserMembershipTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitEventTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202505231801054_DeleteExpDateFromUserMembershipTable"; }
+            get { return "202506021523210_InitEventTable"; }
         }
         
         string IMigrationMetadata.Source

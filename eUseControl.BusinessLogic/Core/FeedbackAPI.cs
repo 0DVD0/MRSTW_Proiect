@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace eUseControl.BusinessLogic.Core
 {
-     internal class FeedbackAPI : IFeedback
+     public class FeedbackAPI : IFeedback
      {
           public List<FeedbackDbTable> GetAllFeedbacks()
           {

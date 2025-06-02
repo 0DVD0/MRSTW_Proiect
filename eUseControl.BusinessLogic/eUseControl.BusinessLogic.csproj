@@ -52,11 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AdminApi.cs" />
+    <Compile Include="Core\EventApi.cs" />
     <Compile Include="Core\FeedbackAPI.cs" />
     <Compile Include="Core\OrderApi.cs" />
     <Compile Include="Core\UserServices.cs" />
     <Compile Include="DBModel\CoachContext.cs" />
     <Compile Include="DBModel\DiscountContext.cs" />
+    <Compile Include="DBModel\EventContext.cs" />
     <Compile Include="DBModel\FeedbackContext.cs" />
     <Compile Include="DBModel\MembershipContext.cs" />
     <Compile Include="DBModel\OrderContext.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Interface\BussinesLogic.cs" />
     <Compile Include="Interface\ICoachApi.cs" />
     <Compile Include="Interface\IDiscountCode.cs" />
+    <Compile Include="Interface\IEvent.cs" />
     <Compile Include="Interface\IFeedback.cs" />
     <Compile Include="Interface\IMembershipApi.cs" />
     <Compile Include="Interface\IOrderApi.cs" />
@@ -141,9 +144,9 @@
     <Compile Include="Migrations\202505230920224_RenameFeedBakcTable.Designer.cs">
       <DependentUpon>202505230920224_RenameFeedBakcTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202505231801054_DeleteExpDateFromUserMembershipTable.cs" />
-    <Compile Include="Migrations\202505231801054_DeleteExpDateFromUserMembershipTable.Designer.cs">
-      <DependentUpon>202505231801054_DeleteExpDateFromUserMembershipTable.cs</DependentUpon>
+    <Compile Include="Migrations\202506021523210_InitEventTable.cs" />
+    <Compile Include="Migrations\202506021523210_InitEventTable.Designer.cs">
+      <DependentUpon>202506021523210_InitEventTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -221,8 +224,8 @@
     <EmbeddedResource Include="Migrations\202505230920224_RenameFeedBakcTable.resx">
       <DependentUpon>202505230920224_RenameFeedBakcTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505231801054_DeleteExpDateFromUserMembershipTable.resx">
-      <DependentUpon>202505231801054_DeleteExpDateFromUserMembershipTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202506021523210_InitEventTable.resx">
+      <DependentUpon>202506021523210_InitEventTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

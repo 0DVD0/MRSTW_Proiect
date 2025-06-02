@@ -3,6 +3,7 @@ using eUseControl.BusinessLogic.Interface;
 using WebsiteGym.Web.Models;
 using eUseControl.BusinessLogic.Core;
 using eUseControl.Domain.Entities.User;
+using eUseControl.Domain.Entities.EventTable;
 using eUseControl.Domain.Enums;
 using System;
 using System.Runtime.Remoting.Messaging;
@@ -13,11 +14,13 @@ namespace WebsiteGym.Web.Controllers
      public class AccountController : Controller
      {
           private readonly IUserServices _userServices;
+          private readonly IEvent _eventServices;
 
           public AccountController()
           {
                var bl = new BussinesLogic();
                _userServices = bl.GetUserApi();
+               _eventServices = bl.GetEventApi();
           }
 
           public ActionResult UserDashboard()
@@ -98,6 +101,14 @@ namespace WebsiteGym.Web.Controllers
 
                     if (result)
                     {
+                         var registerEvent = new EventTable
+                         {
+                              UserName = user.Name,
+                              Action = "User Registered",
+                              EventTime = DateTime.Now,
+                              
+                         };
+                         _eventServices.CreateEvent(registerEvent);
                          return RedirectToAction("AuthPage", "Home");
                     }
                     else
@@ -126,6 +137,18 @@ namespace WebsiteGym.Web.Controllers
                     var foundUser = _userServices.LoginUser(user);
                     if (foundUser != null)
                     {
+                         if ((int)foundUser.Role != 1)
+                         { 
+                              var loginEvent = new EventTable
+                            {
+                              UserName = foundUser.Name,
+                              Action = "User Logged In",
+                              EventTime = DateTime.Now,
+                            };
+                              _eventServices.CreateEvent(loginEvent);
+
+                         }
+                        
                          Session["UserId"] = foundUser.Id;
                          Session["UserName"] = foundUser.Name;
                          Session["UserRole"] = foundUser.Role;
@@ -182,6 +205,17 @@ namespace WebsiteGym.Web.Controllers
                     var passwordReseted = _userServices.UpdateUserPassword(user, newPassword);
                     if (passwordReseted)
                     {
+                         if ((int)user.Role != 1)
+                         {
+                            var resetEvent = new EventTable
+                               {
+                                UserName = user.Name,
+                                Action = "User Password Reset",
+                                EventTime = DateTime.Now,
+                            }; 
+                           _eventServices.CreateEvent(resetEvent);
+                         }
+                         
                          if (Session == null)
                          {
                               return RedirectToAction("Login");

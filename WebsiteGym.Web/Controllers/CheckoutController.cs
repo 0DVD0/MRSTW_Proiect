@@ -1,6 +1,7 @@
 ﻿using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities.User;
 using eUseControl.Domain.Entities.Order;
+using eUseControl.Domain.Entities.EventTable;
 using eUseControl.Domain.Entities;
 using System;
 using System.Linq;
@@ -16,15 +17,16 @@ namespace WebsiteGym.Web.Controllers
         private readonly IOrderApi _order;
         private readonly IMembershipApi _membership;
         private readonly IDiscountCode _discountCodeService;
-
-        public CheckoutController()
+        private readonly IEvent _eventService;
+          public CheckoutController()
         {
             var bl = new BussinesLogic();
             _order = bl.GetOrderApi();
             _membership = bl.GetMembershipApi();
             _userServices = bl.GetUserApi();
             _discountCodeService = bl.GetDiscountApi();
-        }
+            _eventService = bl.GetEventApi();
+          }
 
         // GET: CheckoutMembership
         public ActionResult CheckoutMembership(int membershipId)
@@ -153,6 +155,14 @@ namespace WebsiteGym.Web.Controllers
              }
                else
              {
+                    var purchaseEvent = new EventTable
+                    {
+                         UserName = (string)Session["UserName"],
+                         Action = "User purchased a membership",
+                         EventTime = DateTime.Now,
+                    };
+                    _eventService.CreateEvent(purchaseEvent);
+
                     int? userId = (int?)Session["UserId"];
                     var newUserMembership = new UserMembership
                     {
