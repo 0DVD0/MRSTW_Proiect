@@ -27,7 +27,7 @@ namespace WebsiteGym.Web.Controllers
           {
                if (Session["UserRole"]?.ToString() == "Admin")
                {
-                    return RedirectToAction("AdminDashboard", "Admin");
+                    return RedirectToAction("AdminDash", "Admin");
                }
                else if (Session["UserRole"]?.ToString() == "User")
                {

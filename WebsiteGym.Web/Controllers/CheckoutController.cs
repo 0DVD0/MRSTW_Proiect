@@ -11,42 +11,47 @@ using System.Web.Security;
 
 namespace WebsiteGym.Web.Controllers
 {
-    public class CheckoutController : Controller
-    {
-        private readonly IUserServices _userServices;
-        private readonly IOrderApi _order;
-        private readonly IMembershipApi _membership;
-        private readonly IDiscountCode _discountCodeService;
-        private readonly IEvent _eventService;
+     public class CheckoutController : Controller
+     {
+          private readonly IUserServices _userServices;
+          private readonly IOrderApi _order;
+          private readonly IMembershipApi _membership;
+          private readonly IDiscountCode _discountCodeService;
+          private readonly IEvent _eventService;
           public CheckoutController()
-        {
-            var bl = new BussinesLogic();
-            _order = bl.GetOrderApi();
-            _membership = bl.GetMembershipApi();
-            _userServices = bl.GetUserApi();
-            _discountCodeService = bl.GetDiscountApi();
-            _eventService = bl.GetEventApi();
+          {
+               var bl = new BussinesLogic();
+               _order = bl.GetOrderApi();
+               _membership = bl.GetMembershipApi();
+               _userServices = bl.GetUserApi();
+               _discountCodeService = bl.GetDiscountApi();
+               _eventService = bl.GetEventApi();
           }
 
-        // GET: CheckoutMembership
-        public ActionResult CheckoutMembership(int membershipId)
-        {
-            if (Session["UserRole"]?.ToString() != "User")
-            {
-               return RedirectToAction("AuthPage", "Home");
-            }
+          // GET: CheckoutMembership
+          public ActionResult CheckoutMembership(int membershipId)
+          {
+               if (Session["UserRole"]?.ToString() == "Admin")
+               {
+                    return RedirectToAction("AdminDash", "Admin");
+               } 
+               else if (Session["UserRole"]?.ToString() != "User")
+               {
+                    return RedirectToAction("AuthPage", "Home");
+               }
 
-            var selectedMembership = _membership.GetAllMemberships().FirstOrDefault(m => m.Id == membershipId);
+               var selectedMembership = _membership.GetAllMemberships().FirstOrDefault(m => m.Id == membershipId);
 
-            var model = new OrderViewModel
-            {
-                AvailableMemberships = _membership.GetAllMemberships(),
-                MembershipName = selectedMembership?.MembershipName,
-                AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes(),
-            };
-
+          var model = new OrderViewModel
+          {
+               AvailableMemberships = _membership.GetAllMemberships(),
+               MembershipName = selectedMembership?.MembershipName,
+               AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes(),
+          };
+     
             return View(model);
-        }
+           
+          }
 
         [HttpPost]
         public JsonResult CalculatePrice(string membershipName, int membershipDuration)

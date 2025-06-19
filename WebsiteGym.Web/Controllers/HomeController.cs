@@ -19,16 +19,17 @@ namespace WebsiteGym.Web.Controllers
           [HttpGet]
           public ActionResult AuthPage()
           {
-               if (Session != null && Session["UserId"] != null)
+               if (Session["UserRole"]?.ToString() == "User")
                {
                     return RedirectToAction("UserDashboard", "Account");
                }
-               else
+               else if (Session["UserRole"]?.ToString() == "Admin")
                {
+                    return RedirectToAction("AdminDash", "Admin");
+               }
                    return View();
                }
                
-          }
           public ActionResult Index()
         {
             var topMemberships = _membership.GetTop3Memberships();
